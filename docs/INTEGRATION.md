@@ -100,7 +100,7 @@ not in the dictionary stays English. A backend that returns translated content c
 
 ## 6. Server
 
-`server.js` (Node, `npm start`) serves the files. It has an empty `routes` table for real endpoints, e.g. `'GET /api/hotels'`.
+`scripts/dev-server.js` (Node, `npm start`) serves the files. It has an empty `routes` table for real endpoints, e.g. `'GET /api/hotels'`.
 Point `models/api.js` at those paths and nothing else changes.
 
 ## 7. Porting to the production stack

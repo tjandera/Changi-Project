@@ -8,7 +8,7 @@ Front-end replica of the Changi Off-Airport Check-In booking flow, built for the
 |---|---|
 | Source of truth | `Changi Case-Study.zip` (saved pages + screenshots) and the live site, captured 30 Oct 2026 |
 | Figma prototype | https://www.figma.com/proto/6KAACC2C1GxOySmUomqv7V/Untitled?page-id=16%3A40&node-id=19-1582&starting-point-node-id=19%3A1582&scaling=scale-down-width |
-| Stack | Node server (`server.js`, no dependencies) + static HTML + the site's own compiled Tailwind CSS + ES modules. No build step. |
+| Stack | Node server (`scripts/dev-server.js`, no dependencies) + static HTML + the site's own compiled Tailwind CSS + ES modules. No build step. |
 
 ## Run it
 
@@ -16,7 +16,7 @@ You need **Node.js 18 or newer** (check with `node -v`). Get it from https://nod
 There is nothing to install: the server uses only Node's built-in modules, so there is no `npm install`.
 
 ```bash
-cd changi-oaci-replica     # the folder that contains server.js
+cd changi-oaci-replica     # the folder that contains package.json
 npm start                  # then open http://localhost:3000
 ```
 
@@ -24,7 +24,7 @@ npm start                  # then open http://localhost:3000
 |---|---|
 | Use another port | `PORT=8080 npm start` (Windows PowerShell: `$env:PORT=8080; npm start`) |
 | Open it from your phone on the same Wi-Fi | `HOST=0.0.0.0 npm start`, then visit `http://<your-computer-ip>:3000` |
-| Restart automatically when `server.js` changes | `npm run dev` |
+| Restart automatically when `scripts/dev-server.js` changes | `npm run dev` |
 | Stop | `Ctrl + C` |
 
 If you see `Port 3000 is already in use`, pick another port as above.
@@ -35,9 +35,9 @@ back to the landing page, like the live site.
 
 **Edits show on refresh.** HTML, CSS, JS and JSON are served without caching, so change a file and reload.
 
-`server.js` serves only the site folders (pages, `_next`, `data`, `icons`, `images`, `flags`, `follow-us`, `replica`).
-`docs/`, `tools/`, `.git` and `server.js` itself return 404. To add a real backend, add routes to the `routes`
-table at the top of `server.js` (see [docs/INTEGRATION.md](docs/INTEGRATION.md)).
+`scripts/dev-server.js` serves only the site folders (pages, `_next`, `data`, `icons`, `images`, `flags`, `follow-us`, `replica`).
+`docs/`, `tools/`, `.git` and `scripts/dev-server.js` itself return 404. To add a real backend, add routes to the `routes`
+table at the top of `scripts/dev-server.js` (see [docs/INTEGRATION.md](docs/INTEGRATION.md)).
 
 Opening `index.html` by double-click (`file://`) will not work: the pages use root-relative paths and load `/data/*.json` with `fetch`.
 Any other static server (`npx serve .`, `python3 -m http.server 8080`) also works.
@@ -86,7 +86,7 @@ replica/js/controllers/       C · one script per page, loaded by that page's <s
     boot.js                     shared start-up (config, header, tooltips)
     landing, trip-details, luggage, personal-details, review, manage-booking, faq
 
-server.js, package.json       Node server (npm start), no dependencies
+scripts/dev-server.js, package.json       Node server (npm start), no dependencies
 data/*.json                   all content: hotels, flights, prices, FAQ, countries, copy, flow
 data/i18n/*.json              Chinese text for the 中文 button (zh.json, faq.zh.json)
 tools/archive/build_pages.py  one-off script that produced the first version of the pages (history only)

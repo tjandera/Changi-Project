@@ -6,7 +6,7 @@
  *   2. maps clean URLs to pages:  /faq  ->  faq/index.html
  *   3. refuses everything that is not part of the site (docs, tools, .git, this file)
  *
- * Run:  npm start            (http://localhost:3000)
+ * Run:  npm start            (http://localhost:3000)   [from the project folder]
  *       PORT=8080 npm start  (another port)
  *       HOST=0.0.0.0 npm start  (reachable from other devices on your network)
  *
@@ -17,7 +17,7 @@ const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const ROOT = __dirname;
+const ROOT = path.resolve(__dirname, '..'); // the site folder (one level up from scripts/)
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '127.0.0.1';
 

@@ -1,0 +1,7 @@
+# Not part of the website. Keeps docs and dev tooling off a public Vercel URL.
+docs
+tools
+scripts
+README.md
+LICENSE
+.nvmrc
