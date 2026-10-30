@@ -76,10 +76,11 @@ replica/js/models/            M · data and state
     api.js                      DATA ADAPTER: the only file that knows where data comes from
     store.js                    booking state across steps (sessionStorage) + step guard
     flow.js                     which page follows which (reads "flow" in data/config.json)
+    i18n.js                     language choice and text lookup
     format.js                   display strings ("31 Oct 2026", "1 item(s)", "29.00") and the view model
 replica/js/views/             V · everything that touches the DOM
     dom.js, templates.js        helpers and the HTML snippets (dropdowns, calendar, dialogs)
-    button.js, dialog.js, accordion.js, chrome.js, summary.js
+    button.js, dialog.js, accordion.js, chrome.js, summary.js, language.js (中文 / EN switch)
     fields.js, mui.js           hotel/date/flight pickers, MUI-style text, phone and checkbox fields
 replica/js/controllers/       C · one script per page, loaded by that page's <script type="module">
     boot.js                     shared start-up (config, header, tooltips)
@@ -87,6 +88,7 @@ replica/js/controllers/       C · one script per page, loaded by that page's <s
 
 server.js, package.json       Node server (npm start), no dependencies
 data/*.json                   all content: hotels, flights, prices, FAQ, countries, copy, flow
+data/i18n/*.json              Chinese text for the 中文 button (zh.json, faq.zh.json)
 tools/archive/build_pages.py  one-off script that produced the first version of the pages (history only)
 ```
 

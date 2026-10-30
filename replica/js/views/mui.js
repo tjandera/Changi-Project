@@ -11,8 +11,8 @@ const LABEL_OK = 'rgb(18, 18, 18)';
 const LABEL_ERROR = 'rgb(204, 16, 0)';
 
 /**
- * Outlined text field. Red label + border appear only for something typed that is wrong, after the
- * first blur, and then update live (as on the live site). An empty field is never shown as an error.
+ * Outlined text field. Red label + border appear as soon as something typed is wrong,
+ * and update live with every keystroke. An empty field is never shown as an error.
  * `showErrors: false` keeps the field required (it still blocks Next) but never turns it red (names).
  * @param {HTMLInputElement} input
  * @param {{validate?: (v:string)=>boolean, showErrors?: boolean, format?: (v:string)=>string, onChange?: (v:string)=>void}} opts
@@ -40,6 +40,7 @@ export function textField(
     refresh();
   });
   input.addEventListener('input', () => {
+    if (input.value !== '') touched = true; // errors show from the first character, not after leaving
     if (format) {
       const formatted = format(input.value);
       if (formatted !== input.value) input.value = formatted;
@@ -65,16 +66,21 @@ export function textField(
  */
 export function phoneField(input, { countries, countryIso, onChange }) {
   const lib = window.libphonenumber;
-  const trigger = input.closest('.MuiInputBase-root').querySelector('[data-action="toggle-country"]');
+  const trigger = input
+    .closest('.MuiInputBase-root')
+    .querySelector('[data-action="toggle-country"]');
   const flagBox = trigger.querySelector('[data-bind-html="contact.flagSvg"]');
-  const dialEl = input.closest('.MuiInputBase-root').querySelector('[data-bind="contact.dialCode"]');
+  const dialEl = input
+    .closest('.MuiInputBase-root')
+    .querySelector('[data-bind="contact.dialCode"]');
   const arrow = trigger.querySelector('img');
   const host = input.closest('.relative.inline-block');
   let iso = countryIso;
   let popup = null;
   let stopDismiss = null;
 
-  const country = () => countries.find((c) => c.iso === iso) || countries.find((c) => c.iso === 'SG');
+  const country = () =>
+    countries.find((c) => c.iso === iso) || countries.find((c) => c.iso === 'SG');
   const digits = (v) => v.replace(/\D/g, '');
   const formatNational = (v) => new lib.AsYouType(iso).input(digits(v));
   const isValid = (v) => {
@@ -137,7 +143,9 @@ export function phoneField(input, { countries, countryIso, onChange }) {
     /** "+65 9123 4567" for the review page */
     display: (phone, isoCode = iso) => {
       const c = countries.find((x) => x.iso === isoCode);
-      return phone ? `${c ? c.dialCode : ''} ${new lib.AsYouType(isoCode).input(phone)}`.trim() : '';
+      return phone
+        ? `${c ? c.dialCode : ''} ${new lib.AsYouType(isoCode).input(phone)}`.trim()
+        : '';
     },
   };
 }

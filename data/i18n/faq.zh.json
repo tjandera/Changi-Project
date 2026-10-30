@@ -1,0 +1,131 @@
+{
+ "_source": "Chinese text for data/faq.json (same structure). Used when the 中文 button is on.",
+ "tabs": [
+  {
+   "label": "概述",
+   "items": [
+    {
+     "question": "1. 什么是机场外值机服务？",
+     "answerHtml": "通过樟宜机场集团提供的机场外值机服务，您可以在合作酒店办理行李托运，我们会将行李安全送至机场，并装载到您出发的航班上。<br><br>您只需<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"/booking-details/\">在此处</a>注册该服务，在线办理航班值机，并于上午7点至11点将行李交给酒店。之后，您可以自由探索这座城市，并轻松前往机场。您可以直接在抵达机场领取行李。"
+    },
+    {
+     "question": "2. 我有资格使用该服务吗？ ",
+     "answerHtml": "要符合使用该服务的资格，您必须：<br><ul class=\"list-disc pl-5 mt-2\"><li>是合作酒店的住客，且至少入住1晚</li><li>搭乘参与服务的航空公司航班</li><li>搭乘符合条件的航班（下午5点至次日上午7点起飞的航班），不包括飞往美国的航班</li><li>在线值机并生成电子或手机登机牌</li></ul>"
+    },
+    {
+     "question": "3. 参与的航空公司和酒店有哪些？",
+     "answerHtml": "<u>参与的航空公司</u> <br><ul class=\"list-disc pl-5 mt-2\"><li>新加坡航空（SQ）</li></ul><br><u>参与的酒店</u> <br><ul class=\"list-decimal pl-5 mt-2\"><li>新加坡富丽敦海湾酒店</li><li>新加坡富丽敦酒店</li><li>滨海湾金沙</li></ul>"
+    }
+   ]
+  },
+  {
+   "label": "预订",
+   "items": [
+    {
+     "question": "1. 如何预订该服务？",
+     "answerHtml": "您可以通过我们的机场外值机网站<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"/booking-details/\">在此处</a>预订，最早可提前<span class=\"font-bold\">14天</span>预订，最迟须在航班起飞当天上午11点前预订。<br>建议乘客使用机票上显示的信息进行预订，以便更快办理行李寄存。"
+    },
+    {
+     "question": "2. 费用是多少？",
+     "answerHtml": "该服务每件行李收费 $29。"
+    },
+    {
+     "question": "3. 你们接受超规格行李吗？",
+     "answerHtml": "接受，我们接受滑雪板、高尔夫球包等超规格行李。但航空公司对行李的限制规定仍适用于此服务。请查看您的航空公司网站了解更多信息。<br><br>预订此服务时，请注明超规格物品的数量，以便我们更好地规划服务。"
+    },
+    {
+     "question": "4. 如何增加预订的行李？",
+     "answerHtml": "如果您希望为该服务增购行李，请使用相同的航班和乘客信息<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"/booking-details/\">在此处</a>重新预订。"
+    },
+    {
+     "question": "5. 如果我们的行程不同，同行人员可以合并预订一次行李寄存吗？",
+     "answerHtml": "不可以。行程不同的每位旅客必须分别预订行李寄存。系统每次只能预订一个航班，因此需要单独预订。"
+    },
+    {
+     "question": "6. 如何取消预订？",
+     "answerHtml": "您可在航班起飞前24小时之前免费取消预订。如需在航班起飞前24小时内取消，请发送电子邮件至 <span class=\"font-bold text-[#7A35B0]\">bagassist@changirecommends.com.sg</span>。退款将视具体情况而定，并可能收取取消费用。<br><br>在预订取消邮件中点击“管理预订”，再在“管理预订”中点击“立即取消”。如适用，退款将退回原支付方式，可能需要数个工作日才会到账。"
+    }
+   ]
+  },
+  {
+   "label": "值机",
+   "items": [
+    {
+     "question": "1. 对我的行李有什么要求？",
+     "answerHtml": "每件行李必须符合航空公司的行李限额。超重的行李将无法受理，您需要到樟宜机场的航空公司值机柜台办理托运。为遵守健康与安全规定，每件行李的重量也不得超过32公斤。<br><br>航空公司对行李的限制规定同样适用于此服务（例如，我们<span class=\"font-bold\">不</span>接受受限物品和危险品）。请查看您的航空公司网站了解更多信息。"
+    },
+    {
+     "question": "2. 转乘国内航班时需要领取行李吗？",
+     "answerHtml": "需要。即使行李牌显示最终目的地，部分国家的乘客也必须在首个入境点领取行李，并重新托运以转乘国内航班。这是当地法规的要求，无论航空公司之间是否有合作均适用。<br><br>适用此规定的国家包括日本、美国、中国、加拿大、新西兰、澳大利亚、印度尼西亚、印度、泰国、越南、尼泊尔、菲律宾、韩国、柬埔寨、缅甸、南非和马尔代夫。"
+    },
+    {
+     "question": "3. 如何确保计入我的航空公司常旅客行李限额？ ",
+     "answerHtml": "请确保您的常旅客等级已在航空公司预订中更新，以便显示准确的行李限额。"
+    },
+    {
+     "question": "4. 我需要什么时候将行李交给酒店？ ",
+     "answer": {
+      "raw": "<div class=\"w-full flex flex-col sm:flex-row gap-0 sm:gap-8 items-center justify-center\"><img alt=\"Dropoff\" loading=\"lazy\" width=\"407\" height=\"180\" decoding=\"async\" data-nimg=\"1\" src=\"/images/when-drop-off-luggage-hotel.webp\" style=\"color: transparent;\"><br><p class=\"cag-typography cag-s-body cag-regular\" style=\"color: rgb(18, 18, 18); background: transparent;\">请确保在寄存时间段内交付行李。我们无法接受在此之后到达的行李，因为可能无法及时将其送上您出发的航班。</p></div>"
+     }
+    },
+    {
+     "question": "5. 我在哪里寄存行李？ ",
+     "answerHtml": "您可以在酒店礼宾部柜台寄存行李（除非酒店另有通知）。"
+    },
+    {
+     "question": "6. 在酒店寄存时我需要提供什么？ ",
+     "answerHtml": "请准备好： <br><ul class=\"list-disc pl-5 mt-2\"><li>您的护照</li><li>完成在线值机后的电子或手机登机牌 </li><li>该服务的确认电子邮件</li><li>符合航空公司行李限额的行李 </li></ul>"
+    },
+    {
+     "question": "7. 寄存行李时哪些人需要在酒店现场？",
+     "answerHtml": "所有同行并办理行李托运的乘客都必须到场，接受我们酒店合作伙伴的检查。所有乘客必须备好各自的登机牌和护照。<br><br>在核实每位乘客的身份和行李限额后，我们的自动化系统将发放行李牌。"
+    },
+    {
+     "question": "8. 我可以在酒店现场更改航空公司行程吗？ ",
+     "answerHtml": "酒店工作人员无法协助处理与您航班有关的任何更改或请求（例如更换座位、增购服务、行李超重）。如有任何航班方面的需求，请前往樟宜机场的航空公司值机柜台寻求协助。"
+    },
+    {
+     "question": "9. 我的行李会得到安全存放和运输吗？",
+     "answerHtml": "请放心，您的行李由专人妥善保管！所有行李将被封存，并在存放、运送及进入机场行李系统的全过程中受到安全监控摄像头监控。<br><br>所有工作人员均已通过全面的安全审查和培训，确保以最高的谨慎和安全处理您的行李。"
+    },
+    {
+     "question": "10. 如何办理在新加坡购买物品的消费税退款？",
+     "answerHtml": "强烈建议乘客将这些物品放在随身行李中，以便在需要时向海关出示。<br>建议您查看<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"https://www.customs.gov.sg/individuals/going-through-customs/departure/tourist-refund-scheme/\">海关网站。</a>"
+    }
+   ]
+  },
+  {
+   "label": "值机后",
+   "items": [
+    {
+     "question": "1. 我把东西落在行李里了，还能取回吗？ ",
+     "answerHtml": "行李一经酒店接收，将被封存并受到严格保管，以确保不被篡改。因此，在抵达目的地机场之前，您无法取回行李。"
+    },
+    {
+     "question": "2. 如何追踪我的行李？",
+     "answerHtml": "行李运往机场途中及抵达机场时，您也会收到电子邮件通知。<br><br>您还可以通过管理预订追踪行李，从酒店接收到装载上飞机的全过程，请点击<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"/manage-booking-pin/\">此处。</a>您也可以在将行李交给酒店前扫描行李牌，通过<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"https://changi.me/4ms0vAX\">樟宜应用</a>中的行李追踪功能进行追踪。"
+    },
+    {
+     "question": "3. 如果我寄存行李后航班被取消怎么办？",
+     "answerHtml": "如果您的行李仍在酒店，您可以联系酒店工作人员，确认航班已取消后，他们会将行李退还给您。<br><br>如果您的行李正在运往机场途中或已在机场，请前往樟宜机场，并联系您的航空公司了解如何取回行李。"
+    },
+    {
+     "question": "4. 我还需要去航空公司值机柜台吗？ ",
+     "answerHtml": "不需要，您可以直接前往出境移民柜台，因为我们已为您办理行李托运。<br><br>如果您的行李有任何问题，我们会在航班起飞前联系您，请您在机场重新办理行李托运。"
+    },
+    {
+     "question": "5. 我在到达机场领取行李时发现行李损坏，应该怎么办？ ",
+     "answerHtml": "我们在行李从存放到进入樟宜机场行李系统的整个过程中都会小心处理。如果您的行李有任何损坏，请联系您的航空公司并通过其提交报告。"
+    },
+    {
+     "question": "6. 如果我已在酒店寄存行李，什么时候应该进入出境候机区？",
+     "answerHtml": "建议乘客至少在航班起飞前1至1.5小时完成移民手续并进入出境候机区。您可以在樟宜机场享受各种零售和餐饮服务，或体验候机区内的各种景点。"
+    },
+    {
+     "question": "7. 我可以在机场额外托运行李吗？ ",
+     "answerHtml": "可以，如果仍在您航空公司的行李总限额内，您可以在樟宜机场额外托运行李。"
+    }
+   ]
+  }
+ ]
+}

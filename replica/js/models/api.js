@@ -57,8 +57,13 @@ export const api = {
   },
 
   /** FAQ tabs: [{label, items: [{question, answerHtml} | {question, answer: {raw}}]}]. */
-  async getFaq() {
-    return (await getJSON('faq.json')).tabs;
+  async getFaq(lang = 'en') {
+    return (await getJSON(lang === 'en' ? 'faq.json' : `i18n/faq.${lang}.json`)).tabs;
+  },
+
+  /** Page text dictionary for a language: {strings, patterns, dateFormat} (see models/i18n.js). */
+  async getTranslations(lang) {
+    return getJSON(`i18n/${lang}.json`);
   },
 
   /** Placeholder booking used by ?preview=1. */

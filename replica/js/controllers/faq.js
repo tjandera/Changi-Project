@@ -2,11 +2,13 @@
 import { api } from '../models/api.js';
 import { $, bind } from '../views/dom.js';
 import { wireAccordion } from '../views/accordion.js';
+import { currentLanguage, onLanguageChange } from '../views/language.js';
 import { boot, fail } from './boot.js';
 
 try {
   await boot();
-  const tabs = await api.getFaq();
+  let tabs = await api.getFaq(currentLanguage());
+  let selected = 0;
   const tablist = $('[data-component="faq-tabs"]');
   const underline = $('[data-component="faq-underline"]');
   const list = $('[data-list="faq-items"]');
@@ -25,6 +27,7 @@ try {
   });
 
   function select(index) {
+    selected = index;
     tabNodes.forEach((node, i) => {
       const tab = $('[role="tab"]', node);
       tab.setAttribute('aria-selected', String(i === index));
@@ -45,9 +48,16 @@ try {
   }
 
   select(0);
+
+  // The question and answer text comes from data, so switching language loads the other file.
+  onLanguageChange(async (lang) => {
+    tabs = await api.getFaq(lang);
+    tabNodes.forEach((node, i) => bind(node, { 'tab.label': tabs[i].label }));
+    select(selected);
+  });
+
   window.addEventListener('resize', () => {
-    const i = tabNodes.findIndex((n) => $('[role="tab"]', n).getAttribute('aria-selected') === 'true');
-    const active = $('[role="tab"]', tabNodes[i]);
+    const active = $('[role="tab"]', tabNodes[selected]);
     underline.style.left = `${active.getBoundingClientRect().left - tablist.getBoundingClientRect().left + tablist.scrollLeft}px`;
     underline.style.width = `${active.getBoundingClientRect().width}px`;
   });

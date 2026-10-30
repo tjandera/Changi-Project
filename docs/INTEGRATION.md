@@ -83,6 +83,21 @@ The HTML pages are the source of truth and are formatted by hand (Prettier, prin
 `tools/archive/build_pages.py` is the one-off script that first produced them from the saved pages. It is kept as
 history only and must not be re-run over the repo.
 
+## 5b. Languages (English / 中文)
+
+The 中文 / EN button swaps page text for a dictionary translation. Nothing else changes.
+
+| File | What it holds |
+|---|---|
+| `data/i18n/zh.json` | `strings`: exact English text -> Chinese. `patterns`: text with numbers ("1 item(s)", month names). `inline` and `dateFormat`: dates and "SGT" inside longer text |
+| `data/i18n/faq.zh.json` | The FAQ in Chinese, same shape as `data/faq.json` |
+| `replica/js/models/i18n.js` | Remembers the language and looks text up (no DOM) |
+| `replica/js/views/language.js` | Swaps text on the page, keeps the English so it can switch back, and translates content the page adds later (dropdowns, dialogs) |
+
+To change a translation, edit the JSON. To translate a new sentence, add its exact English text as a key. Text that is
+not in the dictionary stays English. A backend that returns translated content can replace `api.getTranslations()` and
+`api.getFaq(lang)` in `models/api.js`. Add `data-i18n="off"` to anything that must never be translated.
+
 ## 6. Server
 
 `server.js` (Node, `npm start`) serves the files. It has an empty `routes` table for real endpoints, e.g. `'GET /api/hotels'`.
