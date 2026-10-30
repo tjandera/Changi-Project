@@ -129,16 +129,21 @@
   width: 17px;
   height: 17px;
 }
+.replica-feedback-panel:focus {
+  outline: 0;
+}
 .replica-feedback-panel__body {
   display: flex;
   height: 100%;
   align-items: center;
   justify-content: center;
-  padding: 0 24px;
-  box-sizing: border-box;
-  text-align: center;
-  font: 400 14px/20px Lato, sans-serif;
-  color: #6b6b6b;
+  background: rgb(221, 221, 221);
+}
+.replica-feedback-panel__frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 .replica-feedback-shadowbox {
   position: fixed;
@@ -182,9 +187,9 @@
 .replica-mobile-device .replica-feedback-panel__close button {
   color: #fff;
 }
-.replica-mobile-device .replica-feedback-panel__body {
+.replica-mobile-device .replica-feedback-panel__body,
+.replica-mobile-device .replica-feedback-panel__frame {
   height: calc(100% - 27px);
-  background: rgb(237, 237, 237);
 }
 
 /* MUI Checkbox (Step 4). Not captured from the runtime: rebuilt from MUI's defaults

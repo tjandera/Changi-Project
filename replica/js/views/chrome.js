@@ -72,11 +72,13 @@ export function initChrome(config) {
   }
 
   initTooltips(config.tooltips);
-  addFeedbackTab();
+  addFeedbackTab(config);
   addReplicaLabel();
 
   // The live 中文 button runs Google Translate; translation is out of scope here.
-  $$('[data-action="toggle-language"]').forEach((b) => b.setAttribute('title', 'Language switch is not part of this replica'));
+  $$('[data-action="toggle-language"]').forEach((b) =>
+    b.setAttribute('title', 'Language switch is not part of this replica'),
+  );
 }
 
 /** Hover (desktop) or tap (touch) an info icon to show its tooltip. */
@@ -102,26 +104,41 @@ export function initTooltips(copy) {
 }
 
 /**
+ * Panel body. With `feedback.surveyUrl` set in data/config.json it is the survey iframe (as on the live site).
+ * Without it, it shows the grey "page could not load" state a blocked survey frame shows in the browser.
+ */
+function surveyFrame(config) {
+  const url = config?.feedback?.surveyUrl;
+  if (url) {
+    return `<iframe class="replica-feedback-panel__frame" id="replica-feedback-frame" title="OACI Feedback" src="${url}"></iframe>`;
+  }
+  return `<div class="replica-feedback-panel__body" role="img" aria-label="The feedback survey is not part of this replica">
+        <svg viewBox="0 0 72 87" width="36" height="43.5" shape-rendering="crispEdges" aria-hidden="true"><path fill="#acacac" d="M0 0h51v7h-51zM0 7h7v7h-7zM37 7h7v7h-7zM51 7h7v7h-7zM0 14h7v7h-7zM37 14h7v7h-7zM58 14h7v7h-7zM0 21h7v7h-7zM18 21h7v7h-7zM37 21h7v7h-7zM65 21h7v7h-7zM0 28h7v7h-7zM18 28h7v7h-7zM37 28h35v7h-35zM0 35h7v21h-7zM65 35h7v21h-7zM0 56h7v7h-7zM25 56h22v7h-22zM65 56h7v7h-7zM0 63h7v7h-7zM18 63h7v7h-7zM47 63h7v7h-7zM65 63h7v7h-7zM0 70h7v10h-7zM65 70h7v10h-7zM0 80h72v7h-72z"/></svg>
+      </div>`;
+}
+
+/**
  * "Give Feedback" tab and its slide-out panel (look and motion copied from the live Qualtrics widget).
  * Tab click toggles, the X and Escape close. The survey itself is a third-party iframe, so the panel
  * body is a placeholder. Desktop: slides in from the right. Under 768px: pulls up with a dark overlay.
  */
-function addFeedbackTab() {
+function addFeedbackTab(config) {
   const tab = html(
     `<button type="button" class="replica-feedback" role="button" id="replica-feedback-btn" aria-expanded="false" aria-controls="replica-feedback-panel"><div class="replica-feedback__tab"><div>Give Feedback</div></div></button>`,
   );
   const panel = html(
-    `<div class="replica-feedback-panel" id="replica-feedback-panel" role="dialog" aria-modal="false" aria-hidden="true" aria-labelledby="replica-feedback-btn">
+    `<div class="replica-feedback-panel" id="replica-feedback-panel" role="dialog" aria-modal="false" aria-hidden="true" aria-labelledby="replica-feedback-btn" tabindex="-1">
       <div class="replica-feedback-panel__close">
-        <button type="button" role="button" aria-label="Close"><svg viewBox="0 0 17 17" aria-hidden="true"><path d="M2 2 15 15M15 2 2 15" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button>
+        <button type="button" role="button" aria-label="Close"><svg viewBox="0 0 17 17" aria-hidden="true"><path d="M2.2 2.2 14.8 14.8M14.8 2.2 2.2 14.8" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" fill="none"/></svg></button>
         <div class="replica-feedback-panel__close-bg"></div>
       </div>
-      <div class="replica-feedback-panel__body">The feedback survey is not part of this replica.</div>
+      ${surveyFrame(config)}
     </div>`,
   );
   const closeBtn = $('.replica-feedback-panel__close button', panel);
   // Decided by device, like Qualtrics: phones and tablets get the pull-up, every desktop window the side panel.
-  const mobile = navigator.userAgentData?.mobile ?? /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent);
+  const mobile =
+    navigator.userAgentData?.mobile ?? /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent);
   document.documentElement.classList.toggle('replica-mobile-device', mobile);
   let shadow = null;
 
@@ -139,7 +156,8 @@ function addFeedbackTab() {
       shadow = null;
     }
     tab.classList.add('is-ring');
-    if (open) closeBtn.focus({ preventScroll: true });
+    // Like live: opening moves focus into the panel (no visible ring); closing returns it to the tab.
+    if (open) panel.focus({ preventScroll: true });
     else tab.focus({ preventScroll: true });
   };
   const isOpen = () => tab.getAttribute('aria-expanded') === 'true';
