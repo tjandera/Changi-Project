@@ -1,0 +1,66 @@
+/** Landing page: hero booking card (rendered twice, desktop + mobile; kept in sync). */
+import { api } from '../api.js';
+import { $, $$ } from '../dom.js';
+import { setEnabled, onPress } from '../components/button.js';
+import { wireAccordion, findItem } from '../components/accordion.js';
+import { dateField, earliestDate, flightField, hotelField } from '../components/fields.js';
+import { emptyBooking, save } from '../store.js';
+import { boot, fail } from './boot.js';
+
+try {
+  const config = await boot();
+  const hotels = await api.getHotels();
+  const state = { hotel: null, flightDate: earliestDate(config.booking), flight: null };
+  const cards = $$('[data-component="booking-card"]').map((card) => ({ card }));
+
+  const sync = () => {
+    cards.forEach(({ hotel, date, flight, button }) => {
+      hotel.set(state.hotel);
+      date.set(state.flightDate);
+      flight.set(state.flight);
+      flight.setEnabled(Boolean(state.hotel && state.flightDate));
+      setEnabled(button, Boolean(state.hotel && state.flightDate && state.flight));
+    });
+  };
+
+  cards.forEach((c) => {
+    c.hotel = hotelField($('[data-field="hotel"]', c.card), {
+      hotels,
+      onSelect: (h) => {
+        if (state.hotel?.id !== h.id) state.flight = null;
+        state.hotel = h;
+        sync();
+      },
+    });
+    c.date = dateField($('[data-field="flightDate"]', c.card), {
+      booking: config.booking,
+      onSelect: (iso) => {
+        if (state.flightDate !== iso) state.flight = null;
+        state.flightDate = iso;
+        sync();
+      },
+    });
+    c.flight = flightField($('[data-field="flight"]', c.card), {
+      loadFlights: () => api.getFlights({ hotelId: state.hotel.id, date: state.flightDate }),
+      onSelect: (f) => {
+        state.flight = f;
+        sync();
+      },
+    });
+    c.button = $('[data-action="book-now"]', c.card);
+    onPress(c.button, () => {
+      save({ ...emptyBooking(), ...state });
+      window.location.href = config.routes.tripDetails;
+    });
+  });
+  sync();
+
+  // Landing FAQ block: same accordion as /faq, answers from data/faq.json
+  const faq = await api.getFaq();
+  $$('main .flex.flex-col.cursor-pointer.border-b').forEach((row) => {
+    const item = findItem(faq, row.querySelector('p').textContent);
+    if (item) wireAccordion(row, item);
+  });
+} catch (err) {
+  fail(err);
+}

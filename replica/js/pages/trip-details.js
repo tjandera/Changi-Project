@@ -1,0 +1,71 @@
+/** Step 1 · Trip Details: hotel, flight date, flight number, flight time. */
+import { api } from '../api.js';
+import { $, $$, bind } from '../dom.js';
+import { setEnabled, onPress } from '../components/button.js';
+import { dateField, earliestDate, flightField, hotelField } from '../components/fields.js';
+import { viewModel } from '../format.js';
+import { guard, update } from '../store.js';
+import { boot, fail } from './boot.js';
+
+try {
+  const config = await boot();
+  const booking = await guard(null, config);
+  const hotels = await api.getHotels();
+  const next = $('[data-action="next"]');
+
+  const refresh = () => {
+    flight.set(booking.flight);
+    flight.setEnabled(Boolean(booking.hotel && booking.flightDate));
+    bind(document, viewModel(booking, config).values);
+    setEnabled(next, Boolean(booking.hotel && booking.flightDate && booking.flight));
+  };
+
+  const hotel = hotelField($('[data-field="hotel"]'), {
+    hotels,
+    onSelect: (h) => {
+      if (booking.hotel?.id !== h.id) booking.flight = null;
+      booking.hotel = h;
+      hotel.set(h);
+      refresh();
+    },
+  });
+  if (!booking.flightDate) booking.flightDate = earliestDate(config.booking);
+  const date = dateField($('[data-field="flightDate"]'), {
+    booking: config.booking,
+    onSelect: (iso) => {
+      if (booking.flightDate !== iso) booking.flight = null;
+      booking.flightDate = iso;
+      refresh();
+    },
+  });
+  const flight = flightField($('[data-field="flight"]'), {
+    loadFlights: () => api.getFlights({ hotelId: booking.hotel.id, date: booking.flightDate }),
+    onSelect: (f) => {
+      booking.flight = f;
+      refresh();
+    },
+  });
+
+  hotel.set(booking.hotel);
+  date.set(booking.flightDate);
+  refresh();
+
+  // Notes panel collapses with its arrow (arrow rotates like the live site's transition-transform icon).
+  const notes = $('[data-component="notes"]');
+  const arrow = $('[data-action="toggle-notes"]');
+  arrow.addEventListener('click', () => {
+    const collapsed = arrow.classList.toggle('rotate-180');
+    $$(':scope > :not(:first-child)', notes).forEach((row) => (row.hidden = collapsed));
+  });
+
+  onPress(next, () => {
+    update((b) => {
+      b.hotel = booking.hotel;
+      b.flightDate = booking.flightDate;
+      b.flight = booking.flight;
+    });
+    window.location.href = config.routes.luggage;
+  });
+} catch (err) {
+  fail(err);
+}

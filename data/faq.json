@@ -1,0 +1,131 @@
+{
+ "_source": "Captured from the live /faq page on 30 Oct 2026. Answers are HTML strings rendered inside the original answer <p>. Items with {'raw': ...} are inserted as-is.",
+ "tabs": [
+  {
+   "label": "Overview",
+   "items": [
+    {
+     "question": "1. What is the Off-Airport Check-In service?",
+     "answerHtml": "With the Off-Airport Check-In service offered by Changi Airport Group, you can check-in your luggage at participating hotels and have it securely delivered to the airport and loaded onto your departing flight.<br><br>All you have to do is register for the service <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"/booking-details/\">here</a>, check-in for your flight online, and drop your luggage at your hotel from 7am - 11am. Afterwards, you are free to explore the city and can head to the airport hands-free. You can then collect your luggage directly at your arrival airport."
+    },
+    {
+     "question": "2. Am I eligible for the service? ",
+     "answerHtml": "To be eligible for the service, you must: <br><ul class=\"list-disc pl-5 mt-2\"><li>Be a guest of participating hotels with a minimum 1 night stay</li><li>Travel on a participating airline</li><li>Travel on an eligible flight (flights departing from 5pm to 7am the next day), excluding flights to the United States</li><li>Check-in online and generate your digital or mobile boarding pass</li></ul>"
+    },
+    {
+     "question": "3. What are the participating airlines and hotels?",
+     "answerHtml": "<u>Participating airlines</u> <br><ul class=\"list-disc pl-5 mt-2\"><li>Singapore Airlines (SQ)</li></ul><br><u>Participating hotels </u> <br><ul class=\"list-decimal pl-5 mt-2\"><li>Fullerton Bay Hotel Singapore</li><li>Fullerton Hotel Singapore</li><li>Marina Bay Sands</li></ul>"
+    }
+   ]
+  },
+  {
+   "label": "Booking",
+   "items": [
+    {
+     "question": "1. How do I book the service? ",
+     "answerHtml": "You can book through our Off-Airport Check-In website <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"/booking-details/\">here</a> up to <span class=\"font-bold\">14 days</span> before and no later than 11am on the day of your flight.<br>Passengers are encouraged to make a reservation with the details reflected in their airline ticket for a swifter luggage drop-off."
+    },
+    {
+     "question": "2. How much does it cost?  ",
+     "answerHtml": "The service costs $29 per luggage."
+    },
+    {
+     "question": "3. Do you accept odd-sized luggage? ",
+     "answerHtml": "Yes, we accept odd-sized luggage such as skis, golf bags, etc. However, airline rules on luggage restrictions still apply to this service. Please check your airline's website for more information.<br><br>At the point of booking this service, please indicate the number of odd-sized items for us to better plan our service."
+    },
+    {
+     "question": "4. How do I add more luggage to my booking? ",
+     "answerHtml": "Should you wish to purchase more luggage for the service, please make a new reservation <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"/booking-details/\">here</a> with the same flight and passenger details."
+    },
+    {
+     "question": "5. Can my travel party make a single booking for luggage drop-off if we have different travel itineraries?",
+     "answerHtml": "No. Each traveler with a different flight itinerary must make a separate booking for luggage drop-off. The system only allows one flight to be booked at a time, so individual bookings are required."
+    },
+    {
+     "question": "6. How do I cancel my booking? ",
+     "answerHtml": "You can cancel your booking at no charge, up to 24 hours before your flight's departure time. For cancellations within 24 hours of your flight's departure time, please email <span class=\"font-bold text-[#7A35B0]\">bagassist@changirecommends.com.sg</span>. Any refunds will be assessed on a case-by-case basis and a cancellation fee may apply.<br><br>Under your booking cancellation email, click 'Manage Booking'. Under 'Manage Booking', click 'Cancel Now'. Where applicable, refunds will be issued to the original payment method and may take several business days to appear."
+    }
+   ]
+  },
+  {
+   "label": "Check-In",
+   "items": [
+    {
+     "question": "1. What are the requirements for my luggage? ",
+     "answerHtml": "Each luggage must meet your airline's luggage allowance. Excess weight of your luggage will not be processed and you will have to check-in at your airline's check-in counter at Changi Airport. Each piece of baggage should also weigh no more than 32kg to comply with health and safety regulations.<br><br>Airline rules on luggage restrictions apply to this service (e.g. we do <span class=\"font-bold\">not </span> accept restricted items and dangerous goods). Please check your airline's website for more information."
+    },
+    {
+     "question": "2. Do I need to collect my baggage when connecting to a domestic flight?",
+     "answerHtml": "Yes, passengers must collect their baggage at the first point of entry and re-check it for onward domestic travel, even if the baggage tag shows the final destination for certain countries. This requirement is mandated by local regulations and applies regardless of airline partnerships.<br><br>Countries where this rule applies include Japan, USA, China, Canada, New Zealand, Australia, Indonesia, India, Thailand, Vietnam, Nepal, Philippines, Korea, Cambodia, Myanmar, South Africa, and Maldives."
+    },
+    {
+     "question": "3. How do I ensure my airline frequent flyer luggage allowance is taken into account? ",
+     "answerHtml": "Please ensure your frequent flyer status is updated within your airline booking to ensure that the accurate luggage allowance is reflected."
+    },
+    {
+     "question": "4. When do I have to drop off my luggage at the hotel? ",
+     "answer": {
+      "raw": "<div class=\"w-full flex flex-col sm:flex-row gap-0 sm:gap-8 items-center justify-center\"><img alt=\"Dropoff\" loading=\"lazy\" width=\"407\" height=\"180\" decoding=\"async\" data-nimg=\"1\" src=\"/images/when-drop-off-luggage-hotel.webp\" style=\"color: transparent;\"><br><p class=\"cag-typography cag-s-body cag-regular\" style=\"color: rgb(18, 18, 18); background: transparent;\">Please ensure that you drop off your luggage within the drop-off window. We are unable to accept any luggage that arrives after as we may not be able to deliver it in time for your departing flight.</p></div>"
+     }
+    },
+    {
+     "question": "5. Where do I drop off my luggage? ",
+     "answerHtml": "You can drop off your luggage at the hotel concierge desk (unless otherwise informed by the hotel)."
+    },
+    {
+     "question": "6. What do I need to provide at the hotel during drop-off? ",
+     "answerHtml": "Please have ready: <br><ul class=\"list-disc pl-5 mt-2\"><li>Your passport</li><li>Your digital or mobile boarding pass after completing online check-in </li><li>Your confirmation email of the service</li><li>Your luggage that is within your airline's luggage allowance </li></ul>"
+    },
+    {
+     "question": "7. Who needs to be present at the hotel for luggage drop-off?",
+     "answerHtml": "All passengers travelling together who are checking-in their luggage must be present for checks by our hotel partners. All passengers must have their own boarding passes and passports ready.<br><br>Baggage tags will be issued through our automated systems after verifying the identity and the luggage allowances of each passenger."
+    },
+    {
+     "question": "8. Can I modify my airline itinerary on the spot at the hotel? ",
+     "answerHtml": "Hotel staff are unable to assist with any modifications or requests pertaining to your flight (e.g. seat changes, add-ons, excess weight of luggage). Should you have any requests for your flight, please proceed to the airline's check-in counter at Changi Airport for assistance."
+    },
+    {
+     "question": "9. Will my luggage be stored and transported safely?",
+     "answerHtml": "Rest assured, your luggage is in safe hands! All luggage will be sealed and under secure CCTV-monitoring from storage, delivery, and induction at the airport.<br><br>All staff have gone through comprehensive security clearance and training to ensure that your luggage is handled with utmost care and safety."
+    },
+    {
+     "question": "10. How can I process my GST refunds for items purchased in Singapore?",
+     "answerHtml": "Passengers are strongly encouraged to keep these items in their hand carry luggage for presentation to Customs, if required.<br>You are encouraged to check for the latest information on the <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"https://www.customs.gov.sg/individuals/going-through-customs/departure/tourist-refund-scheme/\">Customs website.</a>"
+    }
+   ]
+  },
+  {
+   "label": "After Check-In",
+   "items": [
+    {
+     "question": "1. I left something in my luggage; can I still retrieve it? ",
+     "answerHtml": "Once your luggage has been accepted by the hotels, the luggage will be sealed and under strict custody to ensure that it is not tampered with. As such, you will not be able to retrieve it until you reach your arrival airport."
+    },
+    {
+     "question": "2. How can I track my luggage?",
+     "answerHtml": "You will also get email updates when the luggage is on the way to the airport and when it has arrived at the airport.<br><br>Your luggage can also be tracked from acceptance at the hotel to loading onto the aircraft by managing your booking <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"/manage-booking-pin/\">here.</a> You can also track it via the Baggage Tracker in <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"https://changi.me/4ms0vAX\">Changi App</a> by scanning the baggage tag before handing over your luggage to the hotel."
+    },
+    {
+     "question": "3. What happens if my flight is cancelled after I have dropped off my luggage?",
+     "answerHtml": "If your luggage is still at the hotel, you can reach out to the hotel staff who will return your luggage upon confirmation that the flight has been cancelled.<br><br>If your luggage is on the way to the airport or already at the airport, please proceed to Changi Airport and contact your airline on how to retrieve your luggage."
+    },
+    {
+     "question": "4. Do I still need to go to the airline check-in counter? ",
+     "answerHtml": "No, you can head straight to the departure immigration counters as your luggage would have been checked in by us.<br><br>Should there be any concerns with your luggage, we will contact you to check-in your luggage again at the airport prior to your flight."
+    },
+    {
+     "question": "5. I noticed damage to my luggage upon collecting it from my arrival airport. What should I do? ",
+     "answerHtml": "We handle all luggage carefully throughout its journey from storage to induction at Changi Airport. Should there be any damage to your luggage, please contact your airline and lodge a report through them."
+    },
+    {
+     "question": "6. If I've dropped my luggage at the hotel, when should I enter Departure Transit?",
+     "answerHtml": "We encourage passengers to complete immigration procedures and enter Departure Transit at least 1 to 1.5 hours before your flight. You can enjoy the variety of retail and F&amp;B offerings at Changi Airport or experience our various attractions in transit."
+    },
+    {
+     "question": "7. Can I check-in additional luggage at the airport? ",
+     "answerHtml": "Yes, you can check-in additional luggage at Changi Airport if it is still within your airline's total luggage allowance."
+    }
+   ]
+  }
+ ]
+}

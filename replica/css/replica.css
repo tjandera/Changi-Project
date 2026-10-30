@@ -1,0 +1,125 @@
+/*
+ * Replica-only CSS. Everything visual about the real pages comes from the original
+ * compiled CSS in /_next/static/chunks and the captured MUI runtime CSS.
+ * This file only adds what the replica itself needs.
+ */
+
+/* Elements hidden by the replica's scripts (collapsed summary / notes) */
+[hidden] {
+  display: none !important;
+}
+
+/* Persistent case-study label (not on the live site, on purpose) */
+.replica-label {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 60;
+  max-width: calc(100vw - 104px);
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(18, 18, 18, 0.85);
+  color: #fff;
+  font: 400 11px/14px Lato, sans-serif;
+  pointer-events: none;
+}
+
+/* Visual copy of the Qualtrics "Give Feedback" tab (inline styles copied from the live widget) */
+.replica-feedback {
+  position: fixed;
+  bottom: 45vh;
+  right: -1px;
+  width: 36px;
+  z-index: 55;
+  cursor: default;
+}
+.replica-feedback__tab {
+  background: rgb(108, 33, 127);
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+  transform: rotateZ(180deg);
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* MUI Checkbox (Step 4). Not captured from the runtime: rebuilt from MUI's defaults
+   plus the site's own CagCheckbox style object (classes$g.root in the site bundle). */
+.css-115tajq {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  border-radius: 50%;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 2px 0 0;
+}
+.css-115tajq .cag-checkbox-icon {
+  box-sizing: border-box;
+  height: 20px;
+  width: 20px;
+  border-radius: 6px;
+  position: relative;
+  border: 1px solid var(--cag-primary-color-grey-300, #ababab);
+  display: flex;
+  align-items: center;
+}
+.css-115tajq.Mui-checked .cag-checkbox-icon {
+  background: var(--cag-primary-color-purple-primary-600, #7a35b0);
+  border: none;
+}
+.css-115tajq.Mui-checked .cag-checkbox-icon span {
+  color: var(--cag-primary-color-base-white, #fff);
+}
+.css-1m9pwf3 {
+  cursor: inherit;
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+/* Shown only if /data cannot be loaded (e.g. opened from file://) */
+.replica-error {
+  position: fixed;
+  top: 76px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 70;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #cc1000;
+  color: #fff;
+  font: 700 14px/18px Lato, sans-serif;
+}
+
+/*
+ * "How It Works" columns.
+ * The live markup gives each column `max-w-[300px]` with flex: 0 1 auto. Chrome shrinks those
+ * columns in proportion to their text length, so on the live site in Chrome they come out
+ * 189 / 281 / 215 / 184 / 251 px wide (measured 30 Oct 2026, 1512px viewport).
+ * The reference screenshot in the brief shows five equal 224px columns instead.
+ * The brief says replicate the screenshot, so the columns are pinned to equal widths in every browser
+ * (verified: illustrations, titles and line breaks then match the screenshot pixel-for-pixel).
+ * Remove this rule to get the live site's Chrome layout back.
+ */
+#our-services .lg\:flex.w-full.flex-row > .max-w-\[300px\] {
+  flex: 1 1 0%;
+}

@@ -1,0 +1,71 @@
+{
+ "_source": "Flight list returned by the live site for Marina Bay Sands on 31 Oct 2026 (captured 30 Oct 2026). The live site loads this per hotel + date from its API; here every date returns the same list.",
+ "airlines": {
+  "SQ": {
+   "name": "Singapore Airlines",
+   "logo": "/images/singapore-airlines.png"
+  }
+ },
+ "flights": [
+  {
+   "flightNumber": "SQ176",
+   "airline": "SQ",
+   "route": "Singapore to Vietnam (DAD)",
+   "departureTime": "17:00"
+  },
+  {
+   "flightNumber": "SQ836",
+   "airline": "SQ",
+   "route": "Singapore to China (PVG)",
+   "departureTime": "17:00"
+  },
+  {
+   "flightNumber": "SQ714",
+   "airline": "SQ",
+   "route": "Singapore to Thailand (BKK)",
+   "departureTime": "17:10"
+  },
+  {
+   "flightNumber": "SQ964",
+   "airline": "SQ",
+   "route": "Singapore to Indonesia (CGK)",
+   "departureTime": "17:20"
+  },
+  {
+   "flightNumber": "SQ158",
+   "airline": "SQ",
+   "route": "Singapore to Cambodia (KTI)",
+   "departureTime": "17:30"
+  },
+  {
+   "flightNumber": "SQ186",
+   "airline": "SQ",
+   "route": "Singapore to Vietnam (SGN)",
+   "departureTime": "17:30"
+  },
+  {
+   "flightNumber": "SQ946",
+   "airline": "SQ",
+   "route": "Singapore to Indonesia (DPS)",
+   "departureTime": "17:40"
+  },
+  {
+   "flightNumber": "SQ126",
+   "airline": "SQ",
+   "route": "Singapore to Malaysia (KUL)",
+   "departureTime": "18:30"
+  },
+  {
+   "flightNumber": "SQ720",
+   "airline": "SQ",
+   "route": "Singapore to Thailand (BKK)",
+   "departureTime": "18:35"
+  },
+  {
+   "flightNumber": "SQ740",
+   "airline": "SQ",
+   "route": "Singapore to Thailand (HKT)",
+   "departureTime": "18:35"
+  }
+ ]
+}

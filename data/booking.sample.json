@@ -1,0 +1,26 @@
+{
+ "_comment": "Placeholder booking used by ?preview=1 so a reviewer can open any step directly. Fictional person.",
+ "hotel": {
+  "id": "marina-bay-sands",
+  "name": "Marina Bay Sands"
+ },
+ "flightDate": "today+1",
+ "flight": {
+  "flightNumber": "SQ836",
+  "airline": "SQ",
+  "route": "Singapore to China (PVG)",
+  "departureTime": "17:00"
+ },
+ "luggage": {
+  "standard": 1,
+  "oddSized": 0
+ },
+ "contact": {
+  "firstName": "Alex",
+  "lastName": "Tan",
+  "countryIso": "SG",
+  "phone": "91234567",
+  "email": "alex.tan@example.com"
+ },
+ "termsAccepted": false
+}

@@ -1,0 +1,21 @@
+{
+ "_source": "Hotel list shown in the live Location / Hotel dropdowns (30 Oct 2026).",
+ "hotels": [
+  {
+   "id": "fullerton-bay-hotel",
+   "name": "Fullerton Bay Hotel"
+  },
+  {
+   "id": "itb-asia",
+   "name": "ITB Asia"
+  },
+  {
+   "id": "marina-bay-sands",
+   "name": "Marina Bay Sands"
+  },
+  {
+   "id": "the-fullerton-hotel",
+   "name": "The Fullerton Hotel"
+  }
+ ]
+}

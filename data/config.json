@@ -1,0 +1,61 @@
+{
+ "_comment": "UI configuration. Values marked ASSUMED are not confirmed by the live site; see docs/GAPS.md.",
+ "currency": "S$",
+ "timezoneLabel": "SGT",
+ "pricing": {
+  "standardLuggage": 29,
+  "oddSizedItem": 29,
+  "_oddSizedItem": "ASSUMED: live site shows S$29 per bag; odd-sized price not shown until an item is added"
+ },
+ "booking": {
+  "advanceDays": 14,
+  "sameDayCutoffHour": 11,
+  "_sameDayCutoffHour": "INFERRED from the FAQ: bookings close at 11am on the day of the flight",
+  "maxItemsPerType": 10,
+  "_maxItemsPerType": "ASSUMED",
+  "guardSteps": true,
+  "_guardSteps": "true = like the live site, opening a later step without earlier data sends you to the landing page. Add ?preview=1 to any step URL to load data/booking.sample.json instead."
+ },
+ "routes": {
+  "landing": "/",
+  "tripDetails": "/booking-details/",
+  "luggage": "/booking-baggage/",
+  "personalDetails": "/booking-contact/",
+  "review": "/booking-review/",
+  "manageBooking": "/manage-booking-pin/",
+  "faq": "/faq/"
+ },
+ "tooltips": {
+  "departureDate": "Bookings can be made up to 14 days in advance",
+  "standardLuggage": "Each luggage should not exceed 32kg.",
+  "contactNumber": "We'll only contact this number in case of emergencies.",
+  "bookingCode": "Refer to your confirmation email for your booking confirmation code",
+  "bookingPin": "Refer to your confirmation email for your booking PIN"
+ },
+ "dialogs": {
+  "leave": {
+   "title": "Leave this page?",
+   "body": "If you exit now, your current booking progress will be cleared and you'll have to begin again.",
+   "primary": "Continue with Booking",
+   "secondary": "Leave Page"
+  },
+  "endOfPrototype": {
+   "title": "End of replica flow",
+   "body": "Payment is handled by CAG's payment provider and is not part of this case-study replica. Nothing has been sent or charged.",
+   "primary": "Back to Review",
+   "secondary": "Start Over"
+  },
+  "retrieveNotConnected": {
+   "title": "Booking lookup not connected",
+   "body": "Retrieving a booking needs CAG's booking API. Connect it in replica/js/api.js (retrieveBooking).",
+   "primary": "OK",
+   "secondary": "View FAQs"
+  },
+  "notInReplica": {
+   "title": "Not part of this replica",
+   "body": "This link opens a document that was not included in the case-study capture.",
+   "primary": "OK",
+   "secondary": "View FAQs"
+  }
+ }
+}
