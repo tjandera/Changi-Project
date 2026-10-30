@@ -83,7 +83,12 @@ The HTML pages are the source of truth and are formatted by hand (Prettier, prin
 `tools/archive/build_pages.py` is the one-off script that first produced them from the saved pages. It is kept as
 history only and must not be re-run over the repo.
 
-## 6. Porting to the production stack
+## 6. Server
+
+`server.js` (Node, `npm start`) serves the files. It has an empty `routes` table for real endpoints, e.g. `'GET /api/hotels'`.
+Point `models/api.js` at those paths and nothing else changes.
+
+## 7. Porting to the production stack
 
 The live site is Next.js + Tailwind + MUI + Redux. The skeletons keep the exact class names, so each page
 maps one-to-one onto a React component; `models/api.js` maps onto the existing service layer, and `models/store.js`
