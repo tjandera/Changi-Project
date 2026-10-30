@@ -2,8 +2,8 @@
  * Page chrome shared by every route: header links, the "Leave this page?" guard,
  * info-icon tooltips, the 中文 button, the feedback tab and the replica label.
  */
-import { $$, html, pressable } from '../dom.js';
-import { clear } from '../store.js';
+import { $$, html, pressable } from './dom.js';
+import { clear } from '../models/store.js';
 import { ask } from './dialog.js';
 import { tooltip } from './templates.js';
 

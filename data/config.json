@@ -25,6 +25,13 @@
   "manageBooking": "/manage-booking-pin/",
   "faq": "/faq/"
  },
+ "flow": {
+  "_comment": "Where each page sends the user on its primary button. Values are keys of 'routes'. The landing card goes straight to Step 2 (Luggage); the Step 1 page is reached from the header 'Book Now' and from 'Edit' links.",
+  "landing": "luggage",
+  "tripDetails": "luggage",
+  "luggage": "personalDetails",
+  "personalDetails": "review"
+ },
  "tooltips": {
   "departureDate": "Bookings can be made up to 14 days in advance",
   "standardLuggage": "Each luggage should not exceed 32kg.",
@@ -47,7 +54,7 @@
   },
   "retrieveNotConnected": {
    "title": "Booking lookup not connected",
-   "body": "Retrieving a booking needs CAG's booking API. Connect it in replica/js/api.js (retrieveBooking).",
+   "body": "Retrieving a booking needs CAG's booking API. Connect it in replica/js/models/api.js (retrieveBooking).",
    "primary": "OK",
    "secondary": "View FAQs"
   },

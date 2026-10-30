@@ -1,9 +1,9 @@
 # Integration guide
 
 The pages are plain HTML skeletons. Scripts in `replica/js` fill them from data and wire the interactions.
-To put real data behind them you change **one file**: `replica/js/api.js`.
+To put real data behind them you change **one file**: `replica/js/models/api.js`.
 
-## 1. The data adapter (`replica/js/api.js`)
+## 1. The data adapter (`replica/js/models/api.js`)
 
 | Function | Today | Replace with (suggested) | Returns |
 |---|---|---|---|
@@ -15,7 +15,7 @@ To put real data behind them you change **one file**: `replica/js/api.js`.
 | `submitBooking(booking)` | mocked, returns `{ ok: true, mocked: true }` | `POST /bookings` then redirect to `paymentUrl` | `{ ok, bookingId, paymentUrl }` |
 | `retrieveBooking({ code, pin })` | mocked, returns `{ ok: false }` | `POST /bookings/lookup` | `{ ok, booking }` |
 
-`booking` (sent to `submitBooking`) has the shape documented at the top of `replica/js/store.js`:
+`booking` (sent to `submitBooking`) has the shape documented at the top of `replica/js/models/store.js`:
 
 ```json
 {
@@ -28,14 +28,22 @@ To put real data behind them you change **one file**: `replica/js/api.js`.
 }
 ```
 
-Where to hook the real redirect: `replica/js/pages/review.js`, the `onPress(pay, …)` handler. Today it shows
+Where to hook the real redirect: `replica/js/controllers/review.js`, the `onPress(pay, …)` handler. Today it shows
 an "End of replica flow" dialog after `submitBooking`.
+
+## 1b. Code layout (MVC)
+
+| Layer | Folder | Rule |
+|---|---|---|
+| Model | `replica/js/models/` | Data and state only. No DOM access, except `store.js` redirecting from the step guard. |
+| View | `replica/js/views/` | Reads and writes the DOM. Never fetches data or decides the next page. |
+| Controller | `replica/js/controllers/` | One per page. Loads models, hands data to views, handles button presses and navigation. |
 
 ## 2. Hooks in the HTML
 
 | Attribute | Meaning | Example |
 |---|---|---|
-| `data-bind="key"` | Text filled from the view model (`format.js → viewModel`) | `data-bind="trip.flightSummary"` |
+| `data-bind="key"` | Text filled from the view model (`models/format.js → viewModel`) | `data-bind="trip.flightSummary"` |
 | `data-bind-html="key"` | Inner HTML filled by a component | `data-bind-html="contact.flagSvg"` |
 | `data-field="name"` | Input owned by a component | `data-field="email"` |
 | `data-action="name"` | Clickable control | `data-action="next"`, `data-action="edit-trip"` |
@@ -45,29 +53,38 @@ an "End of replica flow" dialog after `submitBooking`.
 | `data-tooltip="key"` | Info icon; text from `config.tooltips[key]` | `data-tooltip="contactNumber"` |
 | `data-component="name"` | Region a script controls | `summary-body`, `booking-card` |
 
-Bound keys (`format.js`): `currency`, `trip.hotel`, `trip.flightSummary`, `trip.flightTime`,
+Bound keys (`models/format.js`): `currency`, `trip.hotel`, `trip.flightSummary`, `trip.flightTime`,
 `luggage.totalItemsLabel`, `luggage.totalCost`, `contact.fullName`, `contact.phoneDisplay`,
 `contact.email`, `contact.dialCode`, and per luggage line `line.label`, `line.subtotal`, `line.itemsLabel`.
 
 To show a new value: add the key to `viewModel()` and put `data-bind="your.key"` on the element.
 
-## 3. Changing copy, prices and rules
+## 3. Page flow
+
+The order of pages is data, in `data/config.json`:
+
+```json
+"flow": { "landing": "luggage", "tripDetails": "luggage", "luggage": "personalDetails", "personalDetails": "review" }
+```
+
+Each key is the page the user is on; each value is a key of `routes`. Controllers call
+`nextRoute(config, 'landing')` (`models/flow.js`) instead of hard-coding a URL. Today the landing card goes
+straight to Step 2 (Luggage). The Step 1 page (`/booking-details/`) is reached from the header "Book Now"
+and from the "Edit" links on later steps.
+
+## 4. Changing copy, prices and rules
 
 All in `data/config.json`: currency, prices, booking window, same-day cut-off, max items, step guard,
 tooltip text and dialog text. Fields marked `ASSUMED` / `INFERRED` are listed in `docs/GAPS.md`.
 
-## 4. Regenerating the pages
+## 5. Editing the pages
 
-`tools/build_pages.py` rebuilds every `index.html` from the saved pages and the live captures.
-It fails loudly if any expected markup is missing, and it asserts that no personal data from the
-capture is left in Step 4.
+The HTML pages are the source of truth and are formatted by hand (Prettier, print width 100).
+`tools/archive/build_pages.py` is the one-off script that first produced them from the saved pages. It is kept as
+history only and must not be re-run over the repo.
 
-```bash
-python3 tools/build_pages.py "<unzipped Changi Case-Study>" "<live captures folder>"
-```
-
-## 5. Porting to the production stack
+## 6. Porting to the production stack
 
 The live site is Next.js + Tailwind + MUI + Redux. The skeletons keep the exact class names, so each page
-maps one-to-one onto a React component; `api.js` maps onto the existing service layer, and `store.js`
+maps one-to-one onto a React component; `models/api.js` maps onto the existing service layer, and `models/store.js`
 onto the booking reducers.

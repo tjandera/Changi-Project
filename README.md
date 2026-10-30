@@ -38,10 +38,16 @@ back to the landing page, like the live site.
 | `/manage-booking-pin/` | Manage Booking | Live DOM capture |
 | `/faq/` | FAQs | Live DOM capture |
 
+**Flow:** the landing card's Book Now goes straight to Step 2 (`/booking-baggage/`). Step 1 is reached from the header
+Book Now and from the "Edit" links. The chain is set in `data/config.json` under `flow`.
+
 \* The zip's `booking-contact.html` was saved after moving on to Step 4, so it holds Step 4's markup.
 Step 3 was captured from the live page instead. Details in [docs/PROVENANCE.md](docs/PROVENANCE.md).
 
 ## How it is built
+
+The JavaScript follows **MVC**. Models own data and state, views own the DOM, controllers connect them
+(one controller per page). There is no build step: plain ES modules.
 
 ```
 index.html, booking-*/, faq/, manage-booking-pin/   page skeletons (original markup + data-* hooks)
@@ -49,14 +55,26 @@ _next/static/chunks/*.css     the site's compiled Tailwind/global CSS, byte-iden
 _next/static/media/           Lato (Google Fonts build) under the filenames the CSS expects
 replica/css/mui-runtime.css   MUI styles captured from the live page (injected at runtime there)
 replica/css/replica.css       replica-only additions (label, feedback tab, checkbox, 1 layout pin)
-replica/js/api.js             DATA ADAPTER: the only file that knows where data comes from
-replica/js/store.js           booking state across steps (sessionStorage)
-replica/js/format.js          display strings ("31 Oct 2026", "1 item(s)", "29.00")
-replica/js/components/        dropdowns, calendar, MUI fields, dialogs, summary, header
-replica/js/pages/             one small script per page
-data/*.json                   all content: hotels, flights, prices, FAQ, countries, copy
-tools/build_pages.py          regenerates the skeletons from the saved pages (provenance)
+
+replica/js/models/            M · data and state
+    api.js                      DATA ADAPTER: the only file that knows where data comes from
+    store.js                    booking state across steps (sessionStorage) + step guard
+    flow.js                     which page follows which (reads "flow" in data/config.json)
+    format.js                   display strings ("31 Oct 2026", "1 item(s)", "29.00") and the view model
+replica/js/views/             V · everything that touches the DOM
+    dom.js, templates.js        helpers and the HTML snippets (dropdowns, calendar, dialogs)
+    button.js, dialog.js, accordion.js, chrome.js, summary.js
+    fields.js, mui.js           hotel/date/flight pickers, MUI-style text, phone and checkbox fields
+replica/js/controllers/       C · one script per page, loaded by that page's <script type="module">
+    boot.js                     shared start-up (config, header, tooltips)
+    landing, trip-details, luggage, personal-details, review, manage-booking, faq
+
+data/*.json                   all content: hotels, flights, prices, FAQ, countries, copy, flow
+tools/archive/build_pages.py  one-off script that produced the first version of the pages (history only)
 ```
+
+The HTML pages are now the **source of truth**. They are hand-formatted, with a header comment on every
+page and section labels, so edit them directly.
 
 The site's own JavaScript (Next.js/Turbopack bundles, Adobe Launch, Qualtrics, Google Translate)
 is **not** included. It is wired to CAG's production booking, payment and analytics services.
@@ -66,7 +84,7 @@ is **not** included. It is wired to CAG's production booking, payment and analyt
 
 Read **[docs/INTEGRATION.md](docs/INTEGRATION.md)**. In short:
 
-1. Replace the bodies of the functions in `replica/js/api.js` with calls to your endpoints. Keep the return shapes.
+1. Replace the bodies of the functions in `replica/js/models/api.js` with calls to your endpoints. Keep the return shapes.
 2. Everything a page shows is bound through `data-bind`, `data-field`, `data-action` and `data-list` attributes.
    No page code needs to change when data comes from an API.
 

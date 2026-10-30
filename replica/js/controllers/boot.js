@@ -1,6 +1,6 @@
 /** Shared start-up for every page: load config, wire header/tooltips/labels. */
-import { api } from '../api.js';
-import { initChrome } from '../components/chrome.js';
+import { api } from '../models/api.js';
+import { initChrome } from '../views/chrome.js';
 
 export async function boot() {
   const config = await api.getConfig();

@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 """
+ARCHIVED · one-off extraction script (how the first version of the pages was made).
+The HTML pages in this repo have since been hand-formatted and annotated, and they are now the
+source of truth. Do NOT run this against the repo: it would overwrite them with the unformatted
+originals. Keep it as the record of what was changed from the saved pages.
+
 Rebuilds the static HTML skeletons in this repo from the saved pages.
 
 Provenance
@@ -19,11 +24,11 @@ What this script does to the original markup
 6. Adds data-* hooks (data-bind, data-field, data-action, data-nav, data-tooltip, data-template)
    that /replica/js uses to fill content from /data/*.json. These hooks are the integration points.
 
-Usage:  python3 tools/build_pages.py "<path to unzipped Changi Case-Study>" "<path to live captures>"
+Usage:  python3 tools/archive/build_pages.py "<path to unzipped Changi Case-Study>" "<path to live captures>"
 """
 import os, re, sys, json
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SAVED = sys.argv[1]
 LIVE = sys.argv[2]
 
@@ -363,7 +368,7 @@ def document(page, app, scripts):
 
 
 def module(name):
-    return f'\n<script type="module" src="/replica/js/pages/{name}.js"></script>'
+    return f'\n<script type="module" src="/replica/js/controllers/{name}.js"></script>'
 
 
 def write(rel, html):

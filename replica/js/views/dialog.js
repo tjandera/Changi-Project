@@ -1,5 +1,5 @@
 /** MUI Dialog behaviour: mount into <body>, lock scroll, close on backdrop / Escape. */
-import { html } from '../dom.js';
+import { html } from './dom.js';
 import { confirmDialog, oddSizedDialog } from './templates.js';
 
 function mount(markup, { onClose } = {}) {

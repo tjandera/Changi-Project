@@ -1,12 +1,12 @@
 /** Step 4 · Review Booking: read-only summary, Terms checkbox, Make Payment (mocked). */
-import { api } from '../api.js';
-import { $ } from '../dom.js';
-import { setEnabled, onPress } from '../components/button.js';
-import { ask } from '../components/dialog.js';
-import { checkbox } from '../components/mui.js';
-import { fillSummary, wireSummary } from '../components/summary.js';
-import { viewModel } from '../format.js';
-import { clear, guard, save } from '../store.js';
+import { api } from '../models/api.js';
+import { $ } from '../views/dom.js';
+import { setEnabled, onPress } from '../views/button.js';
+import { ask } from '../views/dialog.js';
+import { checkbox } from '../views/mui.js';
+import { fillSummary, wireSummary } from '../views/summary.js';
+import { viewModel } from '../models/format.js';
+import { clear, guard, save } from '../models/store.js';
 import { boot, fail } from './boot.js';
 
 try {

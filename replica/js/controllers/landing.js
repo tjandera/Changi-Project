@@ -1,10 +1,11 @@
 /** Landing page: hero booking card (rendered twice, desktop + mobile; kept in sync). */
-import { api } from '../api.js';
-import { $, $$ } from '../dom.js';
-import { setEnabled, onPress } from '../components/button.js';
-import { wireAccordion, findItem } from '../components/accordion.js';
-import { dateField, earliestDate, flightField, hotelField } from '../components/fields.js';
-import { emptyBooking, save } from '../store.js';
+import { api } from '../models/api.js';
+import { $, $$ } from '../views/dom.js';
+import { setEnabled, onPress } from '../views/button.js';
+import { wireAccordion, findItem } from '../views/accordion.js';
+import { dateField, earliestDate, flightField, hotelField } from '../views/fields.js';
+import { emptyBooking, save } from '../models/store.js';
+import { nextRoute } from '../models/flow.js';
 import { boot, fail } from './boot.js';
 
 try {
@@ -50,7 +51,7 @@ try {
     c.button = $('[data-action="book-now"]', c.card);
     onPress(c.button, () => {
       save({ ...emptyBooking(), ...state });
-      window.location.href = config.routes.tripDetails;
+      window.location.href = nextRoute(config, 'landing');
     });
   });
   sync();

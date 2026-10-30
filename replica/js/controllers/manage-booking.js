@@ -1,9 +1,9 @@
 /** Manage Booking: confirmation code + 6-box PIN, Retrieve Booking (mocked). */
-import { api } from '../api.js';
-import { $, $$ } from '../dom.js';
-import { setEnabled, onPress } from '../components/button.js';
-import { ask } from '../components/dialog.js';
-import { textField } from '../components/mui.js';
+import { api } from '../models/api.js';
+import { $, $$ } from '../views/dom.js';
+import { setEnabled, onPress } from '../views/button.js';
+import { ask } from '../views/dialog.js';
+import { textField } from '../views/mui.js';
 import { boot, fail } from './boot.js';
 
 try {

@@ -1,5 +1,5 @@
 /** FAQ accordion row (FAQ page and the landing page's FAQ block). */
-import { html } from '../dom.js';
+import { html } from './dom.js';
 import { faqAnswer } from './templates.js';
 
 const plain = (q) => q.replace(/^\s*\d+\.\s*/, '').trim().toLowerCase();

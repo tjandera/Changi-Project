@@ -1,11 +1,12 @@
 /** Step 3 · Personal Details: names, contact number (with country), email. */
-import { api } from '../api.js';
-import { $ } from '../dom.js';
-import { setEnabled, onPress } from '../components/button.js';
-import { phoneField, textField } from '../components/mui.js';
-import { fillSummary, wireSummary } from '../components/summary.js';
-import { viewModel } from '../format.js';
-import { guard, save } from '../store.js';
+import { api } from '../models/api.js';
+import { $ } from '../views/dom.js';
+import { setEnabled, onPress } from '../views/button.js';
+import { phoneField, textField } from '../views/mui.js';
+import { fillSummary, wireSummary } from '../views/summary.js';
+import { viewModel } from '../models/format.js';
+import { guard, save } from '../models/store.js';
+import { nextRoute } from '../models/flow.js';
 import { boot, fail } from './boot.js';
 
 // ASSUMED: the live rule is not visible in the page; this is a standard address check.
@@ -56,7 +57,7 @@ try {
 
     onPress(next, () => {
       save(booking);
-      window.location.href = config.routes.review;
+      window.location.href = nextRoute(config, 'personalDetails');
     });
   }
 } catch (err) {

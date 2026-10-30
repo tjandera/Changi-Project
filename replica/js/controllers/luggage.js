@@ -1,10 +1,11 @@
 /** Step 2 · Luggage Details: steppers, per-row price, totals. */
-import { $, $$, bind } from '../dom.js';
-import { setEnabled, onPress } from '../components/button.js';
-import { showOddSized } from '../components/dialog.js';
-import { fillSummary, wireSummary } from '../components/summary.js';
-import { money, viewModel } from '../format.js';
-import { guard, save, totalItems } from '../store.js';
+import { $, $$, bind } from '../views/dom.js';
+import { setEnabled, onPress } from '../views/button.js';
+import { showOddSized } from '../views/dialog.js';
+import { fillSummary, wireSummary } from '../views/summary.js';
+import { money, viewModel } from '../models/format.js';
+import { guard, save, totalItems } from '../models/store.js';
+import { nextRoute } from '../models/flow.js';
 import { boot, fail } from './boot.js';
 
 // Live colours: zero counts are grey, non-zero are black.
@@ -54,7 +55,7 @@ try {
 
     onPress(next, () => {
       save(booking);
-      window.location.href = config.routes.personalDetails;
+      window.location.href = nextRoute(config, 'luggage');
     });
   }
 } catch (err) {

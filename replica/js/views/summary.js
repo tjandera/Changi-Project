@@ -3,7 +3,7 @@
  * fills values, renders one line per luggage type, wires the edit pencils
  * and the collapse arrow.
  */
-import { $, $$, bind, renderList } from '../dom.js';
+import { $, $$, bind, renderList } from './dom.js';
 
 export function fillSummary(root, view) {
   bind(root, view.values);

@@ -28,5 +28,6 @@ What the capture could not provide, what this replica does instead, and who need
 | 22 | Fonts | Site's Lato files not in the zip | Google Fonts Lato under the original filenames; rendered widths matched the live site to 0.1px | — |
 | 23 | Two unnamed countries (AC, TA) | Live phone list shows 2 blank rows | Kept in `countries.json`, hidden in the dropdown | — |
 | 24 | Analytics (Adobe, Qualtrics) | Third-party tracking | Removed | — |
+| 25 | Landing "Book Now" destination | Set by the project owner: landing goes straight to Step 2 (Luggage). The Step 1 page is only reached from the header "Book Now" and "Edit" links. The zip does not show where the live landing card sends users. | `flow.landing = "luggage"` in `data/config.json` | Product: confirm |
 
-Every `ASSUMED` / `INFERRED` value lives in `data/config.json`, so changing a rule never needs a code change.
+Every `ASSUMED` / `INFERRED` value, and the page order, lives in `data/config.json`, so changing a rule never needs a code change.

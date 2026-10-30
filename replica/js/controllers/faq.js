@@ -1,7 +1,7 @@
 /** FAQ: tabs + accordions rendered from data/faq.json. */
-import { api } from '../api.js';
-import { $, bind } from '../dom.js';
-import { wireAccordion } from '../components/accordion.js';
+import { api } from '../models/api.js';
+import { $, bind } from '../views/dom.js';
+import { wireAccordion } from '../views/accordion.js';
 import { boot, fail } from './boot.js';
 
 try {

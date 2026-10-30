@@ -2,8 +2,8 @@
  * Trip fields used on the landing card and Step 1: Hotel/Location dropdown,
  * react-calendar date picker and Flight Number dropdown.
  */
-import { html, onDismiss } from '../dom.js';
-import { displayDate, fromISODate, toISODate } from '../format.js';
+import { html, onDismiss } from './dom.js';
+import { displayDate, fromISODate, toISODate } from '../models/format.js';
 import { calendar, flightList, hotelList } from './templates.js';
 
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

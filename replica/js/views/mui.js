@@ -4,7 +4,7 @@
  * Mui-error, Mui-checked) are the ones MUI applies on the live site; their styles
  * live in /replica/css/mui-runtime.css.
  */
-import { html, onDismiss } from '../dom.js';
+import { html, onDismiss } from './dom.js';
 import { checkIcon, countryList } from './templates.js';
 
 const LABEL_OK = 'rgb(18, 18, 18)';

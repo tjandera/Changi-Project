@@ -3,7 +3,7 @@
  * whose look is driven by three Tailwind classes plus the label colour.
  * Class sets below are the exact ones the live site toggles.
  */
-import { pressable } from '../dom.js';
+import { pressable } from './dom.js';
 
 const ENABLED = ['bg-black', 'border-black', 'cursor-pointer'];
 const DISABLED = ['bg-[#E5E5E5]', 'border-[#CCCCCC]', 'cursor-not-allowed'];

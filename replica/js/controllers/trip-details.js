@@ -1,10 +1,11 @@
 /** Step 1 · Trip Details: hotel, flight date, flight number, flight time. */
-import { api } from '../api.js';
-import { $, $$, bind } from '../dom.js';
-import { setEnabled, onPress } from '../components/button.js';
-import { dateField, earliestDate, flightField, hotelField } from '../components/fields.js';
-import { viewModel } from '../format.js';
-import { guard, update } from '../store.js';
+import { api } from '../models/api.js';
+import { $, $$, bind } from '../views/dom.js';
+import { setEnabled, onPress } from '../views/button.js';
+import { dateField, earliestDate, flightField, hotelField } from '../views/fields.js';
+import { viewModel } from '../models/format.js';
+import { guard, update } from '../models/store.js';
+import { nextRoute } from '../models/flow.js';
 import { boot, fail } from './boot.js';
 
 try {
@@ -64,7 +65,7 @@ try {
       b.flightDate = booking.flightDate;
       b.flight = booking.flight;
     });
-    window.location.href = config.routes.luggage;
+    window.location.href = nextRoute(config, 'tripDetails');
   });
 } catch (err) {
   fail(err);
