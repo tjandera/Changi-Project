@@ -114,6 +114,7 @@ function surveyFrame(config) {
   }
   return `<div class="replica-feedback-panel__body" role="img" aria-label="The feedback survey is not part of this replica">
         <svg viewBox="0 0 72 87" width="36" height="43.5" shape-rendering="crispEdges" aria-hidden="true"><path fill="#acacac" d="M0 0h51v7h-51zM0 7h7v7h-7zM37 7h7v7h-7zM51 7h7v7h-7zM0 14h7v7h-7zM37 14h7v7h-7zM58 14h7v7h-7zM0 21h7v7h-7zM18 21h7v7h-7zM37 21h7v7h-7zM65 21h7v7h-7zM0 28h7v7h-7zM18 28h7v7h-7zM37 28h35v7h-35zM0 35h7v21h-7zM65 35h7v21h-7zM0 56h7v7h-7zM25 56h22v7h-22zM65 56h7v7h-7zM0 63h7v7h-7zM18 63h7v7h-7zM47 63h7v7h-7zM65 63h7v7h-7zM0 70h7v10h-7zM65 70h7v10h-7zM0 80h72v7h-72z"/></svg>
+      <p class="replica-feedback-panel__blocked">This content is blocked. Contact the site owner to fix<br />the issue.</p>
       </div>`;
 }
 
