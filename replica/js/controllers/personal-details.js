@@ -51,8 +51,9 @@ try {
     first.set(booking.contact.firstName);
     last.set(booking.contact.lastName);
     email.set(booking.contact.email);
-    await phone.setCountry(booking.contact.countryIso);
+    // setCountry() reports the input's number through onChange, so fill the saved one in first.
     phone.set(booking.contact.phone);
+    await phone.setCountry(booking.contact.countryIso);
     refresh();
 
     onPress(next, () => {

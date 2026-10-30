@@ -101,6 +101,8 @@ Things the capture could not supply, and the default used here: **[docs/GAPS.md]
 | Step 3 | 1079 / 1079 | Reference shows filled fields; layout identical |
 | Step 4 | 1575 / 1575 | |
 
+Responsive checks (1512/1024/768/390) and the full gap list are in [docs/GAPS.md](docs/GAPS.md) (#18, #19, #20, #26 to #28).
+
 Full click-through (landing → Step 4 → dialogs, FAQ, Manage Booking) passes with zero console
 errors and zero requests outside the local server.
 

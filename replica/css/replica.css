@@ -24,27 +24,167 @@
   pointer-events: none;
 }
 
-/* Visual copy of the Qualtrics "Give Feedback" tab (inline styles copied from the live widget) */
+/* "Give Feedback" tab + slide-out panel. Measured on the live site (30 Oct 2026) from Qualtrics' own inline styles:
+   - tab: 36px wide button, 12px Lato label, 10px padding (34.5 x 96.8px), vertically centred, right:-1px, rotated text
+   - desktop (>= 768px): panel is 100vw / max 400px wide, 70% tall, vertically centred, #ededed, 2px #a6a6a6 border;
+     it slides in over 0.5s and pushes the tab with it
+   - mobile (< 768px): panel pulls up from the bottom (top 100% -> 20%), 50% black overlay behind it; tab stays put
+   The survey itself is a third-party iframe, so the panel body is a placeholder. */
 .replica-feedback {
   position: fixed;
-  bottom: 45vh;
+  top: 50%;
+  translate: 0 -50%;
   right: -1px;
   width: 36px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
   z-index: 55;
-  cursor: default;
+  transition: right 0.5s;
 }
 .replica-feedback__tab {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding: 10px;
   background: rgb(108, 33, 127);
   color: rgb(255, 255, 255);
-  padding: 10px;
   font-size: 15px;
-  font-family: Arial, Helvetica, sans-serif;
-  display: flex;
   writing-mode: vertical-rl;
   text-orientation: sideways;
   transform: rotateZ(180deg);
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+}
+.replica-feedback__tab > div {
+  font-size: 12px; /* the 15px above only sets the padding box; the label itself is 12px */
+  line-height: normal;
+}
+.replica-feedback.is-ring {
+  outline: auto 1px -webkit-focus-ring-color;
+}
+.replica-feedback.is-open {
+  right: calc(min(100vw, 400px) - 1px);
+}
+.replica-feedback-panel {
+  position: fixed;
+  top: 15%;
+  left: 100%;
+  width: 100vw;
+  max-width: 400px;
+  height: 70%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: rgb(237, 237, 237);
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(166, 166, 166);
+  border-right: 0;
+  border-radius: 2px 0 0 2px;
+  z-index: 1401;
+  visibility: hidden;
+  transition: left 0.5s, visibility 0s 0.5s;
+}
+.replica-feedback-panel.is-open {
+  left: calc(100% - min(100vw, 400px));
+  visibility: visible;
+  transition: left 0.5s, visibility 0s;
+}
+.replica-feedback-panel__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+  z-index: 1;
+}
+.replica-feedback-panel__close-bg {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  background: #fff;
+  opacity: 0.5;
+}
+.replica-feedback-panel__close button {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #000;
+  cursor: pointer;
+}
+.replica-feedback-panel__close svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+}
+.replica-feedback-panel__body {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  box-sizing: border-box;
+  text-align: center;
+  font: 400 14px/20px Lato, sans-serif;
+  color: #6b6b6b;
+}
+.replica-feedback-shadowbox {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  opacity: 0.5;
+  z-index: 1400;
+}
+@media (max-width: 767px) {
+  .replica-feedback__tab {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .replica-feedback.is-open {
+    right: -1px;
+  }
+  .replica-feedback-panel {
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    height: 80%;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    transition: top 0.5s, visibility 0s 0.5s;
+  }
+  .replica-feedback-panel.is-open {
+    top: 20%;
+    left: 0;
+    transition: top 0.5s, visibility 0s;
+  }
+  .replica-feedback-panel__close {
+    position: static;
+    padding-right: 10px;
+  }
+  .replica-feedback-panel__close-bg {
+    display: none;
+  }
+  .replica-feedback-panel__close button {
+    color: #fff;
+  }
+  .replica-feedback-panel__body {
+    height: calc(100% - 27px);
+    background: rgb(237, 237, 237);
+  }
 }
 
 /* MUI Checkbox (Step 4). Not captured from the runtime: rebuilt from MUI's defaults
