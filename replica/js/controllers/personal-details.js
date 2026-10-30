@@ -27,10 +27,13 @@ try {
       setEnabled(next, fields.every((f) => f.isValid()));
     };
 
+    // Names are required but never turn red (live behaviour); phone and email do when what was typed is wrong.
     const first = textField($('[data-field="firstName"]'), {
+      showErrors: false,
       onChange: (v) => ((booking.contact.firstName = v), refresh()),
     });
     const last = textField($('[data-field="lastName"]'), {
+      showErrors: false,
       onChange: (v) => ((booking.contact.lastName = v), refresh()),
     });
     const email = textField($('[data-field="email"]'), {

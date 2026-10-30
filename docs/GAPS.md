@@ -14,8 +14,8 @@ What the capture could not provide, what this replica does instead, and who need
 | 8 | Max items per type | Not shown | 10 (`config.booking.maxItemsPerType`) | Business |
 | 9 | Earliest bookable date | Rule runs server-side | Inferred from the FAQ: today until 11:00, then tomorrow; up to 14 days ahead | Business |
 | 10 | Email validation rule | Not visible | Standard `name@domain.tld` check | Backend |
-| 11 | Name validation rule | Not visible | Required, non-blank | Backend |
-| 12 | Error messages | Live site only turns the label + border red, no text | Same: red label + border, no text | Design |
+| 11 | Name validation rule | Live names never turn red (seen on live) | Required (blocks Next) but never red | Backend |
+| 12 | Error messages | Live site only turns the label + border red, no text, and only for a wrong phone or email, not an empty field | Same: after the first blur, red label + border for a phone invalid for the chosen country (libphonenumber) or a malformed email. Empty fields stay neutral | Design |
 | 13 | Hotel field typing / search | Not captured | Click-to-pick list only | Design |
 | 14 | Notes panel collapse (Step 1) | Collapsed state not captured | Arrow rotates; note rows hide | Design |
 | 15 | Odd-sized line label in the summary | Only a standard-luggage booking was captured | "Odd-sized Items" | Design |

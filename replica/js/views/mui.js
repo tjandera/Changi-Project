@@ -11,11 +11,16 @@ const LABEL_OK = 'rgb(18, 18, 18)';
 const LABEL_ERROR = 'rgb(204, 16, 0)';
 
 /**
- * Outlined text field. Errors show after the first blur, then update live (as on the live site).
+ * Outlined text field. Red label + border appear only for something typed that is wrong, after the
+ * first blur, and then update live (as on the live site). An empty field is never shown as an error.
+ * `showErrors: false` keeps the field required (it still blocks Next) but never turns it red (names).
  * @param {HTMLInputElement} input
- * @param {{validate?: (v:string)=>boolean, format?: (v:string)=>string, onChange?: (v:string)=>void}} opts
+ * @param {{validate?: (v:string)=>boolean, showErrors?: boolean, format?: (v:string)=>string, onChange?: (v:string)=>void}} opts
  */
-export function textField(input, { validate = (v) => v.trim() !== '', format, onChange } = {}) {
+export function textField(
+  input,
+  { validate = (v) => v.trim() !== '', showErrors = true, format, onChange } = {},
+) {
   const root = input.closest('.MuiInputBase-root');
   const label = input.closest('.relative.flex.flex-col')?.querySelector('p');
   let touched = false;
@@ -25,7 +30,8 @@ export function textField(input, { validate = (v) => v.trim() !== '', format, on
     input.setAttribute('aria-invalid', String(on));
     if (label) label.style.color = on ? LABEL_ERROR : LABEL_OK;
   };
-  const refresh = () => showError(touched && !validate(input.value));
+  const refresh = () =>
+    showError(showErrors && touched && input.value.trim() !== '' && !validate(input.value));
 
   input.addEventListener('focus', () => root.classList.add('Mui-focused'));
   input.addEventListener('blur', () => {
