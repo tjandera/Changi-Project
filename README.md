@@ -7,6 +7,7 @@ Front-end replica of the Changi Off-Airport Check-In booking flow, built for the
 | | |
 |---|---|
 | Source of truth | `Changi Case-Study.zip` (saved pages + screenshots) and the live site, captured 30 Oct 2026 |
+| Live demo (Vercel) | https://changiproject.vercel.app/ |
 | Figma prototype | https://www.figma.com/proto/6KAACC2C1GxOySmUomqv7V/Untitled?page-id=16%3A40&node-id=19-1582&starting-point-node-id=19%3A1582&scaling=scale-down-width |
 | Stack | Node server (`scripts/dev-server.js`, no dependencies) + static HTML + the site's own compiled Tailwind CSS + ES modules. No build step. |
 
