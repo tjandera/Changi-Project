@@ -147,44 +147,44 @@
   opacity: 0.5;
   z-index: 1400;
 }
-@media (max-width: 767px) {
-  .replica-feedback__tab {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  .replica-feedback.is-open {
-    right: -1px;
-  }
-  .replica-feedback-panel {
-    top: 100%;
-    left: 0;
-    width: 100%;
-    max-width: none;
-    height: 80%;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    transition: top 0.5s, visibility 0s 0.5s;
-  }
-  .replica-feedback-panel.is-open {
-    top: 20%;
-    left: 0;
-    transition: top 0.5s, visibility 0s;
-  }
-  .replica-feedback-panel__close {
-    position: static;
-    padding-right: 10px;
-  }
-  .replica-feedback-panel__close-bg {
-    display: none;
-  }
-  .replica-feedback-panel__close button {
-    color: #fff;
-  }
-  .replica-feedback-panel__body {
-    height: calc(100% - 27px);
-    background: rgb(237, 237, 237);
-  }
+/* Phones and tablets only. Qualtrics picks this by device (user agent), not by window width:
+   a narrow desktop window still gets the side panel. `replica-mobile-device` is set by chrome.js. */
+.replica-mobile-device .replica-feedback__tab {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.replica-mobile-device .replica-feedback.is-open {
+  right: -1px;
+}
+.replica-mobile-device .replica-feedback-panel {
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-width: none;
+  height: 80%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  transition: top 0.5s, visibility 0s 0.5s;
+}
+.replica-mobile-device .replica-feedback-panel.is-open {
+  top: 20%;
+  left: 0;
+  transition: top 0.5s, visibility 0s;
+}
+.replica-mobile-device .replica-feedback-panel__close {
+  position: static;
+  padding-right: 10px;
+}
+.replica-mobile-device .replica-feedback-panel__close-bg {
+  display: none;
+}
+.replica-mobile-device .replica-feedback-panel__close button {
+  color: #fff;
+}
+.replica-mobile-device .replica-feedback-panel__body {
+  height: calc(100% - 27px);
+  background: rgb(237, 237, 237);
 }
 
 /* MUI Checkbox (Step 4). Not captured from the runtime: rebuilt from MUI's defaults

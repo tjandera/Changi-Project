@@ -120,7 +120,9 @@ function addFeedbackTab() {
     </div>`,
   );
   const closeBtn = $('.replica-feedback-panel__close button', panel);
-  const mobile = window.matchMedia('(max-width: 767px)');
+  // Decided by device, like Qualtrics: phones and tablets get the pull-up, every desktop window the side panel.
+  const mobile = navigator.userAgentData?.mobile ?? /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent);
+  document.documentElement.classList.toggle('replica-mobile-device', mobile);
   let shadow = null;
 
   const setOpen = (open) => {
@@ -128,7 +130,7 @@ function addFeedbackTab() {
     panel.classList.toggle('is-open', open);
     tab.setAttribute('aria-expanded', String(open));
     panel.setAttribute('aria-hidden', String(!open));
-    if (open && mobile.matches && !shadow) {
+    if (open && mobile && !shadow) {
       shadow = html('<div class="replica-feedback-shadowbox"></div>');
       document.body.appendChild(shadow);
     }
