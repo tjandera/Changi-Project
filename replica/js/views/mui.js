@@ -206,10 +206,8 @@ export function phoneField(input, { countries, countryIso, onChange }) {
         input.focus();
       });
     });
-    // Live behaviour (screen recording, 31 Oct 2026): the list opens at the top, then slides down by
-    // itself and the chosen country stops at the bottom edge of the box.
-    const selected = list.querySelector('.bg-gray-50');
-    if (selected) glideTo(list, selected);
+    // Live: the list always opens at the top, even when another country is selected. It only
+    // slides (see glideTo) once the guest searches for a country.
     list.focus({ preventScroll: true });
     typeAhead(list, (row) => {
       setCountry(named[Number(row.dataset.index)].iso);
