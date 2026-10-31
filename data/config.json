@@ -69,6 +69,11 @@
   "_comment": "Survey shown in the Give Feedback panel. The live site embeds a Qualtrics survey. Empty = grey 'could not load' panel. Set a URL to embed one.",
   "surveyUrl": ""
  },
+ "reviewLinks": {
+  "_comment": "The two links beside the Terms checkbox on Step 4. The live site opens each in a new tab: the Terms PDF is served from /files/ (copy of OACI-T&Cs_v13Apr26.pdf supplied 31 Oct 2026), the Privacy Policy is Changi's page.",
+  "terms": "/files/OACI-TCs_v13Apr26.pdf",
+  "privacy": "https://www.changiairport.com/en/privacy-policy.html"
+ },
  "footer": {
   "_comment": "Where every footer link goes (copied from the live site, which opens each in a new tab). sites = the Changi Sites dropdown and the bottom bar; columns = the desktop link columns, matched by link text; legal, appStores, social (icon file name), signUp = the rest. Change a URL here, not in the HTML.",
   "sites": [

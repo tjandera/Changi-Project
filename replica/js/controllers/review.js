@@ -47,9 +47,15 @@ try {
       }
     });
 
-    ['open-terms', 'open-privacy'].forEach((a) =>
-      $(`[data-action="${a}"]`).addEventListener('click', () => ask(config.dialogs.notInReplica)),
-    );
+    // Both open in a new tab, as on the live site.
+    [
+      ['open-terms', config.reviewLinks.terms],
+      ['open-privacy', config.reviewLinks.privacy],
+    ].forEach(([action, url]) => {
+      const el = $(`[data-action="${action}"]`);
+      el.setAttribute('role', 'link');
+      el.addEventListener('click', () => window.open(url, '_blank', 'noopener,noreferrer'));
+    });
   }
   endLoading();
 } catch (err) {
