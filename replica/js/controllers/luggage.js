@@ -6,6 +6,7 @@ import { fillSummary, wireSummary } from '../views/summary.js';
 import { money, viewModel } from '../models/format.js';
 import { guard, save, totalItems } from '../models/store.js';
 import { nextRoute } from '../models/flow.js';
+import { navigate } from '../models/leave.js';
 import { boot, fail } from './boot.js';
 
 // Live colours: zero counts are grey, non-zero are black.
@@ -55,7 +56,7 @@ try {
 
     onPress(next, () => {
       save(booking);
-      window.location.href = nextRoute(config, 'luggage');
+      navigate(nextRoute(config, 'luggage'));
     });
   }
 } catch (err) {

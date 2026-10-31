@@ -1,5 +1,6 @@
 /** Manage Booking: confirmation code + 6-box PIN, Retrieve Booking (mocked). */
 import { api } from '../models/api.js';
+import { navigate } from '../models/leave.js';
 import { $, $$ } from '../views/dom.js';
 import { setEnabled, onPress } from '../views/button.js';
 import { ask } from '../views/dialog.js';
@@ -39,7 +40,7 @@ try {
   onPress(retrieve, async () => {
     await api.retrieveBooking({ code: $('[data-field="bookingCode"]').value, pin: pin() }); // mocked
     const choice = await ask(config.dialogs.retrieveNotConnected);
-    if (choice === 'secondary') window.location.href = config.routes.faq;
+    if (choice === 'secondary') navigate(config.routes.faq);
   });
   refresh();
 } catch (err) {

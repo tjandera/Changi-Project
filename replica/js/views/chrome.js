@@ -4,6 +4,7 @@
  */
 import { $, $$, html, pressable } from './dom.js';
 import { clear } from '../models/store.js';
+import { isLeaveCheckSkipped, navigate } from '../models/leave.js';
 import { ask } from './dialog.js';
 import { initLanguage } from './language.js';
 import { footerSite, mobileMenu, tooltip } from './templates.js';
@@ -33,30 +34,40 @@ export function initChrome(config) {
           if (choice !== 'secondary') return;
           clear();
         }
-        window.location.href = to;
+        navigate(to);
       });
     });
   bindNav(document);
 
-  // Browser Back/Forward onto a booking step (live behaviour): the page shows the same
-  // "Leave this page?" dialog. Continue keeps the booking; Leave clears it and goes home.
-  // The live site has no beforeunload prompt, so closing or reloading the tab is not intercepted.
+  // "Leave this page?" on a booking step. Live behaviour, three triggers:
+  //   1. the tab or window is hidden (switching tabs, minimising): the dialog is waiting when you return;
+  //   2. Back/Forward lands on the step;
+  //   3. the tab is closed or reloaded: the browser shows its own confirmation (its text can't be changed).
+  // Continue keeps the booking; Leave Page clears it and goes home. In-app navigation skips all three.
   if (BOOKING_PAGES.has(page)) {
     let asking = false;
-    const guardHistory = async () => {
-      if (asking) return;
+    const askToLeave = async () => {
+      if (asking || isLeaveCheckSkipped()) return;
       asking = true;
       const choice = await ask(config.dialogs.leave);
       asking = false;
       if (choice !== 'secondary') return;
       clear();
-      window.location.href = routes.landing;
+      navigate(routes.landing);
     };
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') askToLeave();
+    });
+    window.addEventListener('beforeunload', (e) => {
+      if (isLeaveCheckSkipped()) return;
+      e.preventDefault();
+      e.returnValue = '';
+    });
     const nav = performance.getEntriesByType('navigation')[0];
-    if (nav && nav.type === 'back_forward') guardHistory();
+    if (nav && nav.type === 'back_forward') askToLeave();
     // Back/forward cache restores the page without reloading it.
     window.addEventListener('pageshow', (e) => {
-      if (e.persisted) guardHistory();
+      if (e.persisted) askToLeave();
     });
   }
 

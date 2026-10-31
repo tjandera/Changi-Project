@@ -4,6 +4,7 @@
  * and the collapse arrow.
  */
 import { $, $$, bind, renderList } from './dom.js';
+import { navigate } from '../models/leave.js';
 
 export function fillSummary(root, view) {
   bind(root, view.values);
@@ -24,7 +25,7 @@ export function wireSummary(config) {
     $$(`[data-action="${action}"]`).forEach((el) => {
       el.setAttribute('role', 'link');
       el.setAttribute('tabindex', '0');
-      const go = () => (window.location.href = href);
+      const go = () => navigate(href);
       el.addEventListener('click', go);
       el.addEventListener('keydown', (e) => e.key === 'Enter' && go());
     });

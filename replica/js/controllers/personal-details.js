@@ -7,6 +7,7 @@ import { fillSummary, wireSummary } from '../views/summary.js';
 import { viewModel } from '../models/format.js';
 import { guard, save } from '../models/store.js';
 import { nextRoute } from '../models/flow.js';
+import { navigate } from '../models/leave.js';
 import { boot, fail } from './boot.js';
 
 // ASSUMED: the live rule is not visible in the page; this is a standard address check.
@@ -61,7 +62,7 @@ try {
 
     onPress(next, () => {
       save(booking);
-      window.location.href = nextRoute(config, 'personalDetails');
+      navigate(nextRoute(config, 'personalDetails'));
     });
   }
 } catch (err) {

@@ -7,6 +7,7 @@ import { checkbox } from '../views/mui.js';
 import { fillSummary, wireSummary } from '../views/summary.js';
 import { viewModel } from '../models/format.js';
 import { clear, guard, save } from '../models/store.js';
+import { navigate } from '../models/leave.js';
 import { boot, fail } from './boot.js';
 
 try {
@@ -37,7 +38,7 @@ try {
       const choice = await ask(config.dialogs.endOfPrototype);
       if (choice === 'secondary') {
         clear();
-        window.location.href = config.routes.landing;
+        navigate(config.routes.landing);
       }
     });
 

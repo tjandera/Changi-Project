@@ -14,6 +14,7 @@
  */
 import { api } from './api.js';
 import { toISODate } from './format.js';
+import { navigate } from './leave.js';
 
 const KEY = 'oaci-replica-booking';
 
@@ -97,7 +98,7 @@ export async function guard(requires, config) {
     (requires === 'luggage' && isTripComplete(booking) && isLuggageComplete(booking)) ||
     (requires === 'contact' && isTripComplete(booking) && isLuggageComplete(booking) && isContactComplete(booking));
   if (!ok) {
-    window.location.replace(config.routes.landing);
+    navigate(config.routes.landing, { replace: true });
     return null;
   }
   return booking;

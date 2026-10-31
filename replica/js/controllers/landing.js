@@ -6,6 +6,7 @@ import { wireAccordion, findItem } from '../views/accordion.js';
 import { dateField, earliestDate, flightField, hotelField } from '../views/fields.js';
 import { emptyBooking, save } from '../models/store.js';
 import { nextRoute } from '../models/flow.js';
+import { navigate } from '../models/leave.js';
 import { boot, fail } from './boot.js';
 
 try {
@@ -51,7 +52,7 @@ try {
     c.button = $('[data-action="book-now"]', c.card);
     onPress(c.button, () => {
       save({ ...emptyBooking(), ...state });
-      window.location.href = nextRoute(config, 'landing');
+      navigate(nextRoute(config, 'landing'));
     });
   });
   sync();

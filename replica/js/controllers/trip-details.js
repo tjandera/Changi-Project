@@ -6,6 +6,7 @@ import { dateField, earliestDate, flightField, hotelField } from '../views/field
 import { viewModel } from '../models/format.js';
 import { guard, update } from '../models/store.js';
 import { nextRoute } from '../models/flow.js';
+import { navigate } from '../models/leave.js';
 import { boot, fail } from './boot.js';
 
 try {
@@ -65,7 +66,7 @@ try {
       b.flightDate = booking.flightDate;
       b.flight = booking.flight;
     });
-    window.location.href = nextRoute(config, 'tripDetails');
+    navigate(nextRoute(config, 'tripDetails'));
   });
 } catch (err) {
   fail(err);

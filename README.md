@@ -75,6 +75,7 @@ replica/js/models/            M · data and state
     store.js                    booking state across steps (sessionStorage) + step guard
     flow.js                     which page follows which (reads "flow" in data/config.json)
     i18n.js                     language choice and text lookup
+    leave.js                    "Leave this page?" skip flag and navigate()
     format.js                   display strings ("31 Oct 2026", "1 item(s)", "29.00") and the view model
 replica/js/views/             V · everything that touches the DOM
     dom.js, templates.js        helpers and the HTML snippets (dropdowns, calendar, dialogs)
