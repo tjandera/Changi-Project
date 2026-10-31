@@ -1,12 +1,12 @@
 /**
  * Page chrome shared by every route: header links, the "Leave this page?" guard,
- * info-icon tooltips, the 中文 button, the feedback tab + slide-out panel and the replica label.
+ * info-icon tooltips, the footer "Changi Sites" dropdown, the 中文 button, the feedback tab + slide-out panel and the replica label.
  */
 import { $, $$, html, pressable } from './dom.js';
 import { clear } from '../models/store.js';
 import { ask } from './dialog.js';
 import { initLanguage } from './language.js';
-import { mobileMenu, tooltip } from './templates.js';
+import { footerSite, mobileMenu, tooltip } from './templates.js';
 
 const BOOKING_PAGES = new Set(['trip-details', 'luggage', 'personal-details', 'review']);
 
@@ -73,11 +73,35 @@ export function initChrome(config) {
   }
 
   initTooltips(config.tooltips);
+  initFooterSites(config.footer?.sites ?? []);
   addFeedbackTab(config);
   addReplicaLabel();
 
   // The 中文 / EN button (the live site uses Google Translate; the replica uses data/i18n/zh.json).
   initLanguage().catch((err) => console.error('Language switch failed:', err));
+}
+
+/**
+ * Footer "Changi Sites : Airport" row (the compact footer below 1024px). Clicking it opens a list of
+ * the sister sites under the row and flips the arrow; clicking again closes it, as on the live site.
+ */
+function initFooterSites(sites) {
+  const arrow = $('footer img[alt="Arrow Down"]');
+  const head = arrow && arrow.closest('.border-t');
+  if (!head || !sites.length) return;
+  const list = head.parentElement;
+  const rows = [];
+  head.setAttribute('aria-expanded', 'false');
+  pressable(head, () => {
+    const open = head.getAttribute('aria-expanded') !== 'true';
+    head.setAttribute('aria-expanded', String(open));
+    arrow.classList.toggle('rotate-180', open);
+    if (open) {
+      sites.forEach((name) => rows.push(list.appendChild(html(footerSite(name)))));
+    } else {
+      rows.splice(0).forEach((row) => row.remove());
+    }
+  });
 }
 
 /** Hover (desktop) or tap (touch) an info icon to show its tooltip. */

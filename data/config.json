@@ -68,5 +68,9 @@
  "feedback": {
   "_comment": "Survey shown in the Give Feedback panel. The live site embeds a Qualtrics survey. Empty = grey 'could not load' panel. Set a URL to embed one.",
   "surveyUrl": ""
+ },
+ "footer": {
+  "_comment": "Rows of the footer 'Changi Sites' dropdown on narrow screens. Plain text on the live site (no links).",
+  "sites": ["Airport", "Corporate", "Careers", "CAI", "Jewel", "Now Boarding"]
  }
 }
