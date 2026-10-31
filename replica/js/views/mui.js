@@ -61,6 +61,38 @@ export function textField(
 }
 
 /**
+ * Slide a list so `row` is visible, the way the live country list does: scrolling down stops with the
+ * row on the bottom edge, scrolling up with it on the top edge. Speed grows with distance (about
+ * 1.4s for the whole list). Wheel, touch or a new glide cancels the slide.
+ */
+const gliding = new WeakMap();
+function glideTo(list, row) {
+  const top = row.offsetTop;
+  const bottom = top + row.offsetHeight;
+  const from = list.scrollTop;
+  const to =
+    bottom > from + list.clientHeight ? bottom - list.clientHeight : top < from ? top : from;
+  cancelAnimationFrame(gliding.get(list));
+  const distance = Math.abs(to - from);
+  if (!distance || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    list.scrollTop = to;
+    return;
+  }
+  const duration = Math.min(1400, 250 + distance * 0.2);
+  const start = performance.now();
+  const stop = () => cancelAnimationFrame(gliding.get(list));
+  list.addEventListener('wheel', stop, { once: true, passive: true });
+  list.addEventListener('touchstart', stop, { once: true, passive: true });
+  const step = (now) => {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 0.5 - Math.cos(Math.PI * t) / 2; // ease in and out
+    list.scrollTop = from + (to - from) * eased;
+    if (t < 1) gliding.set(list, requestAnimationFrame(step));
+  };
+  gliding.set(list, requestAnimationFrame(step));
+}
+
+/**
  * Keyboard search for the country list: type "sing" and the list scrolls to Singapore and marks it,
  * Enter picks it, Up/Down move the mark, Escape closes. Typing pauses for 1s start a new search.
  * It matches the names as shown, so it works in 中文 mode too.
@@ -77,7 +109,7 @@ function typeAhead(list, pick, close) {
     active = row;
     if (!row) return;
     row.classList.add('bg-gray-100');
-    list.scrollTop = row.offsetTop - 2;
+    glideTo(list, row);
   };
 
   list.addEventListener('keydown', (e) => {
@@ -174,8 +206,10 @@ export function phoneField(input, { countries, countryIso, onChange }) {
         input.focus();
       });
     });
+    // Live behaviour (screen recording, 31 Oct 2026): the list opens at the top, then slides down by
+    // itself and the chosen country stops at the bottom edge of the box.
     const selected = list.querySelector('.bg-gray-50');
-    if (selected) list.scrollTop = selected.offsetTop - 80;
+    if (selected) glideTo(list, selected);
     list.focus({ preventScroll: true });
     typeAhead(list, (row) => {
       setCountry(named[Number(row.dataset.index)].iso);
