@@ -85,4 +85,4 @@ export const mobileMenu = () =>
 /* One row of the footer "Changi Sites" dropdown (below 1024px). Captured from the live DOM on 31 Oct 2026.
    The live row opens its site on click; footer.js adds that. */
 export const footerSite = (name) =>
-  `<div class="border-b border-[#ABABAB] py-4 text-center"><p class="cag-typography cag-l-body cag-regular" style="color: rgb(255, 255, 255); background: transparent;">${name}</p></div>`;
+  `<div class="border-b border-[#ABABAB] py-4 text-center" data-i18n-ctx="footer-site"><p class="cag-typography cag-l-body cag-regular" style="color: rgb(255, 255, 255); background: transparent;">${name}</p></div>`;

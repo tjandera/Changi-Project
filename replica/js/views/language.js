@@ -28,7 +28,9 @@ export async function initLanguage() {
     if (skipped(node.parentElement)) return;
     const value = node.nodeValue;
     if (written.get(node) === value) return; // already translated
-    const out = translate(value);
+    // A context key ("footer-site::Airport") wins, for words the live page words differently in a list.
+    const ctx = node.parentElement.closest('[data-i18n-ctx]')?.dataset.i18nCtx;
+    const out = (ctx && translate(`${ctx}::${value.trim()}`)) || translate(value);
     if (out === null || out === value) return;
     originals.set(node, value);
     written.set(node, out);
