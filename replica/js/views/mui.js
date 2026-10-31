@@ -61,6 +61,52 @@ export function textField(
 }
 
 /**
+ * Keyboard search for the country list: type "sing" and the list scrolls to Singapore and marks it,
+ * Enter picks it, Up/Down move the mark, Escape closes. Typing pauses for 1s start a new search.
+ * It matches the names as shown, so it works in 中文 mode too.
+ */
+function typeAhead(list, pick, close) {
+  const rows = [...list.querySelectorAll('[data-index]')];
+  const label = (row) => row.textContent.trim().toLowerCase();
+  let query = '';
+  let timer = null;
+  let active = null;
+
+  const mark = (row) => {
+    if (active) active.classList.remove('bg-gray-100');
+    active = row;
+    if (!row) return;
+    row.classList.add('bg-gray-100');
+    list.scrollTop = row.offsetTop - 2;
+  };
+
+  list.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') return close();
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      return active && pick(active);
+    }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const at = rows.indexOf(active);
+      const next = rows[e.key === 'ArrowDown' ? at + 1 : at < 0 ? rows.length - 1 : at - 1];
+      return mark(next || active);
+    }
+    if (e.key === 'Backspace') {
+      e.preventDefault();
+      query = query.slice(0, -1);
+    } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      e.preventDefault();
+      query = query.length || e.key !== ' ' ? query + e.key.toLowerCase() : query;
+    } else return;
+    clearTimeout(timer);
+    timer = setTimeout(() => (query = ''), 1000);
+    if (!query) return;
+    mark(rows.find((r) => label(r).startsWith(query)) || rows.find((r) => label(r).includes(query)) || active);
+  });
+}
+
+/**
  * Contact Number field: flag + dial-code adornment, country dropdown, as-you-type formatting
  * and validation with libphonenumber-js (the same library the live site bundles).
  */
@@ -131,6 +177,11 @@ export function phoneField(input, { countries, countryIso, onChange }) {
     const selected = list.querySelector('.bg-gray-50');
     if (selected) list.scrollTop = selected.offsetTop - 80;
     list.focus({ preventScroll: true });
+    typeAhead(list, (row) => {
+      setCountry(named[Number(row.dataset.index)].iso);
+      close();
+      input.focus();
+    }, close);
     stopDismiss = onDismiss([popup, trigger], close);
   });
 
