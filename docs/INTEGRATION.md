@@ -93,6 +93,7 @@ The 中文 / EN button swaps page text for a dictionary translation. Nothing els
 | `data/i18n/faq.zh.json` | The FAQ in Chinese, same shape as `data/faq.json` |
 | `replica/js/models/i18n.js` | Remembers the language and looks text up (no DOM) |
 | `replica/js/models/leave.js` | `navigate(url)`: every in-app page change uses it so the "Leave this page?" checks (tab hidden, browser close/reload) stay quiet |
+| `replica/js/views/footer.js` | Footer links: opens each URL listed in `data/config.json` under `footer` in a new tab, runs the "Changi Sites" dropdown, scrolls to top on the logo |
 | `replica/js/views/language.js` | Swaps text on the page, keeps the English so it can switch back, and translates content the page adds later (dropdowns, dialogs) |
 
 To change a translation, edit the JSON. To translate a new sentence, add its exact English text as a key. Text that is

@@ -70,7 +70,76 @@
   "surveyUrl": ""
  },
  "footer": {
-  "_comment": "Rows of the footer 'Changi Sites' dropdown on narrow screens. Plain text on the live site (no links).",
-  "sites": ["Airport", "Corporate", "Careers", "CAI", "Jewel", "Now Boarding"]
+  "_comment": "Where every footer link goes (copied from the live site, which opens each in a new tab). sites = the Changi Sites dropdown and the bottom bar; columns = the desktop link columns, matched by link text; legal, appStores, social (icon file name), signUp = the rest. Change a URL here, not in the HTML.",
+  "sites": [
+   { "site": "Airport", "url": "https://www.changiairport.com/en.html" },
+   { "site": "Corporate", "url": "https://www.changiairport.com/en/corporate.html" },
+   { "site": "Careers", "url": "https://www.changiairport.com/en/careers.html" },
+   { "site": "CAI", "url": "https://www.changiairport.com/en/cai.html" },
+   { "site": "Jewel", "url": "https://www.jewelchangiairport.com/" },
+   { "site": "Now Boarding", "url": "https://nowboarding.changiairport.com/" }
+  ],
+  "columns": [
+   { "title": "Flights", "items": [
+    { "name": "Flight Information", "url": "https://www.changiairport.com/en/fly/flight-information.html" },
+    { "name": "Arrival Guide", "url": "https://www.changiairport.com/en/fly/arrival-guide.html" },
+    { "name": "Departure Guide", "url": "https://www.changiairport.com/en/fly/departure-guide.html" },
+    { "name": "Transiting Guide", "url": "https://www.changiairport.com/en/fly/transit-guide.html" },
+    { "name": "Airline Information", "url": "https://www.changiairport.com/en/fly/airline-information.html" }
+   ] },
+   { "title": "Airport Guide", "items": [
+    { "name": "Map", "url": "https://www.changiairport.com/en/at-changi/map.html" },
+    { "name": "Explore by Terminal", "url": "https://www.changiairport.com/en/at-changi/terminal-guides.html" },
+    { "name": "Transport & Directions", "url": "https://www.changiairport.com/en/at-changi/transport-and-directions.html" },
+    { "name": "Special Assistance", "url": "https://www.changiairport.com/en/at-changi/special-assistance.html" },
+    { "name": "Facilities & Services", "url": "https://www.changiairport.com/en/at-changi/facilities-and-services-directory.html" }
+   ] },
+   { "title": "Dine & Shop", "items": [
+    { "name": "Dining Directory", "url": "https://www.changiairport.com/en/dine-and-shop/dining-directory.html" },
+    { "name": "Shopping Directory", "url": "https://www.changiairport.com/en/dine-and-shop/shop-directory.html" }
+   ] },
+   { "title": "Experience", "items": [
+    { "name": "Tours", "url": "https://www.changiairport.com/en/experience/tours.html" },
+    { "name": "Travel Inspiration", "url": "https://www.changiairport.com/en/experience/attractions-directory.html" },
+    { "name": "Kids", "url": "https://www.changiairport.com/en/experience/kids.html" },
+    { "name": "Attractions", "url": "https://www.changiairport.com/en/experience/attractions-directory.html" },
+    { "name": "Learning Journeys", "url": "https://www.changiairport.com/en/corporate/about-us/learning-journeys.html" },
+    { "name": "Short Stories", "url": "https://www.changiairport.com/en/careers/careers-with-changi-airport-group/love-at-first-flight.html" }
+   ] },
+   { "title": "Events & Promotions", "items": [
+    { "name": "Events", "url": "https://www.changiairport.com/en/happenings/events-directory.html" },
+    { "name": "Promotions", "url": "https://www.changiairport.com/en/happenings/promotions.html" }
+   ] },
+   { "title": "Support", "items": [
+    { "name": "Lost & Found", "url": "https://www.changiairport.com/en/at-changi/facilities-and-services-directory/changi-airport-lost-and-found-services-retrieve-your-lost-items.html" },
+    { "name": "Baggage Tracker", "url": "https://www.changiairport.com/en/help/changi-app/baggage-tracker.html" },
+    { "name": "FAQs", "url": "https://www.changiairport.com/en/help/assistance/faq.html" }
+   ] },
+   { "title": "My Changi", "items": [
+    { "name": "Changi Rewards", "url": "https://www.changiairport.com/en/rewards/catalogue.html" },
+    { "name": "Changi Experiences", "url": "https://www.changiairport.com/en/experience.html" },
+    { "name": "Changi App", "url": "https://www.changiairport.com/en/help/changi-app.html" }
+   ] }
+  ],
+  "legal": [
+   { "name": "Conditions of Use", "url": "https://www.changiairport.com/en/by-laws-and-conditions-of-use.html" },
+   { "name": "Privacy Policy", "url": "https://www.changiairport.com/en/privacy-policy.html" }
+  ],
+  "appStores": [
+   { "alt": "Download on App Store", "url": "https://apps.apple.com/sg/app/changi-app/id391730848" },
+   { "alt": "Get it on Google Play", "url": "https://play.google.com/store/apps/details?id=com.changiairport.cagapp" }
+  ],
+  "social": [
+   { "icon": "facebook", "url": "https://www.facebook.com/changiairport" },
+   { "icon": "instagram", "url": "https://instagram.com/changiairport" },
+   { "icon": "linkedin", "url": "https://www.linkedin.com/company/changiairportgroup" },
+   { "icon": "telegram", "url": "https://bit.ly/2xQwNT8" },
+   { "icon": "tiktok", "url": "https://www.tiktok.com/@changiairport?lang=en" },
+   { "icon": "x", "url": "https://x.com/changiairport" },
+   { "icon": "youtube", "url": "https://www.youtube.com/c/changiairport" },
+   { "icon": "follow-1", "url": "https://weibo.com/changiairport" },
+   { "icon": "follow-2", "url": "https://www.xiaohongshu.com/user/profile/5e15eed30000000001001063" }
+  ],
+  "signUp": "https://www.changiairport.com/en/rewards/dashboard.html"
  }
 }
