@@ -9,7 +9,7 @@ import { calendar, flightList, hotelList } from './templates.js';
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 /** Container the live site appends a field's popup to. */
-const popupHost = (input) => input.parentElement.parentElement.closest('.relative.w-full, .relative.inline-block') || input.parentElement.parentElement;
+const popupHost = (input) => input.parentElement.parentElement.closest('[data-hook~="popup-host"]') || input.parentElement.parentElement;
 
 function attachPopup(input, markup, onPick, extraKeep = []) {
   closeAll();

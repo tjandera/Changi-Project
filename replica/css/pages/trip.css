@@ -1,0 +1,81 @@
+/* Styles that only the trip page uses. Shared pieces live in ../components/.
+   Class names are semantic; each rule is the exact set of utility rules the live site compiled for that element
+   (see docs/CSS.md). Kept in @layer components so the original utilities, the site's cag-* rules and the MUI
+   runtime styles keep winning the cascade exactly as before. */
+@layer components {
+
+  .trip-info-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .trip-card {
+    display: flex;
+    width: 100%;
+    max-width: 843px;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 12px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #e5e5e5;
+    background-color: var(--color-white);
+    padding-inline: 20px;
+    padding-block: 24px;
+  }
+
+  .trip-notes {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 8px;
+    background-color: #f6f3f2;
+    padding-inline: 16px;
+    padding-block: 12px;
+  }
+
+  .trip-notes-toggle {
+    cursor: pointer;
+    transition-property: transform,translate,scale,rotate;
+    transition-timing-function: var(--tw-ease,var(--default-transition-timing-function));
+    --tw-duration: .3s;
+    transition-duration: .3s;
+  }
+
+  .trip-date-row {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  @media (min-width:48rem) {
+    .trip-date-row {
+      flex-direction: row;
+    }
+  }
+
+  .trip-hotel-row {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 32px;
+  }
+  @media (min-width:48rem) {
+    .trip-hotel-row {
+      flex-direction: row;
+    }
+  }
+
+  .trip-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  @media (min-width:48rem) {
+    .trip-stack {
+      gap: 16px;
+    }
+  }
+}

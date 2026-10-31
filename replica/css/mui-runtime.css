@@ -1,3 +1,14 @@
+/* Dialog rules MUI/emotion injects at runtime on the live site (were an inline <style data-emotion="css 7ewhav"> in every page).
+   Kept first so the rules below still win equal-specificity ties, as they did before. */
+@media print {
+  .css-7ewhav {
+    position: absolute !important;
+  }
+}
+.css-7ewhav .MuiPaper-root {
+  border-radius: 16px;
+}
+
 /* MUI / emotion runtime CSS captured from the live page (booking-contact), 30 Oct 2026.
    Emotion injects these with insertRule at runtime, so they are not in the saved HTML. */
 @-webkit-keyframes mui-auto-fill { 0% { display: block; } }

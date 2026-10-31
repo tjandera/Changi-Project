@@ -17,6 +17,9 @@ function link(el, url) {
   pressable(el, () => open(url));
 }
 
+/** Everything in the footer that is clickable on the live site (it carries Tailwind's cursor-pointer there). */
+const CLICKABLE = '.cursor-pointer, .footer-link, .footer-legal-link, .footer-store-badge, .footer-logo, .footer-signup-btn';
+
 const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
 
 export function initFooter(footer = {}) {
@@ -26,7 +29,7 @@ export function initFooter(footer = {}) {
   const within = (selector) => regions.flatMap((r) => $$(selector, r));
 
   // Text links: desktop columns, Changi Sites bar, Conditions of Use / Privacy Policy (both footers).
-  const labelled = within('.cursor-pointer');
+  const labelled = within(CLICKABLE);
   const wire = (name, url) => labelled.filter((el) => text(el) === name).forEach((el) => link(el, url));
   (footer.columns || []).forEach((col) => col.items.forEach((item) => wire(item.name, item.url)));
   (footer.sites || []).forEach((s) => wire(s.site, s.url));
@@ -64,7 +67,7 @@ export function initFooter(footer = {}) {
  */
 function initSitesDropdown(sites) {
   const arrow = $('footer img[alt="Arrow Down"]');
-  const head = arrow && arrow.closest('.border-t');
+  const head = arrow && arrow.closest('[data-hook~="footer-sites-toggle"]');
   if (!head || !sites.length) return;
   const list = head.parentElement;
   let rows = [];

@@ -1,0 +1,9 @@
+/* Text colours. On the live site these are inline style="color: ...; background: transparent" on every <p>/<div>.
+   One class per colour instead. Unlayered (like the site's own cag-* rules) so they beat the base layer; the
+   scripts still set el.style.color for error / disabled states, and an inline style always wins over these. */
+.ink-white  { color: #ffffff; background: transparent; }
+.ink-black  { color: #121212; background: transparent; }
+.ink-grey   { color: #454545; background: transparent; }
+.ink-muted  { color: #999999; background: transparent; }
+.ink-light  { color: #ababab; background: transparent; }
+.ink-purple { color: rgb(122, 53, 176); background: transparent; }

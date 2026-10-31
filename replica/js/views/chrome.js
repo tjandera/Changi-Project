@@ -109,7 +109,7 @@ export function initTooltips(copy) {
   $$('[data-tooltip]').forEach((icon) => {
     const text = copy[icon.dataset.tooltip];
     if (!text) return;
-    const host = icon.closest('.relative') || icon.parentElement;
+    const host = icon.closest('[data-hook~="field"], [data-hook~="tooltip-host"]') || icon.parentElement;
     let tip = null;
     const show = () => {
       if (tip) return;

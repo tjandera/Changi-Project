@@ -1,0 +1,42 @@
+/* Styles that only the review page uses. Shared pieces live in ../components/.
+   Class names are semantic; each rule is the exact set of utility rules the live site compiled for that element
+   (see docs/CSS.md). Kept in @layer components so the original utilities, the site's cag-* rules and the MUI
+   runtime styles keep winning the cascade exactly as before. */
+@layer components {
+
+  .review-terms-card {
+    display: flex;
+    height: 120px;
+    width: 100%;
+    max-width: 843px;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 12px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #e5e5e5;
+    background-color: var(--color-white);
+    padding-inline: 20px;
+    padding-block: 24px;
+  }
+
+  .review-card {
+    display: flex;
+    width: 100%;
+    max-width: 843px;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 12px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #e5e5e5;
+    background-color: var(--color-white);
+    padding: 24px;
+  }
+
+  .review-details {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+}

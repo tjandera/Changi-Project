@@ -1,0 +1,34 @@
+/* Hero banner used by FAQs and Manage Booking.
+   Class names are semantic; each rule is the exact set of utility rules the live site compiled for that element
+   (see docs/CSS.md). Kept in @layer components so the original utilities, the site's cag-* rules and the MUI
+   runtime styles keep winning the cascade exactly as before. */
+@layer components {
+
+  /* used on: faq, manage */
+  .banner-copy {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding-inline: 16px;
+    text-align: center;
+    color: var(--color-white);
+  }
+
+  /* used on: faq, manage */
+  .banner {
+    position: relative;
+    height: 148px;
+    width: 100%;
+    background-color: #fcfcfc;
+  }
+  @media (min-width:48rem) {
+    .banner {
+      height: 240px;
+    }
+  }
+}

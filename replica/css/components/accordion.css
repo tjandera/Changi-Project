@@ -1,0 +1,25 @@
+/* FAQ accordion rows (landing preview and FAQs page).
+   Class names are semantic; each rule is the exact set of utility rules the live site compiled for that element
+   (see docs/CSS.md). Kept in @layer components so the original utilities, the site's cag-* rules and the MUI
+   runtime styles keep winning the cascade exactly as before. */
+@layer components {
+
+  /* used on: faq, landing */
+  .faq-item {
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+    border-color: #e8e8e8;
+  }
+
+  /* used on: faq, landing */
+  .faq-item-header {
+    display: flex;
+    height: 72px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

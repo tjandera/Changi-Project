@@ -22,7 +22,7 @@ export function textField(
   { validate = (v) => v.trim() !== '', showErrors = true, format, onChange } = {},
 ) {
   const root = input.closest('.MuiInputBase-root');
-  const label = input.closest('.relative.flex.flex-col')?.querySelector('p');
+  const label = input.closest('[data-hook~="field"]')?.querySelector('p');
   let touched = false;
 
   const showError = (on) => {
@@ -152,7 +152,7 @@ export function phoneField(input, { countries, countryIso, onChange }) {
     .closest('.MuiInputBase-root')
     .querySelector('[data-bind="contact.dialCode"]');
   const arrow = trigger.querySelector('img');
-  const host = input.closest('.relative.inline-block');
+  const host = input.closest('[data-hook~="popup-host"]');
   let iso = countryIso;
   let popup = null;
   let stopDismiss = null;

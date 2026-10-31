@@ -20,20 +20,19 @@
     <!-- Original compiled Tailwind + global CSS, byte-identical to the saved site -->
     <link rel="stylesheet" href="/_next/static/chunks/0ndgyzgu-3f19.css" data-precedence="next" />
     <link rel="stylesheet" href="/_next/static/chunks/3vw576cu90qfb.css" data-precedence="next" />
-    <style data-emotion="css 7ewhav" data-s="">
-      @media print {
-        .css-7ewhav {
-          position: absolute !important;
-        }
-      }
-      .css-7ewhav .MuiPaper-root {
-        border-radius: 16px;
-      }
-    </style>
     <!-- MUI runtime styles captured from the live page (emotion injects them at runtime) -->
     <link rel="stylesheet" href="/replica/css/mui-runtime.css" />
     <!-- Replica-only additions: replica label, feedback tab, checkbox -->
     <link rel="stylesheet" href="/replica/css/replica.css" />
+    <link rel="stylesheet" href="/replica/css/base/ink.css" />
+    <link rel="stylesheet" href="/replica/css/base/images.css" />
+    <link rel="stylesheet" href="/replica/css/components/layout.css" />
+    <link rel="stylesheet" href="/replica/css/components/header.css" />
+    <link rel="stylesheet" href="/replica/css/components/footer.css" />
+    <link rel="stylesheet" href="/replica/css/components/buttons.css" />
+    <link rel="stylesheet" href="/replica/css/components/progress.css" />
+    <link rel="stylesheet" href="/replica/css/components/booking-summary.css" />
+    <link rel="stylesheet" href="/replica/css/pages/baggage.css" />
   </head>
   <body class="inter_5972bc34-module__OU16Qa__className" data-page="luggage">
     <!--
@@ -41,29 +40,27 @@
       CONTROLLER  /replica/js/controllers/luggage.js  (behaviour)
       DATA        config.json (pricing, max items)
       NEXT        flow.luggage -> Personal Details (Step 3)
-      HOOKS       data-bind, data-field, data-action, data-nav, data-list, data-component (see docs/INTEGRATION.md)
+      HOOKS       data-bind, data-field, data-action, data-nav, data-list, data-component, data-hook (see docs/INTEGRATION.md)
     -->
     <div hidden=""></div>
-    <div class="min-h-screen flex flex-col">
+    <div class="page-shell">
       <!-- SITE HEADER · logo, nav (data-nav), Book Now -->
-      <header class="bg-[#222222] w-full z-50">
-        <div class="flex items-center justify-between px-5 py-4 max-w-[1280px] mx-auto">
+      <header class="site-header">
+        <div class="header-inner">
           <div class="flex items-center">
             <a href="/" data-nav="home"
-              ><div class="flex flex-row items-center gap-[24px]">
+              ><div class="row-24-center">
                 <img
                   alt="CAG Logo"
                   width="130"
                   height="35"
                   decoding="async"
                   data-nimg="1"
-                  class="h-8 w-auto"
-                  style="color: transparent"
+                  class="h-8 w-auto next-img"
                   src="/images/cag-logo.svg"
                 />
                 <p
-                  class="cag-typography cag-l-body cag-black hidden md:block"
-                  style="color: #ffffff; background: transparent"
+                  class="cag-typography cag-l-body cag-black hidden md:block ink-white"
                 >
                   Off-Airport Check-In
                 </p>
@@ -71,39 +68,35 @@
             >
           </div>
           <div class="flex items-center">
-            <div class="hidden md:flex flex-row gap-[24px] items-center">
+            <div class="header-nav">
               <p
-                class="cag-typography cag-s-body cag-bold cursor-pointer"
-                style="color: #ffffff; background: transparent"
+                class="cag-typography cag-s-body cag-bold cursor-pointer ink-white"
                 data-nav="faq"
               >
                 FAQs
               </p>
               <p
-                class="cag-typography cag-s-body cag-bold cursor-pointer"
-                style="color: #ffffff; background: transparent"
+                class="cag-typography cag-s-body cag-bold cursor-pointer ink-white"
                 data-nav="manage-booking"
               >
                 Manage Booking
               </p>
               <div
                 data-nav="book-now"
-                class="flex items-center justify-center cursor-pointer w-[150px] h-[36px] rounded-[60px] bg-[#EFEBE7] border border-[#EFEBE7]"
+                class="header-book-now"
                 style="box-shadow: 0px 1px 2px 0px #1212120d"
               >
                 <p
-                  class="cag-typography cag-s-body cag-bold"
-                  style="color: #121212; background: transparent"
+                  class="cag-typography cag-s-body cag-bold ink-black"
                 >
                   Book Now
                 </p>
               </div>
             </div>
             <button aria-label="Open menu" class="block md:hidden">
-              <div class="flex flex-row gap-[8px] items-center">
+              <div class="row-8-center">
                 <p
-                  class="cag-typography cag-s-body cag-bold"
-                  style="color: #ffffff; background: transparent"
+                  class="cag-typography cag-s-body cag-bold ink-white"
                 >
                   Off-Airport Check-In
                 </p>
@@ -113,8 +106,7 @@
                   width="24"
                   height="24"
                   decoding="async"
-                  data-nimg="1"
-                  style="color: transparent"
+                  data-nimg="1" class="next-img"
                   src="/icons/hamburger.svg"
                 />
               </div>
@@ -125,7 +117,7 @@
       <!-- PAGE CONTENT -->
       <main class="flex-1">
         <button
-          class="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-black text-white shadow-lg flex items-center justify-center hover:bg-gray-800 transition-colors duration-200 cursor-pointer z-50 font-sans font-medium"
+          class="language-fab"
           aria-label="Toggle Language"
           data-action="toggle-language"
         >
@@ -133,18 +125,18 @@
         </button>
         <div style="opacity: 1; transform: none">
           <div
-            class="bg-[#FCFCFC] py-[24px] px-[16px] flex flex-col lg:flex-row-reverse gap-[24px] lg:gap-[32px] max-w-[1280px] mx-auto"
+            class="baggage-content"
           >
-            <div class="w-full lg:w-[405px] lg:mt-[52px]">
+            <div class="booking-summary-aside">
               <div
-                class="flex flex-col w-full min-h-[52px] rounded-[12px] border border-[#E5E5E5] bg-white p-[16px] md:p-[24px]"
+                class="booking-summary-card"
               >
                 <div
                   data-action="toggle-summary"
-                  class="cursor-pointer flex flex-row items-center justify-between"
+                  class="booking-summary-header"
                   style="padding-bottom: 0px"
                 >
-                  <div class="flex flex-row gap-[10px] items-center">
+                  <div class="row-10-center">
                     <img
                       alt="booking-summary"
                       loading="lazy"
@@ -152,12 +144,10 @@
                       height="20"
                       decoding="async"
                       data-nimg="1"
-                      src="/icons/booking-summary.svg"
-                      style="color: transparent"
+                      src="/icons/booking-summary.svg" class="next-img"
                     />
                     <p
-                      class="cag-typography cag-l-body cag-black"
-                      style="color: rgb(18, 18, 18); background: transparent"
+                      class="cag-typography cag-l-body cag-black ink-black"
                     >
                       Booking Summary
                     </p>
@@ -169,15 +159,14 @@
                     height="20"
                     decoding="async"
                     data-nimg="1"
-                    class="cursor-pointer"
+                    class="cursor-pointer next-img"
                     src="/icons/arrow-up-black.svg"
-                    style="color: transparent"
                   />
                 </div>
-                <div data-component="summary-body" class="flex flex-col gap-[24px] pt-[24px]">
-                  <div class="flex flex-col gap-[16px]">
-                    <div class="flex flex-row items-center justify-between">
-                      <div class="flex flex-row gap-[10px] items-center">
+                <div data-component="summary-body" class="booking-summary-body">
+                  <div class="stack-16">
+                    <div class="row-between">
+                      <div class="row-10-center">
                         <img
                           alt="booking-summary-trip"
                           loading="lazy"
@@ -185,12 +174,10 @@
                           height="20"
                           decoding="async"
                           data-nimg="1"
-                          src="/icons/booking-summary-trip.svg"
-                          style="color: transparent"
+                          src="/icons/booking-summary-trip.svg" class="next-img"
                         />
                         <p
-                          class="cag-typography cag-l-body cag-black"
-                          style="color: rgb(18, 18, 18); background: transparent"
+                          class="cag-typography cag-l-body cag-black ink-black"
                         >
                           Trip Details
                         </p>
@@ -203,44 +190,37 @@
                         height="24"
                         decoding="async"
                         data-nimg="1"
-                        class="cursor-pointer"
+                        class="cursor-pointer next-img"
                         src="/icons/edit-summary.svg"
-                        style="color: transparent"
                       />
                     </div>
-                    <div class="flex flex-col gap-[4px]">
+                    <div class="stack-4">
                       <p
-                        class="cag-typography cag-small-text cag-regular"
-                        style="color: rgb(69, 69, 69); background: transparent"
+                        class="cag-typography cag-small-text cag-regular ink-grey"
                       >
                         Hotel
                       </p>
                       <p
-                        class="cag-typography cag-s-body cag-bold md:hidden"
-                        style="color: rgb(18, 18, 18); background: transparent"
+                        class="cag-typography cag-s-body cag-bold md:hidden ink-black"
                         data-bind="trip.hotel"
                       ></p>
                       <p
-                        class="cag-typography cag-l-body cag-bold hidden md:block"
-                        style="color: rgb(18, 18, 18); background: transparent"
+                        class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
                         data-bind="trip.hotel"
                       ></p>
                     </div>
-                    <div class="flex flex-col gap-[4px]">
+                    <div class="stack-4">
                       <p
-                        class="cag-typography cag-small-text cag-regular"
-                        style="color: rgb(69, 69, 69); background: transparent"
+                        class="cag-typography cag-small-text cag-regular ink-grey"
                       >
                         Departure Flight
                       </p>
                       <p
-                        class="cag-typography cag-s-body cag-bold md:hidden"
-                        style="color: rgb(18, 18, 18); background: transparent"
+                        class="cag-typography cag-s-body cag-bold md:hidden ink-black"
                         data-bind="trip.flightSummary"
                       ></p>
                       <p
-                        class="cag-typography cag-l-body cag-bold hidden md:block"
-                        style="color: rgb(18, 18, 18); background: transparent"
+                        class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
                         data-bind="trip.flightSummary"
                       ></p>
                     </div>
@@ -248,71 +228,63 @@
                 </div>
               </div>
             </div>
-            <div class="flex flex-col gap-[24px] w-full lg:w-[843px]">
-              <div class="w-full max-w-[843px] flex flex-row items-center justify-between">
+            <div class="step-main">
+              <div class="progress-header">
                 <h6
-                  class="cag-typography cag-h6 cag-black"
-                  style="color: rgb(18, 18, 18); background: transparent"
+                  class="cag-typography cag-h6 cag-black ink-black"
                 >
                   Luggage Details
                 </h6>
-                <div class="flex flex-col gap-[8px] items-center">
-                  <div class="flex flex-row gap-[6px]">
+                <div class="stack-8-center">
+                  <div class="progress-label">
                     <p
-                      class="cag-typography cag-s-body cag-bold"
-                      style="color: rgb(153, 153, 153); background: transparent"
+                      class="cag-typography cag-s-body cag-bold ink-muted"
                     >
                       Step
                     </p>
-                    <div class="flex flex-row gap-[2px] items-center">
+                    <div class="progress-count">
                       <p
-                        class="cag-typography cag-s-body cag-bold"
-                        style="color: rgb(153, 153, 153); background: transparent"
+                        class="cag-typography cag-s-body cag-bold ink-muted"
                       >
                         2
                       </p>
                       <p
-                        class="cag-typography cag-s-body cag-bold"
-                        style="color: rgb(153, 153, 153); background: transparent"
+                        class="cag-typography cag-s-body cag-bold ink-muted"
                       >
                         /
                       </p>
                       <p
-                        class="cag-typography cag-s-body cag-bold"
-                        style="color: rgb(153, 153, 153); background: transparent"
+                        class="cag-typography cag-s-body cag-bold ink-muted"
                       >
                         4
                       </p>
                     </div>
                   </div>
-                  <div class="w-[63px] h-[8px] rounded-full bg-[#E5E5E5] overflow-hidden">
-                    <div class="h-full bg-[#454545] rounded-full" style="width: 50%"></div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width: 50%"></div>
                   </div>
                 </div>
               </div>
               <div
-                class="flex flex-col bg-white py-[24px] px-[20px] border border-[#E5E5E5] rounded-[12px]"
+                class="baggage-notice-card"
               >
                 <p
-                  class="cag-typography cag-s-body cag-regular block md:hidden"
-                  style="color: rgb(18, 18, 18); background: transparent"
+                  class="cag-typography cag-s-body cag-regular block md:hidden ink-black"
                 >
                   Please ensure that you keep to your airline's luggage allowance.
                 </p>
                 <p
-                  class="cag-typography cag-l-body cag-regular hidden md:block"
-                  style="color: rgb(18, 18, 18); background: transparent"
+                  class="cag-typography cag-l-body cag-regular hidden md:block ink-black"
                 >
                   Please ensure that you keep to your airline's luggage allowance.
                 </p>
-                <div class="flex flex-col gap-[32px] pt-[16px] w-full md:w-[388px]">
-                  <div class="flex flex-col gap-[32px]">
-                    <div class="flex flex-row items-start justify-between">
-                      <div class="flex flex-col gap-[6px] md:w-[276px]">
-                        <div class="relative flex flex-row gap-[4px] items-center">
+                <div class="baggage-steppers">
+                  <div class="stack-32">
+                    <div class="baggage-luggage-row" data-hook="luggage-row">
+                      <div class="baggage-stepper-col">
+                        <div class="baggage-label-row" data-hook="tooltip-host">
                           <p
-                            class="cag-typography cag-s-body cag-bold"
-                            style="color: rgb(18, 18, 18); background: transparent"
+                            class="cag-typography cag-s-body cag-bold ink-black"
                           >
                             Standard Luggage
                           </p>
@@ -324,13 +296,12 @@
                             height="20"
                             decoding="async"
                             data-nimg="1"
-                            src="/icons/booking-reference-info.svg"
-                            style="color: transparent"
+                            src="/icons/booking-reference-info.svg" class="next-img"
                           />
                         </div>
                         <div
                           data-stepper="standard"
-                          class="border border-[#CCCCCC] rounded-[8px] flex flex-row w-[124px] h-[36px] px-[12px] py-[8px] items-center justify-between"
+                          class="baggage-stepper"
                         >
                           <img
                             data-action="decrement"
@@ -340,13 +311,11 @@
                             height="20"
                             decoding="async"
                             data-nimg="1"
-                            class="cursor-pointer"
+                            class="cursor-pointer next-img"
                             src="/icons/remove-item.svg"
-                            style="color: transparent"
                           />
                           <p
-                            class="cag-typography cag-s-body cag-regular"
-                            style="color: rgb(171, 171, 171); background: transparent"
+                            class="cag-typography cag-s-body cag-regular ink-light"
                             data-bind="count"
                           >
                             0
@@ -359,35 +328,31 @@
                             height="20"
                             decoding="async"
                             data-nimg="1"
-                            class="cursor-pointer"
+                            class="cursor-pointer next-img"
                             src="/icons/add-item.svg"
-                            style="color: transparent"
                           />
                         </div>
                       </div>
-                      <div class="flex flex-row gap-[8px]" data-component="row-price">
+                      <div class="row-8" data-component="row-price">
                         <p
-                          class="cag-typography cag-l-body cag-bold"
-                          style="color: rgb(153, 153, 153); background: transparent"
+                          class="cag-typography cag-l-body cag-bold ink-muted"
                           data-bind="currency"
                         >
                           S$
                         </p>
                         <p
-                          class="cag-typography cag-l-body cag-bold"
-                          style="color: rgb(153, 153, 153); background: transparent"
+                          class="cag-typography cag-l-body cag-bold ink-muted"
                           data-bind="subtotal"
                         >
                           0.00
                         </p>
                       </div>
                     </div>
-                    <div class="flex flex-row items-start justify-between">
-                      <div class="flex flex-col gap-[6px] md:w-[276px]">
-                        <div class="relative flex flex-row gap-[4px] items-center">
+                    <div class="baggage-luggage-row" data-hook="luggage-row">
+                      <div class="baggage-stepper-col">
+                        <div class="baggage-label-row" data-hook="tooltip-host">
                           <p
-                            class="cag-typography cag-s-body cag-bold"
-                            style="color: rgb(18, 18, 18); background: transparent"
+                            class="cag-typography cag-s-body cag-bold ink-black"
                           >
                             Odd-sized Items
                           </p>
@@ -399,14 +364,13 @@
                             height="20"
                             decoding="async"
                             data-nimg="1"
-                            class="cursor-pointer"
+                            class="cursor-pointer next-img"
                             src="/icons/booking-reference-info.svg"
-                            style="color: transparent"
                           />
                         </div>
                         <div
                           data-stepper="oddSized"
-                          class="border border-[#CCCCCC] rounded-[8px] flex flex-row w-[124px] h-[36px] px-[12px] py-[8px] items-center justify-between"
+                          class="baggage-stepper"
                         >
                           <img
                             data-action="decrement"
@@ -416,13 +380,11 @@
                             height="20"
                             decoding="async"
                             data-nimg="1"
-                            class="cursor-pointer"
+                            class="cursor-pointer next-img"
                             src="/icons/remove-item.svg"
-                            style="color: transparent"
                           />
                           <p
-                            class="cag-typography cag-s-body cag-regular"
-                            style="color: rgb(171, 171, 171); background: transparent"
+                            class="cag-typography cag-s-body cag-regular ink-light"
                             data-bind="count"
                           >
                             0
@@ -435,23 +397,20 @@
                             height="20"
                             decoding="async"
                             data-nimg="1"
-                            class="cursor-pointer"
+                            class="cursor-pointer next-img"
                             src="/icons/add-item.svg"
-                            style="color: transparent"
                           />
                         </div>
                       </div>
-                      <div class="flex flex-row gap-[8px]" data-component="row-price">
+                      <div class="row-8" data-component="row-price">
                         <p
-                          class="cag-typography cag-l-body cag-bold"
-                          style="color: rgb(153, 153, 153); background: transparent"
+                          class="cag-typography cag-l-body cag-bold ink-muted"
                           data-bind="currency"
                         >
                           S$
                         </p>
                         <p
-                          class="cag-typography cag-l-body cag-bold"
-                          style="color: rgb(153, 153, 153); background: transparent"
+                          class="cag-typography cag-l-body cag-bold ink-muted"
                           data-bind="subtotal"
                         >
                           0.00
@@ -460,69 +419,59 @@
                     </div>
                   </div>
                   <div class="border-t border-[#E8E8E8]"></div>
-                  <div class="flex flex-col gap-[8px]">
-                    <div class="flex flex-row items-center justify-between">
+                  <div class="stack-8">
+                    <div class="row-between">
                       <p
-                        class="cag-typography cag-s-body cag-bold md:hidden"
-                        style="color: rgb(18, 18, 18); background: transparent"
+                        class="cag-typography cag-s-body cag-bold md:hidden ink-black"
                       >
                         Total Luggage
                       </p>
                       <p
-                        class="cag-typography cag-l-body cag-bold hidden md:block"
-                        style="color: rgb(18, 18, 18); background: transparent"
+                        class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
                       >
                         Total Luggage
                       </p>
-                      <div class="flex flex-row gap-[8px] items-center">
+                      <div class="row-8-center">
                         <p
-                          class="cag-typography cag-s-body cag-bold md:hidden"
-                          style="color: rgb(18, 18, 18); background: transparent"
+                          class="cag-typography cag-s-body cag-bold md:hidden ink-black"
                           data-bind="luggage.totalItemsLabel"
                         ></p>
                         <p
-                          class="cag-typography cag-l-body cag-bold hidden md:block"
-                          style="color: rgb(18, 18, 18); background: transparent"
+                          class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
                           data-bind="luggage.totalItemsLabel"
                         ></p>
                       </div>
                     </div>
-                    <div class="flex flex-row items-center justify-between">
+                    <div class="row-between">
                       <p
-                        class="cag-typography cag-s-body cag-bold md:hidden"
-                        style="color: rgb(18, 18, 18); background: transparent"
+                        class="cag-typography cag-s-body cag-bold md:hidden ink-black"
                       >
                         Total Cost
                       </p>
                       <p
-                        class="cag-typography cag-l-body cag-bold hidden md:block"
-                        style="color: rgb(18, 18, 18); background: transparent"
+                        class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
                       >
                         Total Cost
                       </p>
-                      <div class="flex flex-row gap-[8px] items-center">
+                      <div class="row-8-center">
                         <p
-                          class="cag-typography cag-s-body cag-bold md:hidden"
-                          style="color: rgb(18, 18, 18); background: transparent"
+                          class="cag-typography cag-s-body cag-bold md:hidden ink-black"
                           data-bind="currency"
                         >
                           S$
                         </p>
                         <p
-                          class="cag-typography cag-l-body cag-bold hidden md:block"
-                          style="color: rgb(18, 18, 18); background: transparent"
+                          class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
                           data-bind="currency"
                         >
                           S$
                         </p>
                         <p
-                          class="cag-typography cag-s-body cag-bold md:hidden"
-                          style="color: rgb(18, 18, 18); background: transparent"
+                          class="cag-typography cag-s-body cag-bold md:hidden ink-black"
                           data-bind="luggage.totalCost"
                         ></p>
                         <p
-                          class="cag-typography cag-l-body cag-bold hidden md:block"
-                          style="color: rgb(18, 18, 18); background: transparent"
+                          class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
                           data-bind="luggage.totalCost"
                         ></p>
                       </div>
@@ -532,7 +481,7 @@
               </div>
               <div
                 data-action="next"
-                class="rounded-[60px] flex items-center justify-center border transition-colors duration-200 bg-[#E5E5E5] border-[#CCCCCC] cursor-not-allowed"
+                class="btn-pill bg-[#E5E5E5] border-[#CCCCCC] cursor-not-allowed"
                 style="
                   width: 240px;
                   height: 44px;
@@ -542,8 +491,7 @@
                 "
               >
                 <p
-                  class="cag-typography cag-l-body cag-bold"
-                  style="color: rgb(153, 153, 153); background: transparent"
+                  class="cag-typography cag-l-body cag-bold ink-muted"
                 >
                   Next
                 </p>
@@ -553,17 +501,16 @@
         </div>
       </main>
       <!-- SITE FOOTER · app links, follow us, legal -->
-      <footer class="bg-[#222222] text-white block lg:hidden">
-        <div class="p-6 lg:p-0 w-full lg:max-w-[1280px] mx-auto">
-          <div class="w-full flex flex-col gap-10 md:gap-[24px]">
-            <div class="flex flex-col gap-4 md:gap-[10px]">
+      <footer class="footer-compact">
+        <div class="footer-inner">
+          <div class="footer-content">
+            <div class="footer-apps">
               <p
-                class="cag-typography cag-s-body cag-bold"
-                style="color: #ffffff; background: transparent"
+                class="cag-typography cag-s-body cag-bold ink-white"
               >
                 Download Changi App
               </p>
-              <div class="flex flex-wrap gap-6 md:gap-[5px]">
+              <div class="footer-badges">
                 <img
                   alt="Download on App Store"
                   loading="lazy"
@@ -571,8 +518,7 @@
                   height="40"
                   decoding="async"
                   data-nimg="1"
-                  class="cursor-pointer w-[117.55px] h-[40px] md:w-[95px] md:h-[32.5px]"
-                  style="color: transparent"
+                  class="footer-store-badge next-img"
                   src="/images/app-store-button.png"
                 /><img
                   alt="Get it on Google Play"
@@ -581,20 +527,18 @@
                   height="40"
                   decoding="async"
                   data-nimg="1"
-                  class="cursor-pointer w-[117.55px] h-[40px] md:w-[95px] md:h-[32.5px]"
-                  style="color: transparent"
+                  class="footer-store-badge next-img"
                   src="/images/google-play-button.png"
                 />
               </div>
             </div>
-            <div class="flex flex-col gap-4 w-full max-w-[189px] md:max-w-full">
+            <div class="footer-social">
               <p
-                class="cag-typography cag-s-body cag-bold"
-                style="color: #ffffff; background: transparent"
+                class="cag-typography cag-s-body cag-bold ink-white"
               >
                 Follow Us
               </p>
-              <div class="flex flex-wrap gap-4">
+              <div class="footer-social-icons">
                 <div class="cursor-pointer">
                   <div class="block sm:hidden">
                     <img
@@ -603,8 +547,7 @@
                       width="40"
                       height="40"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/facebook.svg"
                     />
                   </div>
@@ -615,8 +558,7 @@
                       width="24"
                       height="24"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/facebook.svg"
                     />
                   </div>
@@ -629,8 +571,7 @@
                       width="40"
                       height="40"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/instagram.svg"
                     />
                   </div>
@@ -641,8 +582,7 @@
                       width="24"
                       height="24"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/instagram.svg"
                     />
                   </div>
@@ -655,8 +595,7 @@
                       width="40"
                       height="40"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/linkedin.svg"
                     />
                   </div>
@@ -667,8 +606,7 @@
                       width="24"
                       height="24"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/linkedin.svg"
                     />
                   </div>
@@ -681,8 +619,7 @@
                       width="40"
                       height="40"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/telegram.svg"
                     />
                   </div>
@@ -693,8 +630,7 @@
                       width="24"
                       height="24"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/telegram.svg"
                     />
                   </div>
@@ -707,8 +643,7 @@
                       width="40"
                       height="40"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/tiktok.svg"
                     />
                   </div>
@@ -719,8 +654,7 @@
                       width="24"
                       height="24"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/tiktok.svg"
                     />
                   </div>
@@ -733,8 +667,7 @@
                       width="40"
                       height="40"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/x.svg"
                     />
                   </div>
@@ -745,8 +678,7 @@
                       width="24"
                       height="24"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/x.svg"
                     />
                   </div>
@@ -759,8 +691,7 @@
                       width="40"
                       height="40"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/youtube.svg"
                     />
                   </div>
@@ -771,8 +702,7 @@
                       width="24"
                       height="24"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/youtube.svg"
                     />
                   </div>
@@ -785,8 +715,7 @@
                       width="40"
                       height="40"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/follow-1.svg"
                     />
                   </div>
@@ -797,8 +726,7 @@
                       width="24"
                       height="24"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/follow-1.svg"
                     />
                   </div>
@@ -811,8 +739,7 @@
                       width="40"
                       height="40"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/follow-2.svg"
                     />
                   </div>
@@ -823,27 +750,24 @@
                       width="24"
                       height="24"
                       decoding="async"
-                      data-nimg="1"
-                      style="color: transparent"
+                      data-nimg="1" class="next-img"
                       src="/follow-us/follow-2.svg"
                     />
                   </div>
                 </div>
               </div>
             </div>
-            <div class="flex flex-col gap-4">
+            <div class="stack-16">
               <p
-                class="cag-typography cag-s-body cag-regular text-left"
-                style="color: #ffffff; background: transparent"
+                class="cag-typography cag-s-body cag-regular text-left ink-white"
               >
                 Sign up for a Changi Account to receive the latest updates
               </p>
               <button
-                class="cursor-pointer w-[112px] h-[45px] border-2 border-white rounded-[30px]"
+                class="footer-signup-btn"
               >
                 <p
-                  class="cag-typography cag-s-body cag-bold"
-                  style="color: #ffffff; background: transparent"
+                  class="cag-typography cag-s-body cag-bold ink-white"
                 >
                   Sign Up
                 </p>
@@ -851,8 +775,8 @@
             </div>
           </div>
         </div>
-        <div class="bg-black px-6 py-6 mt-6">
-          <div class="flex flex-col gap-6 w-full max-w-[1280px] mx-auto">
+        <div class="footer-compact-sites">
+          <div class="footer-compact-inner">
             <div class="flex justify-start">
               <img
                 alt="Changi Airport"
@@ -861,18 +785,16 @@
                 height="35"
                 decoding="async"
                 data-nimg="1"
-                class="h-9 w-auto cursor-pointer"
-                style="color: transparent"
+                class="footer-logo next-img"
                 src="/images/changi-logo-footer.png"
               />
             </div>
-            <div class="flex flex-col gap-6">
+            <div class="stack-24">
               <div class="flex flex-col">
-                <div class="border-t border-b border-[#ABABAB] py-4">
-                  <div class="flex items-center justify-between">
+                <div class="footer-sites-toggle" data-hook="footer-sites-toggle">
+                  <div class="row-between">
                     <p
-                      class="cag-typography cag-l-body cag-regular"
-                      style="color: #ffffff; background: transparent"
+                      class="cag-typography cag-l-body cag-regular ink-white"
                     >
                       Changi Sites : <span class="font-bold">Airport</span>
                     </p>
@@ -883,35 +805,31 @@
                       height="24"
                       decoding="async"
                       data-nimg="1"
-                      class="transition-transform duration-300"
-                      style="color: transparent"
+                      class="transition-transform duration-300 next-img"
                       src="/icons/arrow-down-white.svg"
                     />
                   </div>
                 </div>
               </div>
-              <div class="flex flex-col gap-4">
+              <div class="stack-16">
                 <div class="flex gap-4">
                   <div class="cursor-pointer">
                     <p
-                      class="cag-typography cag-s-body cag-regular text-left"
-                      style="color: #ffffff; background: transparent"
+                      class="cag-typography cag-s-body cag-regular text-left ink-white"
                     >
                       Conditions of Use
                     </p>
                   </div>
                   <div class="cursor-pointer">
                     <p
-                      class="cag-typography cag-s-body cag-regular text-left"
-                      style="color: #ffffff; background: transparent"
+                      class="cag-typography cag-s-body cag-regular text-left ink-white"
                     >
                       Privacy Policy
                     </p>
                   </div>
                 </div>
                 <p
-                  class="cag-typography cag-s-body cag-regular text-left"
-                  style="color: #ffffff; background: transparent"
+                  class="cag-typography cag-s-body cag-regular text-left ink-white"
                 >
                   © 2025 Changi Airport
                 </p>
@@ -920,116 +838,115 @@
           </div>
         </div>
       </footer>
-      <div class="flex-col hidden lg:block">
-        <div class="w-full bg-[#222222] px-5">
+      <div class="footer-desktop">
+        <div class="footer-main-bar">
           <div
-            class="max-w-[1280px] mx-auto pt-[24px] pb-[40px] flex flex-wrap xl:flex-nowrap gap-[24px]"
+            class="footer-main-inner"
           >
-            <div class="flex flex-col gap-[32px]">
-              <div class="flex flex-wrap xl:flex-nowrap gap-[24px]">
-                <div class="flex flex-col gap-[8px] w-[193px]">
-                  <div class="text-[14px] font-bold text-white">Flights</div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+            <div class="stack-32">
+              <div class="footer-columns">
+                <div class="footer-column">
+                  <div class="footer-heading">Flights</div>
+                  <div class="footer-link">
                     Flight Information
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Arrival Guide
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Departure Guide
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Transiting Guide
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Airline Information
                   </div>
                 </div>
-                <div class="flex flex-col gap-[8px] w-[193px]">
-                  <div class="text-[14px] font-bold text-white">Airport Guide</div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">Map</div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                <div class="footer-column">
+                  <div class="footer-heading">Airport Guide</div>
+                  <div class="footer-link">Map</div>
+                  <div class="footer-link">
                     Explore by Terminal
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Transport &amp; Directions
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Special Assistance
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Facilities &amp; Services
                   </div>
                 </div>
-                <div class="flex flex-col gap-[8px] w-[193px]">
-                  <div class="text-[14px] font-bold text-white">Dine &amp; Shop</div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                <div class="footer-column">
+                  <div class="footer-heading">Dine &amp; Shop</div>
+                  <div class="footer-link">
                     Dining Directory
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Shopping Directory
                   </div>
                 </div>
-                <div class="flex flex-col gap-[8px] w-[193px]">
-                  <div class="text-[14px] font-bold text-white">Experience</div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">Tours</div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                <div class="footer-column">
+                  <div class="footer-heading">Experience</div>
+                  <div class="footer-link">Tours</div>
+                  <div class="footer-link">
                     Travel Inspiration
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">Kids</div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">Kids</div>
+                  <div class="footer-link">
                     Attractions
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Learning Journeys
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Short Stories
                   </div>
                 </div>
-                <div class="flex flex-col gap-[8px] w-[193px]">
-                  <div class="text-[14px] font-bold text-white">Events &amp; Promotions</div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">Events</div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                <div class="footer-column">
+                  <div class="footer-heading">Events &amp; Promotions</div>
+                  <div class="footer-link">Events</div>
+                  <div class="footer-link">
                     Promotions
                   </div>
                 </div>
               </div>
-              <div class="flex flex-row gap-[24px]">
-                <div class="flex flex-col gap-[8px] w-[193px]">
-                  <div class="text-[14px] font-bold text-white">Support</div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+              <div class="row-24">
+                <div class="footer-column">
+                  <div class="footer-heading">Support</div>
+                  <div class="footer-link">
                     Lost &amp; Found
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Baggage Tracker
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">FAQs</div>
+                  <div class="footer-link">FAQs</div>
                 </div>
-                <div class="flex flex-col gap-[8px] w-[193px]">
-                  <div class="text-[14px] font-bold text-white">My Changi</div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                <div class="footer-column">
+                  <div class="footer-heading">My Changi</div>
+                  <div class="footer-link">
                     Changi Rewards
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Changi Experiences
                   </div>
-                  <div class="cursor-pointer text-[14px] font-normal text-[#ABABAB]">
+                  <div class="footer-link">
                     Changi App
                   </div>
                 </div>
               </div>
             </div>
-            <div class="p-6 lg:p-0 w-full lg:max-w-[1280px] mx-auto">
-              <div class="w-full flex flex-col gap-10 md:gap-[24px]">
-                <div class="flex flex-col gap-4 md:gap-[10px]">
+            <div class="footer-inner">
+              <div class="footer-content">
+                <div class="footer-apps">
                   <p
-                    class="cag-typography cag-s-body cag-bold"
-                    style="color: #ffffff; background: transparent"
+                    class="cag-typography cag-s-body cag-bold ink-white"
                   >
                     Download Changi App
                   </p>
-                  <div class="flex flex-wrap gap-6 md:gap-[5px]">
+                  <div class="footer-badges">
                     <img
                       alt="Download on App Store"
                       loading="lazy"
@@ -1037,8 +954,7 @@
                       height="40"
                       decoding="async"
                       data-nimg="1"
-                      class="cursor-pointer w-[117.55px] h-[40px] md:w-[95px] md:h-[32.5px]"
-                      style="color: transparent"
+                      class="footer-store-badge next-img"
                       src="/images/app-store-button.png"
                     /><img
                       alt="Get it on Google Play"
@@ -1047,20 +963,18 @@
                       height="40"
                       decoding="async"
                       data-nimg="1"
-                      class="cursor-pointer w-[117.55px] h-[40px] md:w-[95px] md:h-[32.5px]"
-                      style="color: transparent"
+                      class="footer-store-badge next-img"
                       src="/images/google-play-button.png"
                     />
                   </div>
                 </div>
-                <div class="flex flex-col gap-4 w-full max-w-[189px] md:max-w-full">
+                <div class="footer-social">
                   <p
-                    class="cag-typography cag-s-body cag-bold"
-                    style="color: #ffffff; background: transparent"
+                    class="cag-typography cag-s-body cag-bold ink-white"
                   >
                     Follow Us
                   </p>
-                  <div class="flex flex-wrap gap-4">
+                  <div class="footer-social-icons">
                     <div class="cursor-pointer">
                       <div class="block sm:hidden">
                         <img
@@ -1069,8 +983,7 @@
                           width="40"
                           height="40"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/facebook.svg"
                         />
                       </div>
@@ -1081,8 +994,7 @@
                           width="24"
                           height="24"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/facebook.svg"
                         />
                       </div>
@@ -1095,8 +1007,7 @@
                           width="40"
                           height="40"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/instagram.svg"
                         />
                       </div>
@@ -1107,8 +1018,7 @@
                           width="24"
                           height="24"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/instagram.svg"
                         />
                       </div>
@@ -1121,8 +1031,7 @@
                           width="40"
                           height="40"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/linkedin.svg"
                         />
                       </div>
@@ -1133,8 +1042,7 @@
                           width="24"
                           height="24"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/linkedin.svg"
                         />
                       </div>
@@ -1147,8 +1055,7 @@
                           width="40"
                           height="40"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/telegram.svg"
                         />
                       </div>
@@ -1159,8 +1066,7 @@
                           width="24"
                           height="24"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/telegram.svg"
                         />
                       </div>
@@ -1173,8 +1079,7 @@
                           width="40"
                           height="40"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/tiktok.svg"
                         />
                       </div>
@@ -1185,8 +1090,7 @@
                           width="24"
                           height="24"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/tiktok.svg"
                         />
                       </div>
@@ -1199,8 +1103,7 @@
                           width="40"
                           height="40"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/x.svg"
                         />
                       </div>
@@ -1211,8 +1114,7 @@
                           width="24"
                           height="24"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/x.svg"
                         />
                       </div>
@@ -1225,8 +1127,7 @@
                           width="40"
                           height="40"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/youtube.svg"
                         />
                       </div>
@@ -1237,8 +1138,7 @@
                           width="24"
                           height="24"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/youtube.svg"
                         />
                       </div>
@@ -1251,8 +1151,7 @@
                           width="40"
                           height="40"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/follow-1.svg"
                         />
                       </div>
@@ -1263,8 +1162,7 @@
                           width="24"
                           height="24"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/follow-1.svg"
                         />
                       </div>
@@ -1277,8 +1175,7 @@
                           width="40"
                           height="40"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/follow-2.svg"
                         />
                       </div>
@@ -1289,27 +1186,24 @@
                           width="24"
                           height="24"
                           decoding="async"
-                          data-nimg="1"
-                          style="color: transparent"
+                          data-nimg="1" class="next-img"
                           src="/follow-us/follow-2.svg"
                         />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="flex flex-col gap-4">
+                <div class="stack-16">
                   <p
-                    class="cag-typography cag-s-body cag-regular text-left"
-                    style="color: #ffffff; background: transparent"
+                    class="cag-typography cag-s-body cag-regular text-left ink-white"
                   >
                     Sign up for a Changi Account to receive the latest updates
                   </p>
                   <button
-                    class="cursor-pointer w-[112px] h-[45px] border-2 border-white rounded-[30px]"
+                    class="footer-signup-btn"
                   >
                     <p
-                      class="cag-typography cag-s-body cag-bold"
-                      style="color: #ffffff; background: transparent"
+                      class="cag-typography cag-s-body cag-bold ink-white"
                     >
                       Sign Up
                     </p>
@@ -1319,11 +1213,11 @@
             </div>
           </div>
         </div>
-        <div class="w-full bg-[#121212] px-5">
+        <div class="footer-legal-bar">
           <div
-            class="max-w-[1280px] mx-auto h-[83px] py-[24px] flex flex-row items-center justify-between"
+            class="footer-legal-inner"
           >
-            <div class="flex flex-row gap-[48px] items-center">
+            <div class="footer-legal-left">
               <img
                 alt="Changi Airport"
                 loading="lazy"
@@ -1331,22 +1225,21 @@
                 height="35"
                 decoding="async"
                 data-nimg="1"
-                class="h-9 w-auto cursor-pointer"
-                style="color: transparent"
+                class="footer-logo next-img"
                 src="/images/changi-logo-footer.png"
               />
-              <div class="flex flex-row gap-[30px] items-center">
-                <div class="cursor-pointer text-[12px] text-white">Airport</div>
-                <div class="cursor-pointer text-[12px] text-white">Corporate</div>
-                <div class="cursor-pointer text-[12px] text-white">Careers</div>
-                <div class="cursor-pointer text-[12px] text-white">CAI</div>
-                <div class="cursor-pointer text-[12px] text-white">Jewel</div>
+              <div class="footer-legal-links">
+                <div class="footer-legal-link">Airport</div>
+                <div class="footer-legal-link">Corporate</div>
+                <div class="footer-legal-link">Careers</div>
+                <div class="footer-legal-link">CAI</div>
+                <div class="footer-legal-link">Jewel</div>
               </div>
             </div>
-            <div class="flex flex-row gap-[16px]">
-              <div class="cursor-pointer text-[12px] text-white">Conditions of Use</div>
-              <div class="cursor-pointer text-[12px] text-white">Privacy Policy</div>
-              <div class="cursor-pointer text-[12px] text-white">
+            <div class="row-16">
+              <div class="footer-legal-link">Conditions of Use</div>
+              <div class="footer-legal-link">Privacy Policy</div>
+              <div class="footer-legal-link">
                 ©
                 <!-- -->2026<!-- -->
                 Changi Airport

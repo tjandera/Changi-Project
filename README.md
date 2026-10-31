@@ -74,6 +74,11 @@ _next/static/chunks/*.css     the site's compiled Tailwind/global CSS, byte-iden
 _next/static/media/           Lato (Google Fonts build) under the filenames the CSS expects
 replica/css/mui-runtime.css   MUI styles captured from the live page (injected at runtime there)
 replica/css/replica.css       replica-only additions (label, feedback tab, checkbox, 1 layout pin)
+replica/css/base/             ink.css (text colours), images.css (next/image colour)
+replica/css/components/       shared pieces, one file each: layout, header, footer, buttons, forms, progress,
+                              booking-summary, banner, accordion
+replica/css/pages/            landing.css, trip.css, baggage.css, contact.css, review.css, faq.css, manage.css
+                              (only what that one page uses). Naming and rules: docs/CSS.md
 
 replica/js/models/            M · data and state
     api.js                      DATA ADAPTER: the only file that knows where data comes from

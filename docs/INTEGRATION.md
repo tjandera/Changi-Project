@@ -53,6 +53,7 @@ an "End of replica flow" dialog after `submitBooking`.
 | `data-stepper="key"` | Luggage counter row | `data-stepper="oddSized"` |
 | `data-tooltip="key"` | Info icon; text from `config.tooltips[key]` | `data-tooltip="contactNumber"` |
 | `data-component="name"` | Region a script controls | `summary-body`, `booking-card` |
+| `data-hook="name"` | Structural element a script looks up with `closest()` (space-separated list). Replaces the Tailwind class selectors the scripts used before the CSS was split, so renaming a class can't break behaviour | `field`, `popup-host`, `tooltip-host`, `luggage-row`, `footer-sites-toggle` |
 
 Bound keys (`models/format.js`): `currency`, `trip.hotel`, `trip.flightSummary`, `trip.flightTime`,
 `luggage.totalItemsLabel`, `luggage.totalCost`, `contact.fullName`, `contact.phoneDisplay`,

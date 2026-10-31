@@ -29,7 +29,7 @@ try {
         const countEl = $('[data-bind="count"]', stepper);
         countEl.textContent = n;
         countEl.style.color = n ? COUNT.some : COUNT.zero;
-        const row = stepper.closest('.flex.flex-row.items-start');
+        const row = stepper.closest('[data-hook~="luggage-row"]');
         const price = $('[data-component="row-price"]', row);
         $('[data-bind="subtotal"]', price).textContent = money(n * units[key]);
         $$('p', price).forEach((p) => (p.style.color = n ? PRICE.some : PRICE.zero));

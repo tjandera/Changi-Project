@@ -60,7 +60,7 @@ try {
 
   // Landing FAQ block: same accordion as /faq, answers from data/faq.json
   const faq = await api.getFaq();
-  $$('main .flex.flex-col.cursor-pointer.border-b').forEach((row) => {
+  $$('main .faq-item').forEach((row) => {
     const item = findItem(faq, row.querySelector('p').textContent);
     if (item) wireAccordion(row, item);
   });
