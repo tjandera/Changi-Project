@@ -4,7 +4,7 @@ import { $, $$ } from '../views/dom.js';
 import { setEnabled, onPress } from '../views/button.js';
 import { wireAccordion, findItem } from '../views/accordion.js';
 import { dateField, earliestDate, flightField, hotelField } from '../views/fields.js';
-import { emptyBooking, save } from '../models/store.js';
+import { load, save } from '../models/store.js';
 import { nextRoute } from '../models/flow.js';
 import { navigate } from '../models/leave.js';
 import { boot, fail } from './boot.js';
@@ -51,7 +51,8 @@ try {
     });
     c.button = $('[data-action="book-now"]', c.card);
     onPress(c.button, () => {
-      save({ ...emptyBooking(), ...state });
+      // Only the schedule changes; luggage (Step 2) and contact (Step 3) already entered are kept.
+      save({ ...load(), ...state });
       navigate(nextRoute(config, 'landing'));
     });
   });
