@@ -1,7 +1,9 @@
-# Not part of the website. Keeps docs and dev tooling off a public Vercel URL.
-docs
-tools
-scripts
-README.md
-LICENSE
-.nvmrc
+# Not part of the website. Keeps docs and dev tooling off the public Vercel URL.
+# Each rule starts with "/" so it only matches at the repo root: an unanchored "scripts" would also hide
+# views/scripts/ (the page code), which is what broke the first MVC deploy.
+/docs
+/tools
+/scripts
+/README.md
+/LICENSE
+/.nvmrc
