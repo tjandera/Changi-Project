@@ -23,6 +23,10 @@ try {
     fillSummary(document, viewModel(booking, config, { phoneDisplay: `${country ? country.dialCode : ''} ${national}`.trim() }));
     wireSummary(config);
 
+    // Live: the box is always empty when the page loads, so the guest agrees again after every reload.
+    booking.termsAccepted = false;
+    save(booking);
+
     const pay = $('[data-action="make-payment"]');
     checkbox($('[data-field="terms"]'), {
       checked: booking.termsAccepted,
