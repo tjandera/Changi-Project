@@ -55,6 +55,11 @@ Any other static server (`npx serve .`, `python3 -m http.server 8080`) also work
 **Flow:** the landing card's Book Now goes straight to Step 2 (`/booking-baggage/`). Step 1 is reached from the header
 Book Now and from the "Edit" links. The chain is set in `data/config.json` under `flow`.
 
+**What is remembered:** the booking lives in `sessionStorage` for the tab. Going back to the landing page or Step 1 and
+changing the hotel, date or flight keeps the luggage (Step 2) and personal details (Step 3) already entered; only the
+schedule is replaced. The Terms tick on Step 4 is never stored and starts empty every time. "Leave Page" in the
+leave dialog clears everything.
+
 \* The zip's `booking-contact.html` was saved after moving on to Step 4, so it holds Step 4's markup.
 Step 3 was captured from the live page instead. Details in [docs/PROVENANCE.md](docs/PROVENANCE.md).
 
