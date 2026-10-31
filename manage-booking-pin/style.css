@@ -1,9 +1,9 @@
-/* Styles that only the manage page uses. Shared pieces live in ../components/.
-   Class names are semantic; each rule is the exact set of utility rules the live site compiled for that element
-   (see docs/CSS.md). Kept in @layer components so the original utilities, the site's cag-* rules and the MUI
-   runtime styles keep winning the cascade exactly as before. */
+/*
+ * Manage Booking (/manage-booking-pin/): styles only this page uses.
+ * Shared pieces (header, footer, buttons, fields, layout) are in /components/shared.css.
+ * Each class is the exact set of rules the live site compiled for that element (see docs/CSS.md).
+ */
 @layer components {
-
   .manage-pin-digit {
     height: 48px;
     width: 100%;

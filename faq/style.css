@@ -1,9 +1,9 @@
-/* Styles that only the faq page uses. Shared pieces live in ../components/.
-   Class names are semantic; each rule is the exact set of utility rules the live site compiled for that element
-   (see docs/CSS.md). Kept in @layer components so the original utilities, the site's cag-* rules and the MUI
-   runtime styles keep winning the cascade exactly as before. */
+/*
+ * FAQs (/faq/): styles only this page uses.
+ * Shared pieces (header, footer, buttons, fields, layout) are in /components/shared.css.
+ * Each class is the exact set of rules the live site compiled for that element (see docs/CSS.md).
+ */
 @layer components {
-
   .faq-tabs-rail {
     position: absolute;
     bottom: 0;

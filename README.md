@@ -69,17 +69,16 @@ The JavaScript follows **MVC**. Models own data and state, views own the DOM, co
 (one controller per page). There is no build step: plain ES modules.
 
 ```
-index.html, booking-*/, faq/, manage-booking-pin/   page skeletons (original markup + data-* hooks)
-components/                   shared HTML: header.html, footer.html, language-button.html (edit here, then `npm run components`)
-_next/static/chunks/*.css     the site's compiled Tailwind/global CSS, byte-identical
+index.html + style.css                  landing page and the styles only it uses
+booking-details/  index.html + style.css   Step 1 (same pair in every page folder)
+booking-baggage/  booking-contact/  booking-review/  faq/  manage-booking-pin/
+components/                   shared by every page:
+    header.html, footer.html, language-button.html   the markup, written once
+    shared.css                                     their styles + buttons, fields, layout, text colours
+    include.js                                     puts the .html files into each page's data-include slots
+_next/static/chunks/*.css     the site's compiled Tailwind/global CSS, byte-identical (do not edit)
 _next/static/media/           Lato (Google Fonts build) under the filenames the CSS expects
 replica/css/mui-runtime.css   MUI styles captured from the live page (injected at runtime there)
-replica/css/replica.css       replica-only additions (label, feedback tab, checkbox, 1 layout pin)
-replica/css/base/             ink.css (text colours), images.css (next/image colour)
-replica/css/components/       shared pieces, one file each: layout, header, footer, buttons, forms, progress,
-                              booking-summary, banner, accordion
-replica/css/pages/            landing.css, trip.css, baggage.css, contact.css, review.css, faq.css, manage.css
-                              (only what that one page uses). Naming and rules: docs/CSS.md
 
 replica/js/models/            M · data and state
     api.js                      DATA ADAPTER: the only file that knows where data comes from
@@ -93,7 +92,7 @@ replica/js/views/             V · everything that touches the DOM
     button.js, dialog.js, accordion.js, chrome.js, footer.js (footer links), loading.js (dots overlay), summary.js, language.js (中文 / EN switch)
     fields.js, mui.js           hotel/date/flight pickers, MUI-style text, phone and checkbox fields
 replica/js/controllers/       C · one script per page, loaded by that page's <script type="module">
-    boot.js                     shared start-up (config, header, tooltips)
+    boot.js                     shared start-up (waits for components/include.js, then config, header, tooltips)
     landing, trip-details, luggage, personal-details, review, manage-booking, faq
 
 scripts/dev-server.js, package.json       Node server (npm start), no dependencies
@@ -102,11 +101,11 @@ data/i18n/*.json              Chinese text for the 中文 button (zh.json, faq.z
 tools/archive/build_pages.py  one-off script that produced the first version of the pages (history only)
 ```
 
-**Shared HTML (header, footer, 中文 button).** These live once in `components/`. Each page marks the spot with
-`<!-- @component header -->` ... `<!-- @end header -->`, and `scripts/build-components.js` copies the file between the
-markers. Edit `components/header.html`, run `npm run components` (`npm start` and `npm run dev` run it for you), commit
-the pages. `npm run components:check` fails if a page is out of sync. The pages stay plain static HTML, so hosting needs
-no build step. Do not edit between the markers in a page; the next sync overwrites it.
+**Each page folder holds two files:** `index.html` (that page's markup only) and `style.css` (styles only that page
+uses). Everything shared lives in `components/`: the header, footer and 中文 button are written once and each page
+marks their place with `<div data-include="header"></div>`; `components/include.js` fills those slots before the page
+scripts start, and the header slot keeps its 64/68px height so nothing jumps while it loads. Change the header once in
+`components/header.html` and every page has it. CSS naming and rules: [docs/CSS.md](docs/CSS.md).
 
 The HTML pages are now the **source of truth**. They are hand-formatted, with a header comment on every
 page and section labels, so edit them directly.

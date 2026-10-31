@@ -1,2 +1,0 @@
-/* next/image adds style="color: transparent" to every <img> so the alt text never shows while the image loads. */
-.next-img { color: transparent; }

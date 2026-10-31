@@ -29,6 +29,7 @@ const PUBLIC = new Set([
   'booking-contact',
   'booking-details',
   'booking-review',
+  'components',
   'data',
   'faq',
   'files',
@@ -38,6 +39,7 @@ const PUBLIC = new Set([
   'images',
   'manage-booking-pin',
   'replica',
+  'style.css',
 ]);
 
 const TYPES = {

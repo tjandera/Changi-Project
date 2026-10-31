@@ -1,9 +1,9 @@
-/* Styles that only the landing page uses. Shared pieces live in ../components/.
-   Class names are semantic; each rule is the exact set of utility rules the live site compiled for that element
-   (see docs/CSS.md). Kept in @layer components so the original utilities, the site's cag-* rules and the MUI
-   runtime styles keep winning the cascade exactly as before. */
+/*
+ * Landing page (/): styles only this page uses.
+ * Shared pieces (header, footer, buttons, fields, layout) are in /components/shared.css.
+ * Each class is the exact set of rules the live site compiled for that element (see docs/CSS.md).
+ */
 @layer components {
-
   .landing-step-copy {
     display: flex;
     flex-direction: column;
@@ -277,3 +277,13 @@
     max-width: 944px;
   }
 }
+
+/*
+ * "How It Works" columns.
+ * No override on purpose. The live markup gives each column `max-w-[300px]` with flex: 0 1 auto, so
+ * the five columns take their widths from their text (about 189 / 281 / 215 / 184 / 251 px, 32px gaps,
+ * 1248px row, centred). That is what the live site shows at every desktop width, so the replica now
+ * uses the same rule instead of forcing five equal 224px columns (changed 31 Oct 2026 after a
+ * side-by-side check against the live page at 1903px).
+ */
+

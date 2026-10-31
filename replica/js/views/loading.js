@@ -3,7 +3,7 @@
  *
  * Live behaviour (screen recording, 31 Oct 2026): it shows on the booking steps while a page loads,
  * and from the moment a link or button moves you to a booking step, for roughly a third of a second.
- * Header links to FAQs / Manage Booking show no overlay, only the page fade-in (see replica.css).
+ * Header links to FAQs / Manage Booking show no overlay, only the page fade-in (see components/shared.css).
  * The dots are the live site's Lottie file (/animations/loading.json) rebuilt as SVG + CSS.
  */
 import { html } from './dom.js';

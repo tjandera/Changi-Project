@@ -17,23 +17,16 @@
       crossorigin=""
       type="font/woff2"
     />
-    <!-- Original compiled Tailwind + global CSS, byte-identical to the saved site -->
+    <!-- The live site's compiled CSS (Tailwind + globals) and MUI runtime styles: captured, not edited -->
     <link rel="stylesheet" href="/_next/static/chunks/0ndgyzgu-3f19.css" data-precedence="next" />
     <link rel="stylesheet" href="/_next/static/chunks/3vw576cu90qfb.css" data-precedence="next" />
-    <!-- MUI runtime styles captured from the live page (emotion injects them at runtime) -->
     <link rel="stylesheet" href="/replica/css/mui-runtime.css" />
-    <!-- Replica-only additions: replica label, feedback tab, checkbox -->
-    <link rel="stylesheet" href="/replica/css/replica.css" />
-    <link rel="stylesheet" href="/replica/css/base/ink.css" />
-    <link rel="stylesheet" href="/replica/css/base/images.css" />
-    <link rel="stylesheet" href="/replica/css/components/layout.css" />
-    <link rel="stylesheet" href="/replica/css/components/header.css" />
-    <link rel="stylesheet" href="/replica/css/components/footer.css" />
-    <link rel="stylesheet" href="/replica/css/components/buttons.css" />
-    <link rel="stylesheet" href="/replica/css/components/forms.css" />
-    <link rel="stylesheet" href="/replica/css/components/progress.css" />
-    <link rel="stylesheet" href="/replica/css/components/booking-summary.css" />
-    <link rel="stylesheet" href="/replica/css/pages/contact.css" />
+    <!-- Shared by every page: header, footer, buttons, form fields, layout -->
+    <link rel="stylesheet" href="/components/shared.css" />
+    <!-- This page only -->
+    <link rel="stylesheet" href="/booking-contact/style.css" />
+    <!-- Fills the data-include slots below with the shared header, footer and 中文 button -->
+    <script type="module" src="/components/include.js"></script>
   </head>
   <body class="inter_5972bc34-module__OU16Qa__className" data-page="personal-details">
     <!--
@@ -45,102 +38,17 @@
     -->
     <div hidden=""></div>
     <div class="page-shell">
-      <!-- @component header -->
-      <!-- SITE HEADER · logo, nav (data-nav), Book Now -->
-      <header class="site-header">
-        <div class="header-inner">
-          <div class="flex items-center">
-            <a href="/" data-nav="home"
-              ><div class="row-24-center">
-                <img
-                  alt="CAG Logo"
-                  width="130"
-                  height="35"
-                  decoding="async"
-                  data-nimg="1"
-                  class="h-8 w-auto next-img"
-                  src="/images/cag-logo.svg"
-                />
-                <p
-                  class="cag-typography cag-l-body cag-black hidden md:block ink-white"
-                >
-                  Off-Airport Check-In
-                </p>
-              </div></a
-            >
-          </div>
-          <div class="flex items-center">
-            <div class="header-nav">
-              <p
-                class="cag-typography cag-s-body cag-bold cursor-pointer ink-white"
-                data-nav="faq"
-              >
-                FAQs
-              </p>
-              <p
-                class="cag-typography cag-s-body cag-bold cursor-pointer ink-white"
-                data-nav="manage-booking"
-              >
-                Manage Booking
-              </p>
-              <div
-                data-nav="book-now"
-                class="header-book-now"
-                style="box-shadow: 0px 1px 2px 0px #1212120d"
-              >
-                <p
-                  class="cag-typography cag-s-body cag-bold ink-black"
-                >
-                  Book Now
-                </p>
-              </div>
-            </div>
-            <button aria-label="Open menu" class="block md:hidden">
-              <div class="row-8-center">
-                <p
-                  class="cag-typography cag-s-body cag-bold ink-white"
-                >
-                  Off-Airport Check-In
-                </p>
-                <img
-                  alt="Menu"
-                  loading="lazy"
-                  width="24"
-                  height="24"
-                  decoding="async"
-                  data-nimg="1" class="next-img"
-                  src="/icons/hamburger.svg"
-                />
-              </div>
-            </button>
-          </div>
-        </div>
-      </header>
-      <!-- @end header -->
+      <!-- SITE HEADER · components/header.html (logo, nav, Book Now) -->
+      <div data-include="header"></div>
       <!-- PAGE CONTENT -->
       <main class="flex-1">
-        <!-- @component language-button -->
-        <button
-          class="language-fab"
-          aria-label="Toggle Language"
-          data-action="toggle-language"
-        >
-          中文
-        </button>
-        <!-- @end language-button -->
+        <!-- 中文 / EN BUTTON · components/language-button.html -->
+        <div data-include="language-button"></div>
         <div style="opacity: 1; transform: none">
-          <div
-            class="contact-content"
-          >
+          <div class="contact-content">
             <div class="booking-summary-aside">
-              <div
-                class="booking-summary-card"
-              >
-                <div
-                  data-action="toggle-summary"
-                  class="booking-summary-header"
-                  style="padding-bottom: 0px"
-                >
+              <div class="booking-summary-card">
+                <div data-action="toggle-summary" class="booking-summary-header" style="padding-bottom: 0px">
                   <div class="row-10-center">
                     <img
                       alt="booking-summary"
@@ -149,11 +57,10 @@
                       height="20"
                       decoding="async"
                       data-nimg="1"
-                      src="/icons/booking-summary.svg" class="next-img"
+                      src="/icons/booking-summary.svg"
+                      class="next-img"
                     />
-                    <p
-                      class="cag-typography cag-l-body cag-black ink-black"
-                    >
+                    <p class="cag-typography cag-l-body cag-black ink-black">
                       Booking Summary
                     </p>
                   </div>
@@ -179,11 +86,10 @@
                           height="20"
                           decoding="async"
                           data-nimg="1"
-                          src="/icons/booking-summary-trip.svg" class="next-img"
+                          src="/icons/booking-summary-trip.svg"
+                          class="next-img"
                         />
-                        <p
-                          class="cag-typography cag-l-body cag-black ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-black ink-black">
                           Trip Details
                         </p>
                       </div>
@@ -200,30 +106,17 @@
                       />
                     </div>
                     <div class="stack-4">
-                      <p
-                        class="cag-typography cag-small-text cag-regular ink-grey"
-                      >
+                      <p class="cag-typography cag-small-text cag-regular ink-grey">
                         Hotel
                       </p>
-                      <p
-                        class="cag-typography cag-s-body cag-bold md:hidden ink-black"
-                        data-bind="trip.hotel"
-                      ></p>
-                      <p
-                        class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
-                        data-bind="trip.hotel"
-                      ></p>
+                      <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="trip.hotel"></p>
+                      <p class="cag-typography cag-l-body cag-bold hidden md:block ink-black" data-bind="trip.hotel"></p>
                     </div>
                     <div class="stack-4">
-                      <p
-                        class="cag-typography cag-small-text cag-regular ink-grey"
-                      >
+                      <p class="cag-typography cag-small-text cag-regular ink-grey">
                         Departure Flight
                       </p>
-                      <p
-                        class="cag-typography cag-s-body cag-bold md:hidden ink-black"
-                        data-bind="trip.flightSummary"
-                      ></p>
+                      <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="trip.flightSummary"></p>
                       <p
                         class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
                         data-bind="trip.flightSummary"
@@ -241,11 +134,10 @@
                           height="20"
                           decoding="async"
                           data-nimg="1"
-                          src="/icons/baggage-summary.svg" class="next-img"
+                          src="/icons/baggage-summary.svg"
+                          class="next-img"
                         />
-                        <p
-                          class="cag-typography cag-l-body cag-black ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-black ink-black">
                           Luggage Details
                         </p>
                       </div>
@@ -265,27 +157,20 @@
                       <div class="stack-16" data-list="luggage-lines">
                         <div data-template="luggage-line" class="booking-summary-line">
                           <div class="row-between-full">
-                            <p
-                              class="cag-typography cag-s-body cag-bold md:hidden ink-black"
-                              data-bind="line.label"
-                            ></p>
+                            <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="line.label"></p>
                             <p
                               class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
                               data-bind="line.label"
                             ></p>
                             <div class="row-8">
-                              <p
-                                class="cag-typography cag-s-body cag-bold md:hidden ink-black"
-                              >
+                              <p class="cag-typography cag-s-body cag-bold md:hidden ink-black">
                                 S$
                               </p>
                               <p
                                 class="cag-typography cag-s-body cag-bold md:hidden ink-black"
                                 data-bind="line.subtotal"
                               ></p>
-                              <p
-                                class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
-                              >
+                              <p class="cag-typography cag-l-body cag-bold hidden md:block ink-black">
                                 S$
                               </p>
                               <p
@@ -306,14 +191,10 @@
                       </div>
                       <div class="stack-8">
                         <div class="row-between">
-                          <p
-                            class="cag-typography cag-s-body cag-bold md:hidden ink-black"
-                          >
+                          <p class="cag-typography cag-s-body cag-bold md:hidden ink-black">
                             Total Luggage
                           </p>
-                          <p
-                            class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
-                          >
+                          <p class="cag-typography cag-l-body cag-bold hidden md:block ink-black">
                             Total Luggage
                           </p>
                           <div class="row-8-center">
@@ -328,21 +209,14 @@
                           </div>
                         </div>
                         <div class="row-between">
-                          <p
-                            class="cag-typography cag-s-body cag-bold md:hidden ink-black"
-                          >
+                          <p class="cag-typography cag-s-body cag-bold md:hidden ink-black">
                             Total Cost
                           </p>
-                          <p
-                            class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
-                          >
+                          <p class="cag-typography cag-l-body cag-bold hidden md:block ink-black">
                             Total Cost
                           </p>
                           <div class="row-8-center">
-                            <p
-                              class="cag-typography cag-s-body cag-bold md:hidden ink-black"
-                              data-bind="currency"
-                            >
+                            <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="currency">
                               S$
                             </p>
                             <p
@@ -369,32 +243,22 @@
             </div>
             <div class="step-main">
               <div class="progress-header">
-                <h6
-                  class="cag-typography cag-h6 cag-black ink-black"
-                >
+                <h6 class="cag-typography cag-h6 cag-black ink-black">
                   Personal Details
                 </h6>
                 <div class="stack-8-center">
                   <div class="progress-label">
-                    <p
-                      class="cag-typography cag-s-body cag-bold ink-muted"
-                    >
+                    <p class="cag-typography cag-s-body cag-bold ink-muted">
                       Step
                     </p>
                     <div class="progress-count">
-                      <p
-                        class="cag-typography cag-s-body cag-bold ink-muted"
-                      >
+                      <p class="cag-typography cag-s-body cag-bold ink-muted">
                         3
                       </p>
-                      <p
-                        class="cag-typography cag-s-body cag-bold ink-muted"
-                      >
+                      <p class="cag-typography cag-s-body cag-bold ink-muted">
                         /
                       </p>
-                      <p
-                        class="cag-typography cag-s-body cag-bold ink-muted"
-                      >
+                      <p class="cag-typography cag-s-body cag-bold ink-muted">
                         4
                       </p>
                     </div>
@@ -404,17 +268,13 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="contact-form-card"
-              >
+              <div class="contact-form-card">
                 <div class="contact-name-row">
                   <div class="flex-1">
                     <div class="field-group" data-hook="field">
                       <div class="row-between-full">
                         <div class="row-4-center">
-                          <p
-                            class="cag-typography cag-s-body cag-bold ink-black"
-                          >
+                          <p class="cag-typography cag-s-body cag-bold ink-black">
                             First/Given Name (as per passport)
                           </p>
                         </div>
@@ -432,10 +292,7 @@
                             type="text"
                             value=""
                           />
-                          <fieldset
-                            aria-hidden="true"
-                            class="MuiOutlinedInput-notchedOutline css-igs3ac"
-                          >
+                          <fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-igs3ac">
                             <legend class="css-ihdtdm">
                               <span class="notranslate">&#8203;</span>
                             </legend>
@@ -448,9 +305,7 @@
                     <div class="field-group" data-hook="field">
                       <div class="row-between-full">
                         <div class="row-4-center">
-                          <p
-                            class="cag-typography cag-s-body cag-bold ink-black"
-                          >
+                          <p class="cag-typography cag-s-body cag-bold ink-black">
                             Last/Family Name (as per passport)
                           </p>
                         </div>
@@ -468,10 +323,7 @@
                             type="text"
                             value=""
                           />
-                          <fieldset
-                            aria-hidden="true"
-                            class="MuiOutlinedInput-notchedOutline css-igs3ac"
-                          >
+                          <fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-igs3ac">
                             <legend class="css-ihdtdm">
                               <span class="notranslate">&#8203;</span>
                             </legend>
@@ -487,9 +339,7 @@
                     <div class="field-group" data-hook="field">
                       <div class="row-between-full">
                         <div class="row-4-center">
-                          <p
-                            class="cag-typography cag-s-body cag-bold ink-black"
-                          >
+                          <p class="cag-typography cag-s-body cag-bold ink-black">
                             Contact Number
                           </p>
                           <img
@@ -515,15 +365,9 @@
                           >
                             <div data-testid="dropdownAdornment" class="pr-2">
                               <div class="contact-country-inner">
-                                <div
-                                  data-action="toggle-country"
-                                  class="contact-country-picker"
-                                >
+                                <div data-action="toggle-country" class="contact-country-picker">
                                   <div class="contact-dial-code">
-                                    <div
-                                      data-bind-html="contact.flagSvg"
-                                      class="contact-flag"
-                                    >
+                                    <div data-bind-html="contact.flagSvg" class="contact-flag">
                                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
                                         <path fill="#FFF" d="M0 0h900v600H0V0z"></path>
                                         <path fill="#ED2939" d="M0 0h900v300H0V0z"></path>
@@ -549,10 +393,7 @@
                                     />
                                   </div>
                                 </div>
-                                <p
-                                  class="cag-typography cag-s-body cag-regular ink-black"
-                                  data-bind="contact.dialCode"
-                                >
+                                <p class="cag-typography cag-s-body cag-regular ink-black" data-bind="contact.dialCode">
                                   +65
                                 </p>
                               </div>
@@ -566,10 +407,7 @@
                               data-field="phone"
                               inputmode="tel"
                             />
-                            <fieldset
-                              aria-hidden="true"
-                              class="MuiOutlinedInput-notchedOutline css-igs3ac"
-                            >
+                            <fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-igs3ac">
                               <legend class="css-ihdtdm">
                                 <span class="notranslate">&#8203;</span>
                               </legend>
@@ -583,9 +421,7 @@
                     <div class="field-group" data-hook="field">
                       <div class="row-between-full">
                         <div class="row-4-center">
-                          <p
-                            class="cag-typography cag-s-body cag-bold ink-black"
-                          >
+                          <p class="cag-typography cag-s-body cag-bold ink-black">
                             Email Address
                           </p>
                         </div>
@@ -603,10 +439,7 @@
                             type="text"
                             value=""
                           />
-                          <fieldset
-                            aria-hidden="true"
-                            class="MuiOutlinedInput-notchedOutline css-igs3ac"
-                          >
+                          <fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-igs3ac">
                             <legend class="css-ihdtdm">
                               <span class="notranslate">&#8203;</span>
                             </legend>
@@ -620,17 +453,9 @@
               <div
                 data-action="next"
                 class="btn-pill bg-[#E5E5E5] border-[#CCCCCC] cursor-not-allowed"
-                style="
-                  width: 240px;
-                  height: 44px;
-                  box-shadow: rgba(18, 18, 18, 0.05) 0px 1px 2px 0px;
-                  margin-top: 12px;
-                  margin-bottom: 36px;
-                "
+                style=" width: 240px; height: 44px; box-shadow: rgba(18, 18, 18, 0.05) 0px 1px 2px 0px; margin-top: 12px; margin-bottom: 36px; "
               >
-                <p
-                  class="cag-typography cag-l-body cag-bold ink-muted"
-                >
+                <p class="cag-typography cag-l-body cag-bold ink-muted">
                   Next
                 </p>
               </div>
@@ -638,756 +463,8 @@
           </div>
         </div>
       </main>
-      <!-- @component footer -->
-      <!-- SITE FOOTER · app links, follow us, legal -->
-      <footer class="footer-compact">
-        <div class="footer-inner">
-          <div class="footer-content">
-            <div class="footer-apps">
-              <p
-                class="cag-typography cag-s-body cag-bold ink-white"
-              >
-                Download Changi App
-              </p>
-              <div class="footer-badges">
-                <img
-                  alt="Download on App Store"
-                  loading="lazy"
-                  width="118"
-                  height="40"
-                  decoding="async"
-                  data-nimg="1"
-                  class="footer-store-badge next-img"
-                  src="/images/app-store-button.png"
-                /><img
-                  alt="Get it on Google Play"
-                  loading="lazy"
-                  width="118"
-                  height="40"
-                  decoding="async"
-                  data-nimg="1"
-                  class="footer-store-badge next-img"
-                  src="/images/google-play-button.png"
-                />
-              </div>
-            </div>
-            <div class="footer-social">
-              <p
-                class="cag-typography cag-s-body cag-bold ink-white"
-              >
-                Follow Us
-              </p>
-              <div class="footer-social-icons">
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/facebook.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/facebook.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/facebook.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/facebook.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/instagram.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/instagram.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/instagram.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/instagram.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/linkedin.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/linkedin.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/linkedin.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/linkedin.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/telegram.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/telegram.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/telegram.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/telegram.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/tiktok.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/tiktok.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/tiktok.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/tiktok.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/x.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/x.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/x.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/x.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/youtube.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/youtube.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/youtube.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/youtube.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/follow-1.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/follow-1.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/follow-1.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/follow-1.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/follow-2.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/follow-2.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/follow-2.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/follow-2.svg"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="stack-16">
-              <p
-                class="cag-typography cag-s-body cag-regular text-left ink-white"
-              >
-                Sign up for a Changi Account to receive the latest updates
-              </p>
-              <button
-                class="footer-signup-btn"
-              >
-                <p
-                  class="cag-typography cag-s-body cag-bold ink-white"
-                >
-                  Sign Up
-                </p>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="footer-compact-sites">
-          <div class="footer-compact-inner">
-            <div class="flex justify-start">
-              <img
-                alt="Changi Airport"
-                loading="lazy"
-                width="129"
-                height="35"
-                decoding="async"
-                data-nimg="1"
-                class="footer-logo next-img"
-                src="/images/changi-logo-footer.png"
-              />
-            </div>
-            <div class="stack-24">
-              <div class="flex flex-col">
-                <div class="footer-sites-toggle" data-hook="footer-sites-toggle">
-                  <div class="row-between">
-                    <p
-                      class="cag-typography cag-l-body cag-regular ink-white"
-                    >
-                      Changi Sites : <span class="font-bold">Airport</span>
-                    </p>
-                    <img
-                      alt="Arrow Down"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1"
-                      class="transition-transform duration-300 next-img"
-                      src="/icons/arrow-down-white.svg"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="stack-16">
-                <div class="flex gap-4">
-                  <div class="cursor-pointer">
-                    <p
-                      class="cag-typography cag-s-body cag-regular text-left ink-white"
-                    >
-                      Conditions of Use
-                    </p>
-                  </div>
-                  <div class="cursor-pointer">
-                    <p
-                      class="cag-typography cag-s-body cag-regular text-left ink-white"
-                    >
-                      Privacy Policy
-                    </p>
-                  </div>
-                </div>
-                <p
-                  class="cag-typography cag-s-body cag-regular text-left ink-white"
-                >
-                  © 2025 Changi Airport
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-      <div class="footer-desktop">
-        <div class="footer-main-bar">
-          <div
-            class="footer-main-inner"
-          >
-            <div class="stack-32">
-              <div class="footer-columns">
-                <div class="footer-column">
-                  <div class="footer-heading">Flights</div>
-                  <div class="footer-link">
-                    Flight Information
-                  </div>
-                  <div class="footer-link">
-                    Arrival Guide
-                  </div>
-                  <div class="footer-link">
-                    Departure Guide
-                  </div>
-                  <div class="footer-link">
-                    Transiting Guide
-                  </div>
-                  <div class="footer-link">
-                    Airline Information
-                  </div>
-                </div>
-                <div class="footer-column">
-                  <div class="footer-heading">Airport Guide</div>
-                  <div class="footer-link">Map</div>
-                  <div class="footer-link">
-                    Explore by Terminal
-                  </div>
-                  <div class="footer-link">
-                    Transport &amp; Directions
-                  </div>
-                  <div class="footer-link">
-                    Special Assistance
-                  </div>
-                  <div class="footer-link">
-                    Facilities &amp; Services
-                  </div>
-                </div>
-                <div class="footer-column">
-                  <div class="footer-heading">Dine &amp; Shop</div>
-                  <div class="footer-link">
-                    Dining Directory
-                  </div>
-                  <div class="footer-link">
-                    Shopping Directory
-                  </div>
-                </div>
-                <div class="footer-column">
-                  <div class="footer-heading">Experience</div>
-                  <div class="footer-link">Tours</div>
-                  <div class="footer-link">
-                    Travel Inspiration
-                  </div>
-                  <div class="footer-link">Kids</div>
-                  <div class="footer-link">
-                    Attractions
-                  </div>
-                  <div class="footer-link">
-                    Learning Journeys
-                  </div>
-                  <div class="footer-link">
-                    Short Stories
-                  </div>
-                </div>
-                <div class="footer-column">
-                  <div class="footer-heading">Events &amp; Promotions</div>
-                  <div class="footer-link">Events</div>
-                  <div class="footer-link">
-                    Promotions
-                  </div>
-                </div>
-              </div>
-              <div class="row-24">
-                <div class="footer-column">
-                  <div class="footer-heading">Support</div>
-                  <div class="footer-link">
-                    Lost &amp; Found
-                  </div>
-                  <div class="footer-link">
-                    Baggage Tracker
-                  </div>
-                  <div class="footer-link">FAQs</div>
-                </div>
-                <div class="footer-column">
-                  <div class="footer-heading">My Changi</div>
-                  <div class="footer-link">
-                    Changi Rewards
-                  </div>
-                  <div class="footer-link">
-                    Changi Experiences
-                  </div>
-                  <div class="footer-link">
-                    Changi App
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="footer-inner">
-              <div class="footer-content">
-                <div class="footer-apps">
-                  <p
-                    class="cag-typography cag-s-body cag-bold ink-white"
-                  >
-                    Download Changi App
-                  </p>
-                  <div class="footer-badges">
-                    <img
-                      alt="Download on App Store"
-                      loading="lazy"
-                      width="118"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1"
-                      class="footer-store-badge next-img"
-                      src="/images/app-store-button.png"
-                    /><img
-                      alt="Get it on Google Play"
-                      loading="lazy"
-                      width="118"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1"
-                      class="footer-store-badge next-img"
-                      src="/images/google-play-button.png"
-                    />
-                  </div>
-                </div>
-                <div class="footer-social">
-                  <p
-                    class="cag-typography cag-s-body cag-bold ink-white"
-                  >
-                    Follow Us
-                  </p>
-                  <div class="footer-social-icons">
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/facebook.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/facebook.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/facebook.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/facebook.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/instagram.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/instagram.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/instagram.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/instagram.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/linkedin.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/linkedin.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/linkedin.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/linkedin.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/telegram.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/telegram.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/telegram.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/telegram.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/tiktok.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/tiktok.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/tiktok.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/tiktok.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/x.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/x.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/x.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/x.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/youtube.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/youtube.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/youtube.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/youtube.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/follow-1.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/follow-1.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/follow-1.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/follow-1.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/follow-2.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/follow-2.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/follow-2.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/follow-2.svg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="stack-16">
-                  <p
-                    class="cag-typography cag-s-body cag-regular text-left ink-white"
-                  >
-                    Sign up for a Changi Account to receive the latest updates
-                  </p>
-                  <button
-                    class="footer-signup-btn"
-                  >
-                    <p
-                      class="cag-typography cag-s-body cag-bold ink-white"
-                    >
-                      Sign Up
-                    </p>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="footer-legal-bar">
-          <div
-            class="footer-legal-inner"
-          >
-            <div class="footer-legal-left">
-              <img
-                alt="Changi Airport"
-                loading="lazy"
-                width="127"
-                height="35"
-                decoding="async"
-                data-nimg="1"
-                class="footer-logo next-img"
-                src="/images/changi-logo-footer.png"
-              />
-              <div class="footer-legal-links">
-                <div class="footer-legal-link">Airport</div>
-                <div class="footer-legal-link">Corporate</div>
-                <div class="footer-legal-link">Careers</div>
-                <div class="footer-legal-link">CAI</div>
-                <div class="footer-legal-link">Jewel</div>
-              </div>
-            </div>
-            <div class="row-16">
-              <div class="footer-legal-link">Conditions of Use</div>
-              <div class="footer-legal-link">Privacy Policy</div>
-              <div class="footer-legal-link">
-                ©
-                <!-- -->2026<!-- -->
-                Changi Airport
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- @end footer -->
+      <!-- SITE FOOTER · components/footer.html (compact + desktop: app links, follow us, legal) -->
+      <div data-include="footer"></div>
     </div>
     <script src="/replica/vendor/libphonenumber-min.js"></script>
     <!-- CONTROLLER ENTRY POINT -->

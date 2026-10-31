@@ -17,22 +17,16 @@
       crossorigin=""
       type="font/woff2"
     />
-    <!-- Original compiled Tailwind + global CSS, byte-identical to the saved site -->
+    <!-- The live site's compiled CSS (Tailwind + globals) and MUI runtime styles: captured, not edited -->
     <link rel="stylesheet" href="/_next/static/chunks/0ndgyzgu-3f19.css" data-precedence="next" />
     <link rel="stylesheet" href="/_next/static/chunks/3vw576cu90qfb.css" data-precedence="next" />
-    <!-- MUI runtime styles captured from the live page (emotion injects them at runtime) -->
     <link rel="stylesheet" href="/replica/css/mui-runtime.css" />
-    <!-- Replica-only additions: replica label, feedback tab, checkbox -->
-    <link rel="stylesheet" href="/replica/css/replica.css" />
-    <link rel="stylesheet" href="/replica/css/base/ink.css" />
-    <link rel="stylesheet" href="/replica/css/base/images.css" />
-    <link rel="stylesheet" href="/replica/css/components/layout.css" />
-    <link rel="stylesheet" href="/replica/css/components/header.css" />
-    <link rel="stylesheet" href="/replica/css/components/footer.css" />
-    <link rel="stylesheet" href="/replica/css/components/buttons.css" />
-    <link rel="stylesheet" href="/replica/css/components/forms.css" />
-    <link rel="stylesheet" href="/replica/css/components/accordion.css" />
-    <link rel="stylesheet" href="/replica/css/pages/landing.css" />
+    <!-- Shared by every page: header, footer, buttons, form fields, layout -->
+    <link rel="stylesheet" href="/components/shared.css" />
+    <!-- This page only -->
+    <link rel="stylesheet" href="/style.css" />
+    <!-- Fills the data-include slots below with the shared header, footer and 中文 button -->
+    <script type="module" src="/components/include.js"></script>
   </head>
   <body class="inter_5972bc34-module__OU16Qa__className" data-page="landing">
     <!--
@@ -44,89 +38,12 @@
     -->
     <div hidden=""></div>
     <div class="page-shell">
-      <!-- @component header -->
-      <!-- SITE HEADER · logo, nav (data-nav), Book Now -->
-      <header class="site-header">
-        <div class="header-inner">
-          <div class="flex items-center">
-            <a href="/" data-nav="home"
-              ><div class="row-24-center">
-                <img
-                  alt="CAG Logo"
-                  width="130"
-                  height="35"
-                  decoding="async"
-                  data-nimg="1"
-                  class="h-8 w-auto next-img"
-                  src="/images/cag-logo.svg"
-                />
-                <p
-                  class="cag-typography cag-l-body cag-black hidden md:block ink-white"
-                >
-                  Off-Airport Check-In
-                </p>
-              </div></a
-            >
-          </div>
-          <div class="flex items-center">
-            <div class="header-nav">
-              <p
-                class="cag-typography cag-s-body cag-bold cursor-pointer ink-white"
-                data-nav="faq"
-              >
-                FAQs
-              </p>
-              <p
-                class="cag-typography cag-s-body cag-bold cursor-pointer ink-white"
-                data-nav="manage-booking"
-              >
-                Manage Booking
-              </p>
-              <div
-                data-nav="book-now"
-                class="header-book-now"
-                style="box-shadow: 0px 1px 2px 0px #1212120d"
-              >
-                <p
-                  class="cag-typography cag-s-body cag-bold ink-black"
-                >
-                  Book Now
-                </p>
-              </div>
-            </div>
-            <button aria-label="Open menu" class="block md:hidden">
-              <div class="row-8-center">
-                <p
-                  class="cag-typography cag-s-body cag-bold ink-white"
-                >
-                  Off-Airport Check-In
-                </p>
-                <img
-                  alt="Menu"
-                  loading="lazy"
-                  width="24"
-                  height="24"
-                  decoding="async"
-                  data-nimg="1" class="next-img"
-                  src="/icons/hamburger.svg"
-                />
-              </div>
-            </button>
-          </div>
-        </div>
-      </header>
-      <!-- @end header -->
+      <!-- SITE HEADER · components/header.html (logo, nav, Book Now) -->
+      <div data-include="header"></div>
       <!-- PAGE CONTENT -->
       <main class="flex-1">
-        <!-- @component language-button -->
-        <button
-          class="language-fab"
-          aria-label="Toggle Language"
-          data-action="toggle-language"
-        >
-          中文
-        </button>
-        <!-- @end language-button -->
+        <!-- 中文 / EN BUTTON · components/language-button.html -->
+        <div data-include="language-button"></div>
         <div style="opacity: 1; transform: none">
           <div class="landing-body">
             <!-- HERO · desktop: headline, price note and booking card (data-component="booking-card") -->
@@ -137,60 +54,36 @@
                   decoding="async"
                   data-nimg="fill"
                   class="object-cover"
-                  style="
-                    position: absolute;
-                    height: 100%;
-                    width: 100%;
-                    left: 0;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    color: transparent;
-                  "
+                  style=" position: absolute; height: 100%; width: 100%; left: 0; top: 0; right: 0; bottom: 0; color: transparent; "
                   src="/images/oaci-hero-banner.png"
                 />
                 <div class="landing-hero-frame">
                   <div class="landing-hero-copy">
                     <div class="stack-4">
-                      <div
-                        class="landing-beta-badge"
-                      >
-                        <p
-                          class="cag-typography cag-xsmall-text cag-bold ink-light"
-                        >
+                      <div class="landing-beta-badge">
+                        <p class="cag-typography cag-xsmall-text cag-bold ink-light">
                           BETA
                         </p>
                       </div>
                       <div class="stack-8">
-                        <h3
-                          class="cag-typography cag-h3 cag-bold ink-black"
-                        >
+                        <h3 class="cag-typography cag-h3 cag-bold ink-black">
                           Travel lighter at your convenience
                         </h3>
-                        <p
-                          class="cag-typography cag-l-body cag-regular ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-regular ink-black">
                           Check in your luggage at your hotel or conference venue. <br />We'll
                           transfer it seamlessly and securely to your flight.
                         </p>
                       </div>
                     </div>
-                    <p
-                      class="cag-typography cag-l-body cag-black ink-black"
-                    >
+                    <p class="cag-typography cag-l-body cag-black ink-black">
                       Trial price of S$29 per bag.
                     </p>
                     <div class="px-[16px] md:p-0">
-                      <div
-                        data-component="booking-card"
-                        class="landing-booking-card"
-                      >
+                      <div data-component="booking-card" class="landing-booking-card">
                         <div class="stack-16">
                           <div class="stack-6">
                             <div class="row-4-center">
-                              <p
-                                class="cag-typography cag-s-body cag-bold ink-black"
-                              >
+                              <p class="cag-typography cag-s-body cag-bold ink-black">
                                 Location
                               </p>
                             </div>
@@ -221,9 +114,7 @@
                           <div class="field-group" data-hook="field">
                             <div class="row-between-full">
                               <div class="row-4-center">
-                                <p
-                                  class="cag-typography cag-s-body cag-bold ink-black"
-                                >
+                                <p class="cag-typography cag-s-body cag-bold ink-black">
                                   Departure Date
                                 </p>
                                 <img
@@ -262,9 +153,7 @@
                             </div>
                           </div>
                           <div class="stack-6">
-                            <p
-                              class="cag-typography cag-s-body cag-bold ink-black"
-                            >
+                            <p class="cag-typography cag-s-body cag-bold ink-black">
                               Departure Flight Number
                             </p>
                             <div class="relative w-full" data-hook="popup-host">
@@ -294,16 +183,9 @@
                           <div
                             data-action="book-now"
                             class="btn-pill bg-[#E5E5E5] border-[#CCCCCC] cursor-not-allowed"
-                            style="
-                              width: 100%;
-                              height: 40px;
-                              box-shadow: 0px 1px 2px 0px #1212120d;
-                              margin-top: 8px;
-                            "
+                            style=" width: 100%; height: 40px; box-shadow: 0px 1px 2px 0px #1212120d; margin-top: 8px; "
                           >
-                            <p
-                              class="cag-typography cag-s-body cag-bold ink-muted"
-                            >
+                            <p class="cag-typography cag-s-body cag-bold ink-muted">
                               Book Now
                             </p>
                           </div>
@@ -328,32 +210,22 @@
                 />
                 <div class="landing-hero-overlay">
                   <div class="landing-hero-title">
-                    <div
-                      class="landing-beta-badge"
-                    >
-                      <p
-                        class="cag-typography cag-xsmall-text cag-bold ink-light"
-                      >
+                    <div class="landing-beta-badge">
+                      <p class="cag-typography cag-xsmall-text cag-bold ink-light">
                         BETA
                       </p>
                     </div>
                     <div class="stack-8">
-                      <h3
-                        class="cag-typography cag-h3 cag-bold ink-black"
-                      >
+                      <h3 class="cag-typography cag-h3 cag-bold ink-black">
                         Travel lighter at your convenience
                       </h3>
-                      <p
-                        class="cag-typography cag-l-body cag-regular ink-black"
-                      >
+                      <p class="cag-typography cag-l-body cag-regular ink-black">
                         Check in your luggage at your hotel or conference venue. <br />
                         We'll transfer it seamlessly and securely to your flight.
                       </p>
                     </div>
                   </div>
-                  <p
-                    class="cag-typography cag-l-body cag-black ink-black"
-                  >
+                  <p class="cag-typography cag-l-body cag-black ink-black">
                     Trial price of S$29 per bag.
                   </p>
                 </div>
@@ -362,16 +234,11 @@
             <!-- HERO · mobile: booking card (same hooks as the desktop card; landing.js keeps both in sync) -->
             <div class="block md:hidden">
               <div class="px-[16px] md:p-0">
-                <div
-                  data-component="booking-card"
-                  class="landing-booking-card"
-                >
+                <div data-component="booking-card" class="landing-booking-card">
                   <div class="stack-16">
                     <div class="stack-6">
                       <div class="row-4-center">
-                        <p
-                          class="cag-typography cag-s-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-s-body cag-bold ink-black">
                           Location
                         </p>
                       </div>
@@ -402,9 +269,7 @@
                     <div class="field-group" data-hook="field">
                       <div class="row-between-full">
                         <div class="row-4-center">
-                          <p
-                            class="cag-typography cag-s-body cag-bold ink-black"
-                          >
+                          <p class="cag-typography cag-s-body cag-bold ink-black">
                             Departure Date
                           </p>
                           <img
@@ -443,9 +308,7 @@
                       </div>
                     </div>
                     <div class="stack-6">
-                      <p
-                        class="cag-typography cag-s-body cag-bold ink-black"
-                      >
+                      <p class="cag-typography cag-s-body cag-bold ink-black">
                         Departure Flight Number
                       </p>
                       <div class="relative w-full" data-hook="popup-host">
@@ -475,16 +338,9 @@
                     <div
                       data-action="book-now"
                       class="btn-pill bg-[#E5E5E5] border-[#CCCCCC] cursor-not-allowed"
-                      style="
-                        width: 100%;
-                        height: 40px;
-                        box-shadow: 0px 1px 2px 0px #1212120d;
-                        margin-top: 8px;
-                      "
+                      style=" width: 100%; height: 40px; box-shadow: 0px 1px 2px 0px #1212120d; margin-top: 8px; "
                     >
-                      <p
-                        class="cag-typography cag-s-body cag-bold ink-muted"
-                      >
+                      <p class="cag-typography cag-s-body cag-bold ink-muted">
                         Book Now
                       </p>
                     </div>
@@ -495,12 +351,8 @@
             <!-- HOW IT WORKS · desktop (5 columns; widths come from the text, as on the live site) -->
             <div class="landing-how-desktop">
               <div id="our-services" class="stack-center">
-                <div
-                  class="landing-how-it-works"
-                >
-                  <h6
-                    class="cag-typography cag-h6 cag-black text-center ink-black"
-                  >
+                <div class="landing-how-it-works">
+                  <h6 class="cag-typography cag-h6 cag-black text-center ink-black">
                     How It Works
                   </h6>
                   <div class="landing-steps-mobile">
@@ -513,21 +365,18 @@
                             width="80"
                             height="80"
                             decoding="async"
-                            data-nimg="1" class="next-img"
+                            data-nimg="1"
+                            class="next-img"
                             src="/images/how-it-works-step-1.png"
                           />
                         </div>
                         <div class="landing-step-line"></div>
                       </div>
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Check in online
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Complete your airline's online check-in and have your mobile boarding pass
                           ready.
                         </p>
@@ -542,21 +391,18 @@
                             width="80"
                             height="80"
                             decoding="async"
-                            data-nimg="1" class="next-img"
+                            data-nimg="1"
+                            class="next-img"
                             src="/images/how-it-works-step-2.png"
                           />
                         </div>
                         <div class="landing-step-line"></div>
                       </div>
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Drop off luggage
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Check in your luggage at the hotel concierge or conference venue 7am-11am
                           (for flights departing 5pm-7am the next day)
                         </p>
@@ -571,21 +417,18 @@
                             width="80"
                             height="80"
                             decoding="async"
-                            data-nimg="1" class="next-img"
+                            data-nimg="1"
+                            class="next-img"
                             src="/images/how-it-works-step-3.png"
                           />
                         </div>
                         <div class="landing-step-line"></div>
                       </div>
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Track your luggage
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Receive real-time updates as your luggage are sealed and securely
                           transported to the airport.
                         </p>
@@ -600,21 +443,18 @@
                             width="80"
                             height="80"
                             decoding="async"
-                            data-nimg="1" class="next-img"
+                            data-nimg="1"
+                            class="next-img"
                             src="/images/how-it-works-step-4.png"
                           />
                         </div>
                         <div class="landing-step-line"></div>
                       </div>
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Enjoy Singapore
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Explore the city hands-free while your luggage is checked through to your
                           flight.
                         </p>
@@ -629,20 +469,17 @@
                             width="80"
                             height="80"
                             decoding="async"
-                            data-nimg="1" class="next-img"
+                            data-nimg="1"
+                            class="next-img"
                             src="/images/how-it-works-step-5.png"
                           />
                         </div>
                       </div>
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Breeze through the airport
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Head straight to immigration with your mobile boarding pass. Your luggage
                           will meet you at your destination.
                         </p>
@@ -657,18 +494,15 @@
                         width="136"
                         height="136"
                         decoding="async"
-                        data-nimg="1" class="next-img"
+                        data-nimg="1"
+                        class="next-img"
                         src="/images/how-it-works-step-1.png"
                       />
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Check in online
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Complete your airline's online check-in and have your mobile boarding pass
                           ready.
                         </p>
@@ -681,18 +515,15 @@
                         width="136"
                         height="136"
                         decoding="async"
-                        data-nimg="1" class="next-img"
+                        data-nimg="1"
+                        class="next-img"
                         src="/images/how-it-works-step-2.png"
                       />
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Drop off luggage
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Check in your luggage at the hotel concierge or conference venue 7am-11am
                           (for flights departing 5pm-7am the next day)
                         </p>
@@ -705,18 +536,15 @@
                         width="136"
                         height="136"
                         decoding="async"
-                        data-nimg="1" class="next-img"
+                        data-nimg="1"
+                        class="next-img"
                         src="/images/how-it-works-step-3.png"
                       />
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Track your luggage
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Receive real-time updates as your luggage are sealed and securely
                           transported to the airport.
                         </p>
@@ -729,18 +557,15 @@
                         width="136"
                         height="136"
                         decoding="async"
-                        data-nimg="1" class="next-img"
+                        data-nimg="1"
+                        class="next-img"
                         src="/images/how-it-works-step-4.png"
                       />
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Enjoy Singapore
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Explore the city hands-free while your luggage is checked through to your
                           flight.
                         </p>
@@ -753,18 +578,15 @@
                         width="136"
                         height="136"
                         decoding="async"
-                        data-nimg="1" class="next-img"
+                        data-nimg="1"
+                        class="next-img"
                         src="/images/how-it-works-step-5.png"
                       />
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Breeze through the airport
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Head straight to immigration with your mobile boarding pass. Your luggage
                           will meet you at your destination.
                         </p>
@@ -777,12 +599,8 @@
             <!-- HOW IT WORKS · mobile -->
             <div class="landing-how-mobile">
               <div id="our-services" class="stack-center">
-                <div
-                  class="landing-how-it-works"
-                >
-                  <h6
-                    class="cag-typography cag-h6 cag-black text-center ink-black"
-                  >
+                <div class="landing-how-it-works">
+                  <h6 class="cag-typography cag-h6 cag-black text-center ink-black">
                     How It Works
                   </h6>
                   <div class="landing-steps-mobile">
@@ -795,21 +613,18 @@
                             width="80"
                             height="80"
                             decoding="async"
-                            data-nimg="1" class="next-img"
+                            data-nimg="1"
+                            class="next-img"
                             src="/images/how-it-works-step-1.png"
                           />
                         </div>
                         <div class="landing-step-line"></div>
                       </div>
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Check in online
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Complete your airline's online check-in and have your mobile boarding pass
                           ready.
                         </p>
@@ -824,21 +639,18 @@
                             width="80"
                             height="80"
                             decoding="async"
-                            data-nimg="1" class="next-img"
+                            data-nimg="1"
+                            class="next-img"
                             src="/images/how-it-works-step-2.png"
                           />
                         </div>
                         <div class="landing-step-line"></div>
                       </div>
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Drop off luggage
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Check in your luggage at the hotel concierge or conference venue 7am-11am
                           (for flights departing 5pm-7am the next day)
                         </p>
@@ -853,21 +665,18 @@
                             width="80"
                             height="80"
                             decoding="async"
-                            data-nimg="1" class="next-img"
+                            data-nimg="1"
+                            class="next-img"
                             src="/images/how-it-works-step-3.png"
                           />
                         </div>
                         <div class="landing-step-line"></div>
                       </div>
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Track your luggage
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Receive real-time updates as your luggage are sealed and securely
                           transported to the airport.
                         </p>
@@ -882,21 +691,18 @@
                             width="80"
                             height="80"
                             decoding="async"
-                            data-nimg="1" class="next-img"
+                            data-nimg="1"
+                            class="next-img"
                             src="/images/how-it-works-step-4.png"
                           />
                         </div>
                         <div class="landing-step-line"></div>
                       </div>
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Enjoy Singapore
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Explore the city hands-free while your luggage is checked through to your
                           flight.
                         </p>
@@ -911,20 +717,17 @@
                             width="80"
                             height="80"
                             decoding="async"
-                            data-nimg="1" class="next-img"
+                            data-nimg="1"
+                            class="next-img"
                             src="/images/how-it-works-step-5.png"
                           />
                         </div>
                       </div>
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Breeze through the airport
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Head straight to immigration with your mobile boarding pass. Your luggage
                           will meet you at your destination.
                         </p>
@@ -939,18 +742,15 @@
                         width="136"
                         height="136"
                         decoding="async"
-                        data-nimg="1" class="next-img"
+                        data-nimg="1"
+                        class="next-img"
                         src="/images/how-it-works-step-1.png"
                       />
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Check in online
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Complete your airline's online check-in and have your mobile boarding pass
                           ready.
                         </p>
@@ -963,18 +763,15 @@
                         width="136"
                         height="136"
                         decoding="async"
-                        data-nimg="1" class="next-img"
+                        data-nimg="1"
+                        class="next-img"
                         src="/images/how-it-works-step-2.png"
                       />
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Drop off luggage
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Check in your luggage at the hotel concierge or conference venue 7am-11am
                           (for flights departing 5pm-7am the next day)
                         </p>
@@ -987,18 +784,15 @@
                         width="136"
                         height="136"
                         decoding="async"
-                        data-nimg="1" class="next-img"
+                        data-nimg="1"
+                        class="next-img"
                         src="/images/how-it-works-step-3.png"
                       />
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Track your luggage
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Receive real-time updates as your luggage are sealed and securely
                           transported to the airport.
                         </p>
@@ -1011,18 +805,15 @@
                         width="136"
                         height="136"
                         decoding="async"
-                        data-nimg="1" class="next-img"
+                        data-nimg="1"
+                        class="next-img"
                         src="/images/how-it-works-step-4.png"
                       />
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Enjoy Singapore
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Explore the city hands-free while your luggage is checked through to your
                           flight.
                         </p>
@@ -1035,18 +826,15 @@
                         width="136"
                         height="136"
                         decoding="async"
-                        data-nimg="1" class="next-img"
+                        data-nimg="1"
+                        class="next-img"
                         src="/images/how-it-works-step-5.png"
                       />
                       <div class="landing-step-copy">
-                        <p
-                          class="cag-typography cag-l-body cag-bold ink-black"
-                        >
+                        <p class="cag-typography cag-l-body cag-bold ink-black">
                           Breeze through the airport
                         </p>
-                        <p
-                          class="cag-typography cag-s-body cag-regular ink-grey"
-                        >
+                        <p class="cag-typography cag-s-body cag-regular ink-grey">
                           Head straight to immigration with your mobile boarding pass. Your luggage
                           will meet you at your destination.
                         </p>
@@ -1058,20 +846,14 @@
             </div>
             <!-- PARTICIPATING AIRLINES AND HOTELS -->
             <div class="bg-[#EFEBE7]">
-              <div
-                class="landing-partners"
-              >
+              <div class="landing-partners">
                 <div class="block lg:hidden">
-                  <h6
-                    class="cag-typography cag-h6 cag-bold text-center ink-black"
-                  >
+                  <h6 class="cag-typography cag-h6 cag-bold text-center ink-black">
                     Exclusively Available with <br />Participating Airlines and Hotels
                   </h6>
                 </div>
                 <div class="hidden lg:block">
-                  <h5
-                    class="cag-typography cag-h5 cag-black text-center ink-black"
-                  >
+                  <h5 class="cag-typography cag-h5 cag-black text-center ink-black">
                     Exclusively Available with<br />
                     Participating Airlines and Hotels
                   </h5>
@@ -1091,9 +873,7 @@
                           src="/images/singapore-airlines.png"
                         />
                       </div>
-                      <p
-                        class="cag-typography cag-small-text cag-bold text-center ink-grey"
-                      >
+                      <p class="cag-typography cag-small-text cag-bold text-center ink-grey">
                         Singapore Airlines
                       </p>
                     </div>
@@ -1110,9 +890,7 @@
                           src="/images/fullerton-bay-hotel.png"
                         />
                       </div>
-                      <p
-                        class="cag-typography cag-small-text cag-bold text-center ink-grey"
-                      >
+                      <p class="cag-typography cag-small-text cag-bold text-center ink-grey">
                         Fullerton Bay Hotel
                       </p>
                     </div>
@@ -1129,9 +907,7 @@
                           src="/images/fullerton-hotel.png"
                         />
                       </div>
-                      <p
-                        class="cag-typography cag-small-text cag-bold text-center ink-grey"
-                      >
+                      <p class="cag-typography cag-small-text cag-bold text-center ink-grey">
                         Fullerton Hotel
                       </p>
                     </div>
@@ -1148,9 +924,7 @@
                           src="/images/marina-bay-sands.png"
                         />
                       </div>
-                      <p
-                        class="cag-typography cag-small-text cag-bold text-center ink-grey"
-                      >
+                      <p class="cag-typography cag-small-text cag-bold text-center ink-grey">
                         Marina Bay Sands
                       </p>
                     </div>
@@ -1167,9 +941,7 @@
                           src="/images/singapore-airlines.png"
                         />
                       </div>
-                      <p
-                        class="cag-typography cag-small-text cag-bold text-center ink-grey"
-                      >
+                      <p class="cag-typography cag-small-text cag-bold text-center ink-grey">
                         Singapore Airlines
                       </p>
                     </div>
@@ -1186,9 +958,7 @@
                           src="/images/fullerton-bay-hotel.png"
                         />
                       </div>
-                      <p
-                        class="cag-typography cag-small-text cag-bold text-center ink-grey"
-                      >
+                      <p class="cag-typography cag-small-text cag-bold text-center ink-grey">
                         Fullerton Bay Hotel
                       </p>
                     </div>
@@ -1205,9 +975,7 @@
                           src="/images/fullerton-hotel.png"
                         />
                       </div>
-                      <p
-                        class="cag-typography cag-small-text cag-bold text-center ink-grey"
-                      >
+                      <p class="cag-typography cag-small-text cag-bold text-center ink-grey">
                         Fullerton Hotel
                       </p>
                     </div>
@@ -1224,9 +992,7 @@
                           src="/images/marina-bay-sands.png"
                         />
                       </div>
-                      <p
-                        class="cag-typography cag-small-text cag-bold text-center ink-grey"
-                      >
+                      <p class="cag-typography cag-small-text cag-bold text-center ink-grey">
                         Marina Bay Sands
                       </p>
                     </div>
@@ -1247,9 +1013,7 @@
                       />
                     </div>
                     <div class="w-[80px]">
-                      <p
-                        class="cag-typography cag-l-body cag-bold text-center break-words ink-grey"
-                      >
+                      <p class="cag-typography cag-l-body cag-bold text-center break-words ink-grey">
                         Singapore Airlines
                       </p>
                     </div>
@@ -1268,9 +1032,7 @@
                       />
                     </div>
                     <div class="w-[80px]">
-                      <p
-                        class="cag-typography cag-l-body cag-bold text-center break-words ink-grey"
-                      >
+                      <p class="cag-typography cag-l-body cag-bold text-center break-words ink-grey">
                         Fullerton Bay Hotel
                       </p>
                     </div>
@@ -1289,9 +1051,7 @@
                       />
                     </div>
                     <div class="w-[80px]">
-                      <p
-                        class="cag-typography cag-l-body cag-bold text-center break-words ink-grey"
-                      >
+                      <p class="cag-typography cag-l-body cag-bold text-center break-words ink-grey">
                         Fullerton Hotel
                       </p>
                     </div>
@@ -1310,18 +1070,14 @@
                       />
                     </div>
                     <div class="w-[80px]">
-                      <p
-                        class="cag-typography cag-l-body cag-bold text-center break-words ink-grey"
-                      >
+                      <p class="cag-typography cag-l-body cag-bold text-center break-words ink-grey">
                         Marina Bay Sands
                       </p>
                     </div>
                   </div>
                 </div>
                 <div class="landing-credit">
-                  <p
-                    class="cag-typography cag-l-body cag-italic ink-black"
-                  >
+                  <p class="cag-typography cag-l-body cag-italic ink-black">
                     Brought to you specially by <br class="block md:hidden" />
                     <!-- -->Changi Airport Group.
                   </p>
@@ -1331,17 +1087,13 @@
             <!-- FREQUENTLY ASKED QUESTIONS (accordion rows; answers come from data/faq.json) -->
             <div class="landing-faq-inner">
               <div class="landing-faq-section">
-                <h6
-                  class="cag-typography cag-h6 cag-black text-center ink-black"
-                >
+                <h6 class="cag-typography cag-h6 cag-black text-center ink-black">
                   Frequently Asked Questions
                 </h6>
                 <div class="landing-faq-list">
                   <div class="faq-item">
                     <div class="faq-item-header">
-                      <p
-                        class="cag-typography cag-l-body cag-black ink-black"
-                      >
+                      <p class="cag-typography cag-l-body cag-black ink-black">
                         1. What is the Off-Airport Check-In service?
                       </p>
                       <img
@@ -1358,9 +1110,7 @@
                   </div>
                   <div class="faq-item">
                     <div class="faq-item-header">
-                      <p
-                        class="cag-typography cag-l-body cag-black ink-black"
-                      >
+                      <p class="cag-typography cag-l-body cag-black ink-black">
                         2. Am I eligible for the service?
                       </p>
                       <img
@@ -1377,9 +1127,7 @@
                   </div>
                   <div class="faq-item">
                     <div class="faq-item-header">
-                      <p
-                        class="cag-typography cag-l-body cag-black ink-black"
-                      >
+                      <p class="cag-typography cag-l-body cag-black ink-black">
                         3. When do I have to drop off my luggage at the hotel?
                       </p>
                       <img
@@ -1396,9 +1144,7 @@
                   </div>
                   <div class="faq-item">
                     <div class="faq-item-header">
-                      <p
-                        class="cag-typography cag-l-body cag-black ink-black"
-                      >
+                      <p class="cag-typography cag-l-body cag-black ink-black">
                         4. How can I track my luggage?
                       </p>
                       <img
@@ -1420,9 +1166,7 @@
                       class="btn-pill bg-black border-black cursor-pointer"
                       style="width: 160px; height: 36px; box-shadow: 0px 1px 2px 0px #1212120d"
                     >
-                      <p
-                        class="cag-typography cag-s-body cag-bold ink-white"
-                      >
+                      <p class="cag-typography cag-s-body cag-bold ink-white">
                         See all FAQs
                       </p>
                     </div></a
@@ -1434,756 +1178,8 @@
           <!--$--><!--/$-->
         </div>
       </main>
-      <!-- @component footer -->
-      <!-- SITE FOOTER · app links, follow us, legal -->
-      <footer class="footer-compact">
-        <div class="footer-inner">
-          <div class="footer-content">
-            <div class="footer-apps">
-              <p
-                class="cag-typography cag-s-body cag-bold ink-white"
-              >
-                Download Changi App
-              </p>
-              <div class="footer-badges">
-                <img
-                  alt="Download on App Store"
-                  loading="lazy"
-                  width="118"
-                  height="40"
-                  decoding="async"
-                  data-nimg="1"
-                  class="footer-store-badge next-img"
-                  src="/images/app-store-button.png"
-                /><img
-                  alt="Get it on Google Play"
-                  loading="lazy"
-                  width="118"
-                  height="40"
-                  decoding="async"
-                  data-nimg="1"
-                  class="footer-store-badge next-img"
-                  src="/images/google-play-button.png"
-                />
-              </div>
-            </div>
-            <div class="footer-social">
-              <p
-                class="cag-typography cag-s-body cag-bold ink-white"
-              >
-                Follow Us
-              </p>
-              <div class="footer-social-icons">
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/facebook.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/facebook.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/facebook.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/facebook.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/instagram.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/instagram.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/instagram.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/instagram.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/linkedin.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/linkedin.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/linkedin.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/linkedin.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/telegram.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/telegram.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/telegram.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/telegram.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/tiktok.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/tiktok.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/tiktok.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/tiktok.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/x.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/x.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/x.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/x.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/youtube.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/youtube.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/youtube.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/youtube.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/follow-1.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/follow-1.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/follow-1.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/follow-1.svg"
-                    />
-                  </div>
-                </div>
-                <div class="cursor-pointer">
-                  <div class="block sm:hidden">
-                    <img
-                      alt="/follow-us/follow-2.svg"
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/follow-2.svg"
-                    />
-                  </div>
-                  <div class="hidden md:block">
-                    <img
-                      alt="/follow-us/follow-2.svg"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1" class="next-img"
-                      src="/follow-us/follow-2.svg"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="stack-16">
-              <p
-                class="cag-typography cag-s-body cag-regular text-left ink-white"
-              >
-                Sign up for a Changi Account to receive the latest updates
-              </p>
-              <button
-                class="footer-signup-btn"
-              >
-                <p
-                  class="cag-typography cag-s-body cag-bold ink-white"
-                >
-                  Sign Up
-                </p>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="footer-compact-sites">
-          <div class="footer-compact-inner">
-            <div class="flex justify-start">
-              <img
-                alt="Changi Airport"
-                loading="lazy"
-                width="129"
-                height="35"
-                decoding="async"
-                data-nimg="1"
-                class="footer-logo next-img"
-                src="/images/changi-logo-footer.png"
-              />
-            </div>
-            <div class="stack-24">
-              <div class="flex flex-col">
-                <div class="footer-sites-toggle" data-hook="footer-sites-toggle">
-                  <div class="row-between">
-                    <p
-                      class="cag-typography cag-l-body cag-regular ink-white"
-                    >
-                      Changi Sites : <span class="font-bold">Airport</span>
-                    </p>
-                    <img
-                      alt="Arrow Down"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                      data-nimg="1"
-                      class="transition-transform duration-300 next-img"
-                      src="/icons/arrow-down-white.svg"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="stack-16">
-                <div class="flex gap-4">
-                  <div class="cursor-pointer">
-                    <p
-                      class="cag-typography cag-s-body cag-regular text-left ink-white"
-                    >
-                      Conditions of Use
-                    </p>
-                  </div>
-                  <div class="cursor-pointer">
-                    <p
-                      class="cag-typography cag-s-body cag-regular text-left ink-white"
-                    >
-                      Privacy Policy
-                    </p>
-                  </div>
-                </div>
-                <p
-                  class="cag-typography cag-s-body cag-regular text-left ink-white"
-                >
-                  © 2025 Changi Airport
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-      <div class="footer-desktop">
-        <div class="footer-main-bar">
-          <div
-            class="footer-main-inner"
-          >
-            <div class="stack-32">
-              <div class="footer-columns">
-                <div class="footer-column">
-                  <div class="footer-heading">Flights</div>
-                  <div class="footer-link">
-                    Flight Information
-                  </div>
-                  <div class="footer-link">
-                    Arrival Guide
-                  </div>
-                  <div class="footer-link">
-                    Departure Guide
-                  </div>
-                  <div class="footer-link">
-                    Transiting Guide
-                  </div>
-                  <div class="footer-link">
-                    Airline Information
-                  </div>
-                </div>
-                <div class="footer-column">
-                  <div class="footer-heading">Airport Guide</div>
-                  <div class="footer-link">Map</div>
-                  <div class="footer-link">
-                    Explore by Terminal
-                  </div>
-                  <div class="footer-link">
-                    Transport &amp; Directions
-                  </div>
-                  <div class="footer-link">
-                    Special Assistance
-                  </div>
-                  <div class="footer-link">
-                    Facilities &amp; Services
-                  </div>
-                </div>
-                <div class="footer-column">
-                  <div class="footer-heading">Dine &amp; Shop</div>
-                  <div class="footer-link">
-                    Dining Directory
-                  </div>
-                  <div class="footer-link">
-                    Shopping Directory
-                  </div>
-                </div>
-                <div class="footer-column">
-                  <div class="footer-heading">Experience</div>
-                  <div class="footer-link">Tours</div>
-                  <div class="footer-link">
-                    Travel Inspiration
-                  </div>
-                  <div class="footer-link">Kids</div>
-                  <div class="footer-link">
-                    Attractions
-                  </div>
-                  <div class="footer-link">
-                    Learning Journeys
-                  </div>
-                  <div class="footer-link">
-                    Short Stories
-                  </div>
-                </div>
-                <div class="footer-column">
-                  <div class="footer-heading">Events &amp; Promotions</div>
-                  <div class="footer-link">Events</div>
-                  <div class="footer-link">
-                    Promotions
-                  </div>
-                </div>
-              </div>
-              <div class="row-24">
-                <div class="footer-column">
-                  <div class="footer-heading">Support</div>
-                  <div class="footer-link">
-                    Lost &amp; Found
-                  </div>
-                  <div class="footer-link">
-                    Baggage Tracker
-                  </div>
-                  <div class="footer-link">FAQs</div>
-                </div>
-                <div class="footer-column">
-                  <div class="footer-heading">My Changi</div>
-                  <div class="footer-link">
-                    Changi Rewards
-                  </div>
-                  <div class="footer-link">
-                    Changi Experiences
-                  </div>
-                  <div class="footer-link">
-                    Changi App
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="footer-inner">
-              <div class="footer-content">
-                <div class="footer-apps">
-                  <p
-                    class="cag-typography cag-s-body cag-bold ink-white"
-                  >
-                    Download Changi App
-                  </p>
-                  <div class="footer-badges">
-                    <img
-                      alt="Download on App Store"
-                      loading="lazy"
-                      width="118"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1"
-                      class="footer-store-badge next-img"
-                      src="/images/app-store-button.png"
-                    /><img
-                      alt="Get it on Google Play"
-                      loading="lazy"
-                      width="118"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1"
-                      class="footer-store-badge next-img"
-                      src="/images/google-play-button.png"
-                    />
-                  </div>
-                </div>
-                <div class="footer-social">
-                  <p
-                    class="cag-typography cag-s-body cag-bold ink-white"
-                  >
-                    Follow Us
-                  </p>
-                  <div class="footer-social-icons">
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/facebook.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/facebook.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/facebook.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/facebook.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/instagram.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/instagram.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/instagram.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/instagram.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/linkedin.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/linkedin.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/linkedin.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/linkedin.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/telegram.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/telegram.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/telegram.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/telegram.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/tiktok.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/tiktok.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/tiktok.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/tiktok.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/x.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/x.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/x.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/x.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/youtube.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/youtube.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/youtube.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/youtube.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/follow-1.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/follow-1.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/follow-1.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/follow-1.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="cursor-pointer">
-                      <div class="block sm:hidden">
-                        <img
-                          alt="/follow-us/follow-2.svg"
-                          loading="lazy"
-                          width="40"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/follow-2.svg"
-                        />
-                      </div>
-                      <div class="hidden md:block">
-                        <img
-                          alt="/follow-us/follow-2.svg"
-                          loading="lazy"
-                          width="24"
-                          height="24"
-                          decoding="async"
-                          data-nimg="1" class="next-img"
-                          src="/follow-us/follow-2.svg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="stack-16">
-                  <p
-                    class="cag-typography cag-s-body cag-regular text-left ink-white"
-                  >
-                    Sign up for a Changi Account to receive the latest updates
-                  </p>
-                  <button
-                    class="footer-signup-btn"
-                  >
-                    <p
-                      class="cag-typography cag-s-body cag-bold ink-white"
-                    >
-                      Sign Up
-                    </p>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="footer-legal-bar">
-          <div
-            class="footer-legal-inner"
-          >
-            <div class="footer-legal-left">
-              <img
-                alt="Changi Airport"
-                loading="lazy"
-                width="127"
-                height="35"
-                decoding="async"
-                data-nimg="1"
-                class="footer-logo next-img"
-                src="/images/changi-logo-footer.png"
-              />
-              <div class="footer-legal-links">
-                <div class="footer-legal-link">Airport</div>
-                <div class="footer-legal-link">Corporate</div>
-                <div class="footer-legal-link">Careers</div>
-                <div class="footer-legal-link">CAI</div>
-                <div class="footer-legal-link">Jewel</div>
-              </div>
-            </div>
-            <div class="row-16">
-              <div class="footer-legal-link">Conditions of Use</div>
-              <div class="footer-legal-link">Privacy Policy</div>
-              <div class="footer-legal-link">
-                ©
-                <!-- -->2026<!-- -->
-                Changi Airport
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- @end footer -->
+      <!-- SITE FOOTER · components/footer.html (compact + desktop: app links, follow us, legal) -->
+      <div data-include="footer"></div>
     </div>
     <!-- CONTROLLER ENTRY POINT -->
     <script type="module" src="/replica/js/controllers/landing.js"></script>

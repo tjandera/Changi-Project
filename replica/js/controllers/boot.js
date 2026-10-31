@@ -1,10 +1,11 @@
-/** Shared start-up for every page: load config, wire header/tooltips/labels. */
+/** Shared start-up for every page: put in the shared header/footer, load config, wire header/tooltips/labels. */
+import { included } from '/components/include.js';
 import { api } from '../models/api.js';
 import { initChrome } from '../views/chrome.js';
 import { hideLoading } from '../views/loading.js';
 
 export async function boot() {
-  const config = await api.getConfig();
+  const [config] = await Promise.all([api.getConfig(), included]);
   initChrome(config);
   return config;
 }
