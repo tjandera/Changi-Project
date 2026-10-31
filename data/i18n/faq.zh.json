@@ -9,7 +9,7 @@
      "answerHtml": "通过樟宜机场集团提供的机场外值机服务，您可以在合作酒店办理行李托运，我们会将行李安全送至机场，并装载到您出发的航班上。<br><br>您只需<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"/booking-details/\">在此处</a>注册该服务，在线办理航班值机，并于上午7点至11点将行李交给酒店。之后，您可以自由探索这座城市，并轻松前往机场。您可以直接在抵达机场领取行李。"
     },
     {
-     "question": "2. 我有资格使用该服务吗？ ",
+     "question": "2. 我是否符合享受该服务的条件？ ",
      "answerHtml": "要符合使用该服务的资格，您必须：<br><ul class=\"list-disc pl-5 mt-2\"><li>是合作酒店的住客，且至少入住1晚</li><li>搭乘参与服务的航空公司航班</li><li>搭乘符合条件的航班（下午5点至次日上午7点起飞的航班），不包括飞往美国的航班</li><li>在线值机并生成电子或手机登机牌</li></ul>"
     },
     {
@@ -63,7 +63,7 @@
      "answerHtml": "请确保您的常旅客等级已在航空公司预订中更新，以便显示准确的行李限额。"
     },
     {
-     "question": "4. 我需要什么时候将行李交给酒店？ ",
+     "question": "4. 我什么时候需要把行李送到酒店？ ",
      "answer": {
       "raw": "<div class=\"w-full flex flex-col sm:flex-row gap-0 sm:gap-8 items-center justify-center\"><img alt=\"Dropoff\" loading=\"lazy\" width=\"407\" height=\"180\" decoding=\"async\" data-nimg=\"1\" src=\"/images/when-drop-off-luggage-hotel.webp\" style=\"color: transparent;\"><br><p class=\"cag-typography cag-s-body cag-regular\" style=\"color: rgb(18, 18, 18); background: transparent;\">请确保在寄存时间段内交付行李。我们无法接受在此之后到达的行李，因为可能无法及时将其送上您出发的航班。</p></div>"
      }
@@ -102,7 +102,7 @@
      "answerHtml": "行李一经酒店接收，将被封存并受到严格保管，以确保不被篡改。因此，在抵达目的地机场之前，您无法取回行李。"
     },
     {
-     "question": "2. 如何追踪我的行李？",
+     "question": "2. 我如何追踪我的行李？",
      "answerHtml": "行李运往机场途中及抵达机场时，您也会收到电子邮件通知。<br><br>您还可以通过管理预订追踪行李，从酒店接收到装载上飞机的全过程，请点击<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"/manage-booking-pin/\">此处。</a>您也可以在将行李交给酒店前扫描行李牌，通过<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold underline text-[#7A35B0]\" href=\"https://changi.me/4ms0vAX\">樟宜应用</a>中的行李追踪功能进行追踪。"
     },
     {
