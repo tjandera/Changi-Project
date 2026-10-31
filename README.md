@@ -11,7 +11,35 @@ Front-end replica of the Changi Off-Airport Check-In booking flow, contained Wit
 |---|---|
 | Live demo (Vercel) | https://changiproject.vercel.app/ |
 | Figma prototype | https://www.figma.com/proto/6KAACC2C1GxOySmUomqv7V/Untitled?page-id=16%3A40&node-id=19-1582&starting-point-node-id=19%3A1582&scaling=scale-down-width |
+| Architecture | **Model–View–Controller (MVC)**: `models/`, `views/`, `controllers/`, plus `public/` for static assets |
 | Stack | Node server (`scripts/dev-server.js`, no dependencies) + static HTML + the site's own compiled Tailwind CSS + ES modules. |
+
+## Architecture: Model–View–Controller
+
+This project uses a **Model–View–Controller (MVC)** architecture. Every file sits in one of three layers, and each
+layer has one job:
+
+| Layer | Folder | Job | Never does |
+|---|---|---|---|
+| **Model** | `models/` | Data and state: loads hotels, flights, prices and copy (`models/data/*.json`), keeps the booking across steps, decides which page comes next | Touch the page (no DOM) |
+| **View** | `views/` | What the user sees: each page's HTML + CSS (`views/pages/`), the shared header/footer (`views/components/`), and the code that draws on the page (`views/scripts/`) | Fetch data or decide what happens next |
+| **Controller** | `controllers/` | One script per page: asks the models for data, hands it to the views, reacts to clicks and typing, moves to the next step | Hold data itself or build HTML |
+| *(static)* | `public/` | Images, icons, flags, fonts, the live site's compiled CSS and vendor files, served as they are | — |
+
+How a page works, e.g. Step 2 (Luggage):
+
+```
+browser opens /booking-baggage/
+  └─ views/pages/booking-baggage/index.html + style.css      (View: the markup and its styles)
+       └─ controllers/luggage.js                             (Controller: runs on load)
+            ├─ models/store.js   → current booking            (Model)
+            ├─ models/format.js  → prices and labels to show  (Model)
+            ├─ views/scripts/summary.js, button.js → update the page   (View)
+            └─ on "Next": models/store.js saves, models/flow.js → /booking-contact/
+```
+
+Why it matters for a backend team: only `models/api.js` knows where data comes from, so swapping the JSON files for real
+APIs changes one file and no page. Details: [docs/INTEGRATION.md](docs/INTEGRATION.md).
 
 ## Run it
 
