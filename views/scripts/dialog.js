@@ -32,7 +32,7 @@ function mount(markup, { onClose } = {}) {
  * @param {{title, body, primary, secondary}} copy  usually from config.dialogs.*
  * @returns {Promise<'primary'|'secondary'|'dismissed'>}
  */
-export function ask(copy) {
+export function showDialog(copy) {
   return new Promise((resolve) => {
     let result = 'dismissed';
     const { node, close } = mount(confirmDialog(copy), { onClose: () => resolve(result) });
@@ -49,7 +49,7 @@ export function ask(copy) {
   });
 }
 
-export function showOddSized() {
+export function showOddSizedInfo() {
   const { node, close } = mount(oddSizedDialog());
   node.querySelector('[data-dialog="close"]').addEventListener('click', close);
 }

@@ -4,7 +4,7 @@ import { faqAnswer } from './templates.js';
 
 const plain = (q) => q.replace(/^\s*\d+\.\s*/, '').trim().toLowerCase();
 
-export function wireAccordion(row, item) {
+export function setUpAccordion(row, item) {
   const head = row.firstElementChild;
   const arrow = head.querySelector('img');
   head.setAttribute('role', 'button');
@@ -22,7 +22,7 @@ export function wireAccordion(row, item) {
 }
 
 /** Find the FAQ entry whose question matches a row's text (ignores the "1." numbering). */
-export function findItem(tabs, questionText) {
+export function findFaqItem(tabs, questionText) {
   const target = plain(questionText);
   for (const tab of tabs) {
     const hit = tab.items.find((i) => plain(i.question) === target);

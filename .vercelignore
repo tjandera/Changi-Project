@@ -4,6 +4,6 @@
 /docs
 /tools
 /scripts
-/README.md
+**/README.md
 /LICENSE
 /.nvmrc

@@ -3,19 +3,19 @@
  * fills values, renders one line per luggage type, wires the edit pencils
  * and the collapse arrow.
  */
-import { $, $$, bind, renderList } from './dom.js';
+import { $, $$, fillBindings, renderList } from './dom.js';
 import { navigate } from '../../models/leave.js';
 
 export function fillSummary(root, view) {
-  bind(root, view.values);
+  fillBindings(root, view.values);
   $$('[data-list="luggage-lines"]', root).forEach((list) =>
     renderList(list, view.lines, (node, line) =>
-      bind(node, { 'line.label': line.label, 'line.subtotal': line.subtotal, 'line.itemsLabel': line.itemsLabel }),
+      fillBindings(node, { 'line.label': line.label, 'line.subtotal': line.subtotal, 'line.itemsLabel': line.itemsLabel }),
     ),
   );
 }
 
-export function wireSummary(config) {
+export function setUpSummaryToggle(config) {
   const edits = {
     'edit-trip': config.routes.tripDetails,
     'edit-luggage': config.routes.luggage,

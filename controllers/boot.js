@@ -1,21 +1,35 @@
-/** Shared start-up for every page: put in the shared header/footer, load config, wire header/tooltips/labels. */
-import { included } from '../views/components/include.js';
+/**
+ * Start-up shared by every page
+ *
+ * Every controller begins with `await startPage()` and ends with `.catch(showPageError)`.
+ *
+ * startPage():
+ *   1. waits for the shared header, footer and 中文 button to be put into the page (views/components/include.js)
+ *      while it loads the site settings (models/data/config.json), both at the same time
+ *   2. sets up the parts every page has: header links, Book Now, mobile menu, tooltips, footer links,
+ *      the 中文 switch, the feedback tab and the loading overlay (views/scripts/chrome.js)
+ *   3. returns the settings, so the page can use prices, routes, dialog text and so on
+ */
+
+// Models: data and state
 import { api } from '../models/api.js';
-import { initChrome } from '../views/scripts/chrome.js';
+// Views: what the user sees
+import { componentsLoaded } from '../views/components/include.js';
+import { setUpSharedParts } from '../views/scripts/chrome.js';
 import { hideLoading } from '../views/scripts/loading.js';
 
-export async function boot() {
-  const [config] = await Promise.all([api.getConfig(), included]);
-  initChrome(config);
+export async function startPage() {
+  const [config] = await Promise.all([api.getConfig(), componentsLoaded]);
+  setUpSharedParts(config);
   return config;
 }
 
-/** Report a data-loading failure on the page instead of failing silently. */
-export function fail(err) {
-  console.error(err);
+/** Shows what went wrong at the top of the page instead of failing silently (e.g. data files not found). */
+export function showPageError(error) {
+  console.error(error);
   hideLoading();
-  const note = document.createElement('div');
-  note.className = 'replica-error';
-  note.textContent = `Could not load page data: ${err.message}. Serve the folder over http (see README).`;
-  document.body.appendChild(note);
+  const message = document.createElement('div');
+  message.className = 'replica-error';
+  message.textContent = `Could not load page data: ${error.message}. Serve the folder over http (see README).`;
+  document.body.appendChild(message);
 }

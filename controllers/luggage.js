@@ -1,66 +1,99 @@
-/** Step 2 · Luggage Details: steppers, per-row price, totals. */
-import { $, $$, bind } from '../views/scripts/dom.js';
-import { setEnabled, onPress } from '../views/scripts/button.js';
-import { showOddSized } from '../views/scripts/dialog.js';
-import { fillSummary, wireSummary } from '../views/scripts/summary.js';
-import { money, viewModel } from '../models/format.js';
-import { guard, save, totalItems } from '../models/store.js';
-import { nextRoute } from '../models/flow.js';
+/**
+ * Step 2 · Luggage Details  ·  /booking-baggage/
+ * HTML: views/pages/booking-baggage/index.html
+ *
+ * What this page does:
+ *   1. Sends the guest home if Step 1 (the trip) is not filled in.
+ *   2. Lets the guest add or remove Standard Luggage and Odd-sized Items with the − and + buttons.
+ *   3. After every change: updates the row's price, the totals and the Booking Summary, and saves the booking.
+ *   4. Opens the "Odd-sized items" explanation.
+ *   5. Turns on "Next" once at least one item is added. Pressing it goes to Step 3.
+ */
+
+// Models: data and state
+import { countLuggageItems, loadBookingOrGoHome, saveBooking } from '../models/store.js';
+import { buildViewModel, formatMoney } from '../models/format.js';
+import { nextPageUrl } from '../models/flow.js';
 import { navigate } from '../models/leave.js';
-import { endLoading } from '../views/scripts/loading.js';
-import { boot, fail } from './boot.js';
+// Views: what the user sees
+import { $, $$, fillBindings } from '../views/scripts/dom.js';
+import { onPress, setButtonEnabled } from '../views/scripts/button.js';
+import { showOddSizedInfo } from '../views/scripts/dialog.js';
+import { fillSummary, setUpSummaryToggle } from '../views/scripts/summary.js';
+import { finishLoading } from '../views/scripts/loading.js';
+// Start-up shared by every page
+import { showPageError, startPage } from './boot.js';
 
-// Live colours: zero counts are grey, non-zero are black.
-const COUNT = { zero: 'rgb(171, 171, 171)', some: 'rgb(18, 18, 18)' };
-const PRICE = { zero: 'rgb(153, 153, 153)', some: 'rgb(18, 18, 18)' };
+// Colours from the live site: a row with no items is grey, a row with items is black.
+const COUNT_COLOUR = { empty: 'rgb(171, 171, 171)', filled: 'rgb(18, 18, 18)' };
+const PRICE_COLOUR = { empty: 'rgb(153, 153, 153)', filled: 'rgb(18, 18, 18)' };
 
-try {
-  const config = await boot();
-  const booking = await guard('trip', config);
-  if (booking) {
-    const next = $('[data-action="next"]');
-    const units = { standard: config.pricing.standardLuggage, oddSized: config.pricing.oddSizedItem };
-    const max = config.booking.maxItemsPerType;
+showPage().catch(showPageError);
 
-    const render = () => {
-      $$('[data-stepper]').forEach((stepper) => {
-        const key = stepper.dataset.stepper;
-        const n = booking.luggage[key];
-        const countEl = $('[data-bind="count"]', stepper);
-        countEl.textContent = n;
-        countEl.style.color = n ? COUNT.some : COUNT.zero;
-        const row = stepper.closest('[data-hook~="luggage-row"]');
-        const price = $('[data-component="row-price"]', row);
-        $('[data-bind="subtotal"]', price).textContent = money(n * units[key]);
-        $$('p', price).forEach((p) => (p.style.color = n ? PRICE.some : PRICE.zero));
-      });
-      const view = viewModel(booking, config);
-      bind(document, view.values);
-      fillSummary(document, view);
-      setEnabled(next, totalItems(booking) > 0);
+async function showPage() {
+  const config = await startPage();
+  const booking = await loadBookingOrGoHome('trip', config);
+  if (!booking) {
+    finishLoading(); // Step 1 is not done, so the guest is being sent home
+    return;
+  }
+
+  const nextButton = $('[data-action="next"]');
+  const counters = $$('[data-stepper]'); // one per luggage type: "standard" and "oddSized"
+  const unitPrice = {
+    standard: config.pricing.standardLuggage,
+    oddSized: config.pricing.oddSizedItem,
+  };
+  const maxPerType = config.booking.maxItemsPerType;
+
+  counters.forEach((counter) => {
+    const luggageType = counter.dataset.stepper;
+
+    const changeCount = (change) => {
+      const newCount = booking.luggage[luggageType] + change;
+      booking.luggage[luggageType] = Math.min(maxPerType, Math.max(0, newCount)); // keep it between 0 and the max
+      saveBooking(booking);
+      showLuggage();
     };
 
-    $$('[data-stepper]').forEach((stepper) => {
-      const key = stepper.dataset.stepper;
-      const change = (delta) => {
-        booking.luggage[key] = Math.min(max, Math.max(0, booking.luggage[key] + delta));
-        save(booking);
-        render();
-      };
-      $('[data-action="decrement"]', stepper).addEventListener('click', () => change(-1));
-      $('[data-action="increment"]', stepper).addEventListener('click', () => change(1));
+    $('[data-action="decrement"]', counter).addEventListener('click', () => changeCount(-1));
+    $('[data-action="increment"]', counter).addEventListener('click', () => changeCount(+1));
+  });
+
+  /** Shows every count, row price, total and the summary, and turns Next on or off. */
+  function showLuggage() {
+    counters.forEach((counter) => {
+      const luggageType = counter.dataset.stepper;
+      const count = booking.luggage[luggageType];
+      showCountAndPrice(counter, count, count * unitPrice[luggageType]);
     });
 
-    $('[data-action="open-odd-sized"]').addEventListener('click', showOddSized);
-    wireSummary(config);
-    render();
-
-    onPress(next, () => {
-      save(booking);
-      navigate(nextRoute(config, 'luggage'));
-    });
+    const viewModel = buildViewModel(booking, config);
+    fillBindings(document, viewModel.values);
+    fillSummary(document, viewModel);
+    setButtonEnabled(nextButton, countLuggageItems(booking) > 0);
   }
-  endLoading();
-} catch (err) {
-  fail(err);
+
+  $('[data-action="open-odd-sized"]').addEventListener('click', showOddSizedInfo);
+  setUpSummaryToggle(config);
+  showLuggage();
+
+  onPress(nextButton, () => {
+    saveBooking(booking);
+    navigate(nextPageUrl(config, 'luggage'));
+  });
+
+  finishLoading();
+}
+
+/** Writes one row's count and price, grey when it is zero. */
+function showCountAndPrice(counter, count, price) {
+  const countText = $('[data-bind="count"]', counter);
+  countText.textContent = count;
+  countText.style.color = count ? COUNT_COLOUR.filled : COUNT_COLOUR.empty;
+
+  const row = counter.closest('[data-hook~="luggage-row"]');
+  const priceBox = $('[data-component="row-price"]', row);
+  $('[data-bind="subtotal"]', priceBox).textContent = formatMoney(price);
+  $$('p', priceBox).forEach((priceText) => (priceText.style.color = count ? PRICE_COLOUR.filled : PRICE_COLOUR.empty));
 }

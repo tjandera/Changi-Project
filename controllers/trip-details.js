@@ -1,79 +1,113 @@
-/** Step 1 · Trip Details: hotel, flight date, flight number, flight time. */
+/**
+ * Step 1 · Trip Details  ·  /booking-details/
+ * HTML: views/pages/booking-details/index.html
+ *
+ * What this page does:
+ *   1. Shows the hotel and flight date already chosen, with the flight number left empty to pick again
+ *      (the live site does the same when you come back here through "Edit").
+ *   2. Updates the flight summary on the right whenever a field changes.
+ *   3. Opens and closes the Notes panel.
+ *   4. Turns on "Next" once hotel, date and flight are chosen. Pressing it saves the trip and goes to Step 2.
+ *
+ * Changes are only saved when Next is pressed. Leaving the page keeps the booking as it was.
+ */
+
+// Models: data and state
 import { api } from '../models/api.js';
-import { $, $$, bind } from '../views/scripts/dom.js';
-import { setEnabled, onPress } from '../views/scripts/button.js';
-import { dateField, earliestDate, flightField, hotelField } from '../views/scripts/fields.js';
-import { viewModel } from '../models/format.js';
-import { guard, update } from '../models/store.js';
-import { nextRoute } from '../models/flow.js';
+import { loadBookingOrGoHome, updateBooking } from '../models/store.js';
+import { buildViewModel } from '../models/format.js';
+import { nextPageUrl } from '../models/flow.js';
 import { navigate } from '../models/leave.js';
-import { endLoading } from '../views/scripts/loading.js';
-import { boot, fail } from './boot.js';
+// Views: what the user sees
+import { $, $$, fillBindings } from '../views/scripts/dom.js';
+import { onPress, setButtonEnabled } from '../views/scripts/button.js';
+import { createDatePicker, createFlightPicker, createHotelPicker, earliestBookableDate } from '../views/scripts/fields.js';
+import { finishLoading } from '../views/scripts/loading.js';
+// Start-up shared by every page
+import { showPageError, startPage } from './boot.js';
 
-try {
-  const config = await boot();
-  const booking = await guard(null, config);
+showPage().catch(showPageError);
+
+async function showPage() {
+  const config = await startPage();
+  const booking = await loadBookingOrGoHome(null, config); // Step 1 needs nothing filled in before it
   const hotels = await api.getHotels();
-  // Live behaviour (31 Oct 2026): Step 1 is reached through Edit, and it opens with the hotel and date
-  // kept but the flight number and flight time empty ("-"), so a flight must be picked again.
-  // Only this screen is cleared; the saved booking is untouched until Next is pressed.
-  booking.flight = null;
-  const next = $('[data-action="next"]');
+  const nextButton = $('[data-action="next"]');
 
-  const refresh = () => {
-    flight.set(booking.flight);
-    flight.setEnabled(Boolean(booking.hotel && booking.flightDate));
-    bind(document, viewModel(booking, config).values);
-    setEnabled(next, Boolean(booking.hotel && booking.flightDate && booking.flight));
+  // A working copy of the trip for this screen. The flight is cleared so it has to be picked again.
+  const trip = {
+    hotel: booking.hotel,
+    flightDate: booking.flightDate || earliestBookableDate(config.booking),
+    flight: null,
   };
 
-  const hotel = hotelField($('[data-field="hotel"]'), {
+  const hotelPicker = createHotelPicker($('[data-field="hotel"]'), {
     hotels,
-    onSelect: (h) => {
-      if (booking.hotel?.id !== h.id) booking.flight = null;
-      booking.hotel = h;
-      hotel.set(h);
-      refresh();
+    onSelect: (hotel) => {
+      // Flights depend on the hotel, so a different hotel clears the flight.
+      const isDifferentHotel = trip.hotel?.id !== hotel.id;
+      if (isDifferentHotel) trip.flight = null;
+      trip.hotel = hotel;
+      hotelPicker.set(hotel);
+      showTrip();
     },
   });
-  if (!booking.flightDate) booking.flightDate = earliestDate(config.booking);
-  const date = dateField($('[data-field="flightDate"]'), {
+
+  const datePicker = createDatePicker($('[data-field="flightDate"]'), {
     booking: config.booking,
-    onSelect: (iso) => {
-      if (booking.flightDate !== iso) booking.flight = null;
-      booking.flightDate = iso;
-      refresh();
-    },
-  });
-  const flight = flightField($('[data-field="flight"]'), {
-    loadFlights: () => api.getFlights({ hotelId: booking.hotel.id, date: booking.flightDate }),
-    onSelect: (f) => {
-      booking.flight = f;
-      refresh();
+    onSelect: (date) => {
+      // Flights depend on the date too.
+      const isDifferentDate = trip.flightDate !== date;
+      if (isDifferentDate) trip.flight = null;
+      trip.flightDate = date;
+      showTrip();
     },
   });
 
-  hotel.set(booking.hotel);
-  date.set(booking.flightDate);
-  refresh();
-
-  // Notes panel collapses with its arrow (arrow rotates like the live site's transition-transform icon).
-  const notes = $('[data-component="notes"]');
-  const arrow = $('[data-action="toggle-notes"]');
-  arrow.addEventListener('click', () => {
-    const collapsed = arrow.classList.toggle('is-flipped');
-    $$(':scope > :not(:first-child)', notes).forEach((row) => (row.hidden = collapsed));
+  const flightPicker = createFlightPicker($('[data-field="flight"]'), {
+    loadFlights: () => api.getFlights({ hotelId: trip.hotel.id, date: trip.flightDate }),
+    onSelect: (flight) => {
+      trip.flight = flight;
+      showTrip();
+    },
   });
 
-  onPress(next, () => {
-    update((b) => {
-      b.hotel = booking.hotel;
-      b.flightDate = booking.flightDate;
-      b.flight = booking.flight;
+  /** Shows the trip in the fields and the summary, and turns the flight field and Next on or off. */
+  function showTrip() {
+    const hasHotelAndDate = Boolean(trip.hotel && trip.flightDate);
+    const hasEverything = Boolean(hasHotelAndDate && trip.flight);
+
+    flightPicker.set(trip.flight);
+    flightPicker.setEnabled(hasHotelAndDate); // a flight can only be picked after the hotel and date
+    fillBindings(document, buildViewModel({ ...booking, ...trip }, config).values);
+    setButtonEnabled(nextButton, hasEverything);
+  }
+
+  hotelPicker.set(trip.hotel);
+  datePicker.set(trip.flightDate);
+  showTrip();
+  setUpNotesToggle();
+
+  onPress(nextButton, () => {
+    updateBooking((savedBooking) => {
+      savedBooking.hotel = trip.hotel;
+      savedBooking.flightDate = trip.flightDate;
+      savedBooking.flight = trip.flight;
     });
-    navigate(nextRoute(config, 'tripDetails'));
+    navigate(nextPageUrl(config, 'tripDetails'));
   });
-  endLoading();
-} catch (err) {
-  fail(err);
+
+  finishLoading();
+}
+
+/** The arrow on the Notes panel hides or shows every row under the panel's title. */
+function setUpNotesToggle() {
+  const notesPanel = $('[data-component="notes"]');
+  const arrow = $('[data-action="toggle-notes"]');
+
+  arrow.addEventListener('click', () => {
+    const isCollapsed = arrow.classList.toggle('is-flipped');
+    const rowsUnderTitle = $$(':scope > :not(:first-child)', notesPanel);
+    rowsUnderTitle.forEach((row) => (row.hidden = isCollapsed));
+  });
 }

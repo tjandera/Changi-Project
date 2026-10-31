@@ -18,7 +18,7 @@ export function displayDate(iso) {
 }
 
 /** 29 -> "29.00" */
-export const money = (n) => Number(n).toFixed(2);
+export const formatMoney = (n) => Number(n).toFixed(2);
 
 /** 1 -> "1 item(s)" */
 export const itemsLabel = (n) => `${n} item(s)`;
@@ -27,13 +27,13 @@ export const itemsLabel = (n) => `${n} item(s)`;
  * Turns the booking into the flat key/value map the pages bind with data-bind="key".
  * Adding a new bound value = add a key here + a data-bind attribute in the HTML.
  */
-export function viewModel(booking, config, extras = {}) {
+export function buildViewModel(booking, config, extras = {}) {
   const { flight, flightDate, hotel, luggage, contact } = booking;
   const price = config.pricing;
   const lines = [
     { key: 'standard', label: 'Standard Luggage', count: luggage.standard, unit: price.standardLuggage },
     { key: 'oddSized', label: 'Odd-sized Items', count: luggage.oddSized, unit: price.oddSizedItem },
-  ].map((l) => ({ ...l, subtotal: money(l.count * l.unit), itemsLabel: itemsLabel(l.count) }));
+  ].map((l) => ({ ...l, subtotal: formatMoney(l.count * l.unit), itemsLabel: itemsLabel(l.count) }));
   const totalCount = luggage.standard + luggage.oddSized;
   const totalCost = lines.reduce((sum, l) => sum + l.count * l.unit, 0);
 
@@ -48,7 +48,7 @@ export function viewModel(booking, config, extras = {}) {
         : '',
       'trip.flightTime': flight ? `${flight.departureTime} (${config.timezoneLabel})` : '-',
       'luggage.totalItemsLabel': itemsLabel(totalCount),
-      'luggage.totalCost': money(totalCost),
+      'luggage.totalCost': formatMoney(totalCost),
       'contact.fullName': `${contact.firstName} ${contact.lastName}`.trim(),
       'contact.phoneDisplay': extras.phoneDisplay || '',
       'contact.email': contact.email,

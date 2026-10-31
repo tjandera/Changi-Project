@@ -10,7 +10,7 @@ const DISABLED = ['btn-pill--disabled'];
 const TEXT_ON = 'rgb(255, 255, 255)';
 const TEXT_OFF = 'rgb(153, 153, 153)';
 
-export function setEnabled(button, enabled) {
+export function setButtonEnabled(button, enabled) {
   if (!button) return;
   button.classList.remove(...(enabled ? DISABLED : ENABLED));
   button.classList.add(...(enabled ? ENABLED : DISABLED));

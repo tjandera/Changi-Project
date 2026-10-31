@@ -6,7 +6,7 @@
  *   <div data-include="header"></div>
  *
  * This module swaps every such slot for the file's markup. It starts as soon as the page is parsed (the <script>
- * in each <head>), and boot() waits for `included` before any page script looks at the DOM, so the scripts see
+ * in each <head>), and startPage() (controllers/boot.js) waits for `componentsLoaded` before any page script looks at the DOM, so the scripts see
  * the same page as if the markup were written inline.
  */
 const cache = new Map();
@@ -31,4 +31,4 @@ async function fill(slot) {
 }
 
 /** Resolves once every slot on the page holds its markup. */
-export const included = Promise.all([...document.querySelectorAll('[data-include]')].map(fill));
+export const componentsLoaded = Promise.all([...document.querySelectorAll('[data-include]')].map(fill));

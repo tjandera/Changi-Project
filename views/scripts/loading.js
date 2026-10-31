@@ -50,7 +50,7 @@ export function hideLoading() {
 }
 
 /** A booking step calls this once its data is on screen. */
-export function endLoading() {
+export function finishLoading() {
   const wait = Math.max(0, shownAt + MIN_VISIBLE_MS - performance.now());
   setTimeout(releaseContent, Math.max(0, wait - FADE_LEAD_MS));
   setTimeout(hideLoading, wait);

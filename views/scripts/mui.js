@@ -17,7 +17,7 @@ const LABEL_ERROR = 'rgb(204, 16, 0)';
  * @param {HTMLInputElement} input
  * @param {{validate?: (v:string)=>boolean, showErrors?: boolean, format?: (v:string)=>string, onChange?: (v:string)=>void}} opts
  */
-export function textField(
+export function createTextField(
   input,
   { validate = (v) => v.trim() !== '', showErrors = true, format, onChange } = {},
 ) {
@@ -142,7 +142,7 @@ function typeAhead(list, pick, close) {
  * Contact Number field: flag + dial-code adornment, country dropdown, as-you-type formatting
  * and validation with libphonenumber-js (the same library the live site bundles).
  */
-export function phoneField(input, { countries, countryIso, onChange }) {
+export function createPhoneField(input, { countries, countryIso, onChange }) {
   const lib = window.libphonenumber;
   const trigger = input
     .closest('.MuiInputBase-root')
@@ -166,7 +166,7 @@ export function phoneField(input, { countries, countryIso, onChange }) {
     return d.length > 0 && lib.isValidPhoneNumber(d, iso);
   };
 
-  const field = textField(input, {
+  const field = createTextField(input, {
     validate: isValid,
     format: formatNational,
     onChange: () => onChange({ countryIso: iso, phone: digits(input.value) }),
@@ -234,7 +234,7 @@ export function phoneField(input, { countries, countryIso, onChange }) {
 }
 
 /** MUI checkbox (Terms & Conditions). */
-export function checkbox(input, { checked = false, onChange }) {
+export function createCheckbox(input, { checked = false, onChange }) {
   const root = input.closest('.MuiCheckbox-root');
   const icon = root.querySelector('.cag-checkbox-icon');
   const render = (on) => {

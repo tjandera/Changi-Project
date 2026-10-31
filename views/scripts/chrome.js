@@ -3,9 +3,9 @@
  * info-icon tooltips, the footer links (footer.js), the 中文 button, the feedback tab + slide-out panel and the replica label.
  */
 import { $, $$, html, pressable } from './dom.js';
-import { clear } from '../../models/store.js';
+import { clearBooking } from '../../models/store.js';
 import { beforeNavigate, isLeaveCheckSkipped, navigate } from '../../models/leave.js';
-import { ask } from './dialog.js';
+import { showDialog } from './dialog.js';
 import { initLanguage } from './language.js';
 import { initFooter } from './footer.js';
 import { showLoading } from './loading.js';
@@ -17,7 +17,7 @@ const LOADING_PAGES = new Set(['trip-details', 'luggage', 'personal-details', 'r
 // Steps 2-4. Step 1 (trip-details) never shows the "Leave this page?" checks.
 const LEAVE_CHECK_PAGES = new Set(['luggage', 'personal-details', 'review']);
 
-export function initChrome(config) {
+export function setUpSharedParts(config) {
   const page = document.body.dataset.page;
   const routes = config.routes;
   const targets = {
@@ -61,10 +61,10 @@ export function initChrome(config) {
     const askToLeave = async () => {
       if (asking || isLeaveCheckSkipped()) return;
       asking = true;
-      const choice = await ask(config.dialogs.leave);
+      const choice = await showDialog(config.dialogs.leave);
       asking = false;
       if (choice !== 'secondary') return;
-      clear();
+      clearBooking();
       navigate(routes.landing);
     };
     document.addEventListener('visibilitychange', () => {

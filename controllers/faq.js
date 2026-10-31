@@ -1,66 +1,98 @@
-/** FAQ: tabs + accordions rendered from data/faq.json. */
+/**
+ * FAQs  ·  /faq/
+ * HTML: views/pages/faq/index.html
+ *
+ * What this page does:
+ *   1. Builds one tab per FAQ section (Overview, Booking, Check-in, After Check-in) from models/data/faq.json.
+ *   2. Clicking a tab moves the black underline under it and lists that section's questions.
+ *   3. Each question opens and closes to show its answer.
+ *   4. Switching to 中文 reloads the questions from the Chinese file (models/data/i18n/faq.zh.json).
+ *
+ * The HTML holds one hidden example tab and one example question (data-template). They are copied for each item.
+ */
+
+// Models: data and state
 import { api } from '../models/api.js';
-import { $, bind } from '../views/scripts/dom.js';
-import { wireAccordion } from '../views/scripts/accordion.js';
+// Views: what the user sees
+import { $, fillBindings } from '../views/scripts/dom.js';
+import { setUpAccordion } from '../views/scripts/accordion.js';
 import { currentLanguage, onLanguageChange } from '../views/scripts/language.js';
-import { boot, fail } from './boot.js';
+// Start-up shared by every page
+import { showPageError, startPage } from './boot.js';
 
-try {
-  await boot();
-  let tabs = await api.getFaq(currentLanguage());
-  let selected = 0;
-  const tablist = $('[data-component="faq-tabs"]');
+// Tab text colours from the live site.
+const TAB_COLOUR = { selected: '#121212', other: '#999999' };
+
+showPage().catch(showPageError);
+
+async function showPage() {
+  await startPage();
+  let faqSections = await api.getFaq(currentLanguage());
+  let selectedIndex = 0;
+
+  const tabBar = $('[data-component="faq-tabs"]');
   const underline = $('[data-component="faq-underline"]');
-  const list = $('[data-list="faq-items"]');
-  const tabTemplate = $('[data-template="faq-tab"]', tablist);
-  const itemTemplate = $('[data-template="faq-item"]', list);
-  tabTemplate.remove();
-  itemTemplate.remove();
+  const questionList = $('[data-list="faq-items"]');
 
-  const tabNodes = tabs.map((tab, i) => {
-    const node = tabTemplate.cloneNode(true);
-    node.removeAttribute('data-template');
-    bind(node, { 'tab.label': tab.label });
-    tablist.insertBefore(node, underline.previousElementSibling);
-    $('[role="tab"]', node).addEventListener('click', () => select(i));
-    return node;
+  // Take the two examples out of the page; they are only used as patterns to copy.
+  const tabTemplate = $('[data-template="faq-tab"]', tabBar);
+  const questionTemplate = $('[data-template="faq-item"]', questionList);
+  tabTemplate.remove();
+  questionTemplate.remove();
+
+  const tabs = faqSections.map((section, index) => {
+    const tab = copyTemplate(tabTemplate);
+    fillBindings(tab, { 'tab.label': section.label });
+    tabBar.insertBefore(tab, underline.previousElementSibling);
+    $('[role="tab"]', tab).addEventListener('click', () => selectTab(index));
+    return tab;
   });
 
-  function select(index) {
-    selected = index;
-    tabNodes.forEach((node, i) => {
-      const tab = $('[role="tab"]', node);
-      tab.setAttribute('aria-selected', String(i === index));
-      $('p', tab).style.color = i === index ? '#121212' : '#999999';
-    });
-    const active = $('[role="tab"]', tabNodes[index]);
-    underline.style.left = `${active.getBoundingClientRect().left - tablist.getBoundingClientRect().left + tablist.scrollLeft}px`;
-    underline.style.width = `${active.getBoundingClientRect().width}px`;
+  /** Highlights one tab, moves the underline under it and lists its questions. */
+  function selectTab(index) {
+    selectedIndex = index;
 
-    list.replaceChildren();
-    tabs[index].items.forEach((item) => {
-      const node = itemTemplate.cloneNode(true);
-      node.removeAttribute('data-template');
-      bind(node, { 'item.question': item.question });
-      wireAccordion(node, item);
-      list.appendChild(node);
+    tabs.forEach((tab, tabIndex) => {
+      const tabButton = $('[role="tab"]', tab);
+      const isSelected = tabIndex === index;
+      tabButton.setAttribute('aria-selected', String(isSelected));
+      $('p', tabButton).style.color = isSelected ? TAB_COLOUR.selected : TAB_COLOUR.other;
+    });
+    moveUnderline();
+
+    questionList.replaceChildren();
+    faqSections[index].items.forEach((faqItem) => {
+      const questionRow = copyTemplate(questionTemplate);
+      fillBindings(questionRow, { 'item.question': faqItem.question });
+      setUpAccordion(questionRow, faqItem);
+      questionList.appendChild(questionRow);
     });
   }
 
-  select(0);
+  /** Puts the underline exactly under the selected tab (its left edge and width). */
+  function moveUnderline() {
+    const selectedTab = $('[role="tab"]', tabs[selectedIndex]);
+    const tabBox = selectedTab.getBoundingClientRect();
+    const barBox = tabBar.getBoundingClientRect();
+    underline.style.left = `${tabBox.left - barBox.left + tabBar.scrollLeft}px`;
+    underline.style.width = `${tabBox.width}px`;
+  }
 
-  // The question and answer text comes from data, so switching language loads the other file.
-  onLanguageChange(async (lang) => {
-    tabs = await api.getFaq(lang);
-    tabNodes.forEach((node, i) => bind(node, { 'tab.label': tabs[i].label }));
-    select(selected);
+  selectTab(0);
+
+  // The questions and answers are data, so switching language loads the other file.
+  onLanguageChange(async (language) => {
+    faqSections = await api.getFaq(language);
+    tabs.forEach((tab, index) => fillBindings(tab, { 'tab.label': faqSections[index].label }));
+    selectTab(selectedIndex);
   });
 
-  window.addEventListener('resize', () => {
-    const active = $('[role="tab"]', tabNodes[selected]);
-    underline.style.left = `${active.getBoundingClientRect().left - tablist.getBoundingClientRect().left + tablist.scrollLeft}px`;
-    underline.style.width = `${active.getBoundingClientRect().width}px`;
-  });
-} catch (err) {
-  fail(err);
+  window.addEventListener('resize', moveUnderline);
+}
+
+/** A fresh copy of a hidden example element, ready to fill in. */
+function copyTemplate(template) {
+  const copy = template.cloneNode(true);
+  copy.removeAttribute('data-template');
+  return copy;
 }

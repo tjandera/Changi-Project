@@ -127,6 +127,7 @@ views/                        V · everything the user sees
         fields.js, mui.js         hotel/date/flight pickers, MUI-style text, phone and checkbox fields
 
 controllers/                  C · one script per page, loaded by that page's <script type="module">
+    README.md                   how to read a controller: the shared shape, naming rules, common helpers
     boot.js                     shared start-up (waits for the components, then config, header, tooltips)
     landing, trip-details, luggage, personal-details, review, manage-booking, faq
 

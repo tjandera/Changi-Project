@@ -36,7 +36,7 @@ an "End of replica flow" dialog after `submitBooking`.
 
 | Layer | Folder | Rule |
 |---|---|---|
-| Model | `models/` | Data and state only. No DOM access, except `store.js` redirecting from the step guard. |
+| Model | `models/` | Data and state only. No DOM access, except `store.js` sending the guest home from a step opened too early (`loadBookingOrGoHome`). |
 | View | `views/scripts/` | Reads and writes the DOM. Never fetches data or decides the next page. |
 | Controller | `controllers/` | One per page. Loads models, hands data to views, handles button presses and navigation. |
 
@@ -44,7 +44,7 @@ an "End of replica flow" dialog after `submitBooking`.
 
 | Attribute | Meaning | Example |
 |---|---|---|
-| `data-bind="key"` | Text filled from the view model (`models/format.js → viewModel`) | `data-bind="trip.flightSummary"` |
+| `data-bind="key"` | Text filled from the view model (`models/format.js → buildViewModel`) | `data-bind="trip.flightSummary"` |
 | `data-bind-html="key"` | Inner HTML filled by a component | `data-bind-html="contact.flagSvg"` |
 | `data-field="name"` | Input owned by a component | `data-field="email"` |
 | `data-action="name"` | Clickable control | `data-action="next"`, `data-action="edit-trip"` |
@@ -60,7 +60,7 @@ Bound keys (`models/format.js`): `currency`, `trip.hotel`, `trip.flightSummary`,
 `luggage.totalItemsLabel`, `luggage.totalCost`, `contact.fullName`, `contact.phoneDisplay`,
 `contact.email`, `contact.dialCode`, and per luggage line `line.label`, `line.subtotal`, `line.itemsLabel`.
 
-To show a new value: add the key to `viewModel()` and put `data-bind="your.key"` on the element.
+To show a new value: add the key to `buildViewModel()` and put `data-bind="your.key"` on the element.
 
 ## 3. Page flow
 
@@ -71,7 +71,7 @@ The order of pages is data, in `models/data/config.json`:
 ```
 
 Each key is the page the user is on; each value is a key of `routes`. Controllers call
-`nextRoute(config, 'landing')` (`models/flow.js`) instead of hard-coding a URL. Today the landing card goes
+`nextPageUrl(config, 'landing')` (`models/flow.js`) instead of hard-coding a URL. Today the landing card goes
 straight to Step 2 (Luggage). The Step 1 page (`/booking-details/`) is reached from the header "Book Now"
 and from the "Edit" links on later steps.
 

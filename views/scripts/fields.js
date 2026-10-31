@@ -43,7 +43,7 @@ export function closeAll() {
 }
 
 /** Hotel / Location dropdown. */
-export function hotelField(input, { hotels, onSelect }) {
+export function createHotelPicker(input, { hotels, onSelect }) {
   const open = () => {
     if (openFor === input) return closeAll();
     attachPopup(input, hotelList(input.offsetWidth, hotels.map((h) => h.name)), (i) => onSelect(hotels[i]));
@@ -58,7 +58,7 @@ export function hotelField(input, { hotels, onSelect }) {
 const FLIGHT_ON = 'field-select';
 const FLIGHT_OFF = 'field-select-disabled';
 
-export function flightField(input, { loadFlights, onSelect }) {
+export function createFlightPicker(input, { loadFlights, onSelect }) {
   const icon = input.parentElement.querySelector('img');
   let enabled = !input.disabled;
   const setEnabled = (on) => {
@@ -84,21 +84,21 @@ export function flightField(input, { loadFlights, onSelect }) {
  * First bookable date. FAQ: "up to 14 days before and no later than 11am on the day of your flight",
  * so after the cut-off hour the earliest date is tomorrow. (Inferred; the live rule runs server-side.)
  */
-export function earliestDate({ sameDayCutoffHour }, now = new Date()) {
+export function earliestBookableDate({ sameDayCutoffHour }, now = new Date()) {
   const d = new Date(now);
   d.setHours(0, 0, 0, 0);
   if (now.getHours() >= sameDayCutoffHour) d.setDate(d.getDate() + 1);
   return toISODate(d);
 }
 
-/** react-calendar month view. Selectable range: earliestDate .. today + advanceDays. */
-export function dateField(input, { booking, onSelect }) {
+/** react-calendar month view. Selectable range: earliestBookableDate .. today + advanceDays. */
+export function createDatePicker(input, { booking, onSelect }) {
   let shown = null; // first day of the month on screen
   let value = null; // ISO
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const firstBookable = fromISODate(earliestDate(booking));
+  const firstBookable = fromISODate(earliestBookableDate(booking));
   const last = new Date(today);
   last.setDate(last.getDate() + booking.advanceDays);
 

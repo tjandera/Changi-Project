@@ -4,7 +4,7 @@ export const $ = (selector, root = document) => root.querySelector(selector);
 export const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
 /** Fill every [data-bind="key"] under root with values[key] (text only). */
-export function bind(root, values) {
+export function fillBindings(root, values) {
   $$('[data-bind]', root).forEach((el) => {
     const key = el.dataset.bind;
     if (Object.prototype.hasOwnProperty.call(values, key)) el.textContent = values[key];
