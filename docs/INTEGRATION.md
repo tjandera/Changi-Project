@@ -75,7 +75,7 @@ and from the "Edit" links on later steps.
 ## 4. Changing copy, prices and rules
 
 All in `data/config.json`: currency, prices, booking window, same-day cut-off, max items, step guard,
-tooltip text and dialog text. Fields marked `ASSUMED` / `INFERRED` are listed in `docs/GAPS.md`.
+tooltip text and dialog text. Fields marked `ASSUMED` / `INFERRED` are not confirmed by the live site: check them with the business.
 
 ## 5. Editing the pages
 

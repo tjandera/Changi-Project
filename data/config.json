@@ -1,5 +1,5 @@
 {
- "_comment": "UI configuration. Values marked ASSUMED are not confirmed by the live site; see docs/GAPS.md.",
+ "_comment": "UI configuration. Values marked ASSUMED are not confirmed by the live site.",
  "currency": "S$",
  "timezoneLabel": "SGT",
  "pricing": {
