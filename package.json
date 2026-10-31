@@ -4,8 +4,12 @@
   "private": true,
   "description": "Case-study replica of the Changi Off-Airport Check-In booking flow. Not affiliated with Changi Airport Group.",
   "scripts": {
+    "prestart": "node scripts/build-components.js",
+    "predev": "node scripts/build-components.js",
     "start": "node scripts/dev-server.js",
-    "dev": "node --watch scripts/dev-server.js"
+    "dev": "node --watch scripts/dev-server.js",
+    "components": "node scripts/build-components.js",
+    "components:check": "node scripts/build-components.js --check"
   },
   "engines": {
     "node": ">=18"

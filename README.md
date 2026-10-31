@@ -70,6 +70,7 @@ The JavaScript follows **MVC**. Models own data and state, views own the DOM, co
 
 ```
 index.html, booking-*/, faq/, manage-booking-pin/   page skeletons (original markup + data-* hooks)
+components/                   shared HTML: header.html, footer.html, language-button.html (edit here, then `npm run components`)
 _next/static/chunks/*.css     the site's compiled Tailwind/global CSS, byte-identical
 _next/static/media/           Lato (Google Fonts build) under the filenames the CSS expects
 replica/css/mui-runtime.css   MUI styles captured from the live page (injected at runtime there)
@@ -100,6 +101,12 @@ data/*.json                   all content: hotels, flights, prices, FAQ, countri
 data/i18n/*.json              Chinese text for the 中文 button (zh.json, faq.zh.json)
 tools/archive/build_pages.py  one-off script that produced the first version of the pages (history only)
 ```
+
+**Shared HTML (header, footer, 中文 button).** These live once in `components/`. Each page marks the spot with
+`<!-- @component header -->` ... `<!-- @end header -->`, and `scripts/build-components.js` copies the file between the
+markers. Edit `components/header.html`, run `npm run components` (`npm start` and `npm run dev` run it for you), commit
+the pages. `npm run components:check` fails if a page is out of sync. The pages stay plain static HTML, so hosting needs
+no build step. Do not edit between the markers in a page; the next sync overwrites it.
 
 The HTML pages are now the **source of truth**. They are hand-formatted, with a header comment on every
 page and section labels, so edit them directly.

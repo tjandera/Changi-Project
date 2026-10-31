@@ -38,6 +38,11 @@ Short combinations that are already clear stay as utilities: two classes or fewe
 1,736 elements and 5,694 classes). Converting them would only add names for `display: flex`. Inline `style` is kept
 for per-instance sizes (`width: 240px; height: 44px`, progress-bar widths) and values set by script.
 
+## Shared markup
+
+The header, footer and 中文 button markup lives once in `components/` (see the README), so their classes are edited in
+one place for all 7 pages.
+
 ## Scripts and class names
 
 The scripts used to find elements with selectors like `.relative.flex.flex-col` or `.border-t`. That coupled behaviour to
