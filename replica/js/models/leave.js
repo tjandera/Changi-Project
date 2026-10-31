@@ -1,7 +1,7 @@
 /**
  * "Leave this page?" bookkeeping, shared by every booking step.
  *
- * Live behaviour (read from the site's own page script, 31 Oct 2026): while a booking step is open,
+ * Live behaviour (read from the site's own page script, 31 Oct 2026): while Steps 2-4 are open (never Step 1, never the header links),
  * hiding the tab or window opens the "Leave this page?" dialog and closing/reloading the page shows
  * the browser's own confirmation. Both are switched off while the app itself is navigating
  * (Next buttons, Edit links, "Leave Page"), which the live site calls `isSkipLeaveCheck`.

@@ -10,7 +10,8 @@ import { initLanguage } from './language.js';
 import { initFooter } from './footer.js';
 import { mobileMenu, tooltip } from './templates.js';
 
-const BOOKING_PAGES = new Set(['trip-details', 'luggage', 'personal-details', 'review']);
+// Steps 2-4. Step 1 (trip-details) never shows the "Leave this page?" checks.
+const LEAVE_CHECK_PAGES = new Set(['luggage', 'personal-details', 'review']);
 
 export function initChrome(config) {
   const page = document.body.dataset.page;
@@ -22,30 +23,25 @@ export function initChrome(config) {
     'book-now': routes.tripDetails,
   };
 
-  // Header links (also used by the mobile menu). During a booking they ask "Leave this page?" first.
+  // Header links (also used by the mobile menu). Live behaviour: they just navigate, with no
+  // "Leave this page?" dialog, on every page including the booking steps.
   const bindNav = (root) =>
     $$('[data-nav]', root).forEach((el) => {
       const to = targets[el.dataset.nav];
       if (!to) return;
-      pressable(el, async (e) => {
+      pressable(el, (e) => {
         e.preventDefault();
-        // Live behaviour: leaving the booking flow from the header asks first and clears progress.
-        if (BOOKING_PAGES.has(page)) {
-          const choice = await ask(config.dialogs.leave);
-          if (choice !== 'secondary') return;
-          clear();
-        }
         navigate(to);
       });
     });
   bindNav(document);
 
-  // "Leave this page?" on a booking step. Live behaviour, three triggers:
+  // "Leave this page?" on Steps 2-4 only. Live behaviour, three triggers:
   //   1. the tab or window is hidden (switching tabs, minimising): the dialog is waiting when you return;
   //   2. Back/Forward lands on the step;
   //   3. the tab is closed or reloaded: the browser shows its own confirmation (its text can't be changed).
   // Continue keeps the booking; Leave Page clears it and goes home. In-app navigation skips all three.
-  if (BOOKING_PAGES.has(page)) {
+  if (LEAVE_CHECK_PAGES.has(page)) {
     let asking = false;
     const askToLeave = async () => {
       if (asking || isLeaveCheckSkipped()) return;
