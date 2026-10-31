@@ -9,6 +9,10 @@
  ],
  "patterns": [
   {
+   "re": "^luggage-line::(\\d+) item\\(s\\)$",
+   "zh": "$1 件"
+  },
+  {
    "re": "^(\\d+) item\\(s\\)$",
    "zh": "$1件"
   },
@@ -206,13 +210,17 @@
   "Last/Family Name (as per passport)": "姓氏/家族姓名（与护照一致）",
   "Contact Number": "联系电话",
   "Email Address": "电子邮件",
-  "Review Booking": "核对预订",
-  "First/Last Name (as per passport)": "名字/姓氏（与护照一致）",
-  "Terms & Conditions": "条款和条件",
+  "Review Booking": "预订评价",
+  "First/Last Name (as per passport)": "姓名（与护照一致）",
+  "Terms & Conditions": "条款及细则",
   "I have read and I agree to the": "我已阅读并同意",
   "Terms and Conditions": "条款和条件",
   "and": "和",
   "CAG's Privacy Policy.": "樟宜机场集团的隐私政策。",
+  "terms-sentence::I have read and I agree to the": "我已阅读并同意",
+  "terms-sentence::Terms and Conditions": "条款和条件",
+  "terms-sentence::and": "以及",
+  "terms-sentence::CAG's Privacy Policy.": "CAG 的隐私政策。",
   "Make Payment": "付款",
   "Select hotel and flight date first": "请先选择酒店和航班日期",
   "Departs": "起飞",
