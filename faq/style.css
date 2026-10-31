@@ -1,0 +1,101 @@
+/*
+ * FAQs (/faq/): styles only this page uses.
+ * Shared pieces (header, footer, buttons, fields, layout) are in /components/shared.css.
+ * Each class is the exact set of rules the live site compiled for that element (see docs/CSS.md).
+ */
+@layer components {
+  .faq-tabs-rail {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #e5e5e5;
+  }
+
+  .faq-tabs-indicator {
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    height: 2px;
+    background-color: var(--color-black);
+    transition-property: all;
+    transition-timing-function: var(--tw-ease,var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration,var(--default-transition-duration));
+  }
+
+  .faq-tab {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding-inline: 8px;
+    padding-block: 16px;
+    transition-property: all;
+    transition-timing-function: var(--tw-ease,var(--default-transition-timing-function));
+    --tw-duration: .2s;
+    transition-duration: .2s;
+  }
+  @media (hover:hover) {
+    .faq-tab:hover {
+      cursor: pointer;
+      opacity: .8;
+    }
+  }
+
+  .faq-list {
+    margin-inline: auto;
+    display: flex;
+    max-width: 944px;
+    flex-direction: column;
+    gap: 20px;
+    padding-inline: 20px;
+    padding-top: 16px;
+  }
+  @media (min-width:48rem) {
+    .faq-list {
+      padding-top: 48px;
+    }
+  }
+  @media (min-width:64rem) {
+    .faq-list {
+      padding-inline: 0;
+    }
+  }
+
+  .faq-contact {
+    margin-inline: auto;
+    display: flex;
+    max-width: 944px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    padding-block: 48px;
+  }
+
+  .faq-tab-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .faq-tabs {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+  }
+
+  .faq-illustration-band {
+    background-color: #fcfcfc;
+  }
+
+  .faq-tab-text {
+    white-space: nowrap;
+  }
+}

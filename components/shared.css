@@ -1,0 +1,1549 @@
+/*
+ * Styles shared by every page. Each page links this file and then its own style.css:
+ *
+ *   /components/shared.css        this file
+ *   /<page folder>/style.css      what only that page uses (e.g. /booking-baggage/style.css)
+ *
+ * Under it sit the live site's own compiled CSS (/_next/static/chunks/*.css, Tailwind + globals) and the MUI
+ * runtime styles (/replica/css/mui-runtime.css). Those are captured from the live site and not edited.
+ *
+ * Part A (unlayered): replica features, text colours, header slot, typography (type-*), MUI text fields.
+ * Part B (@layer components): the shared components, in this order:
+ *    1. Layout
+ *    2. Header
+ *    3. Footer
+ *    4. Buttons and links
+ *    5. Form fields
+ *    6. Step progress
+ *    7. Booking Summary
+ *    8. Banner
+ *    9. FAQ accordion
+ *   10. Helpers (show/hide by screen size, clickable, centred text ...)
+ *
+ * Each class in part B is the exact set of rules the live site compiled for that element (see docs/CSS.md).
+ * @layer components sits below Tailwind's utilities, so classes the scripts toggle at runtime
+ * (bg-black, cursor-not-allowed, rotate-180 ...) still win, as they do on the live site.
+ */
+
+
+/* =============================================================================================
+ * A1. Replica features that are not part of the live site's CSS
+ * ============================================================================================= */
+/* Elements hidden by the replica's scripts (collapsed summary / notes) */
+[hidden] {
+  display: none !important;
+}
+
+/* Persistent case-study label (not on the live site, on purpose) */
+.replica-label {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 60;
+  max-width: calc(100vw - 104px);
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(18, 18, 18, 0.85);
+  color: #fff;
+  font: 400 11px/14px Lato, sans-serif;
+  pointer-events: none;
+}
+
+/* "Give Feedback" tab + slide-out panel. Measured on the live site (30 Oct 2026) from Qualtrics' own inline styles:
+   - tab: 36px wide button, 12px Lato label, 10px padding (34.5 x 96.8px), vertically centred, right:-1px, rotated text
+   - desktop (>= 768px): panel is 100vw / max 400px wide, 70% tall, vertically centred, #ededed, 2px #a6a6a6 border;
+     it slides in over 0.5s and pushes the tab with it
+   - mobile (< 768px): panel pulls up from the bottom (top 100% -> 20%), 50% black overlay behind it; tab stays put
+   The survey itself is a third-party iframe, so the panel body is a placeholder. */
+.replica-feedback {
+  position: fixed;
+  top: 50%;
+  translate: 0 -50%;
+  right: -1px;
+  width: 36px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  z-index: 55;
+  transition: right 0.5s;
+}
+.replica-feedback__tab {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding: 10px;
+  background: rgb(108, 33, 127);
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+  transform: rotateZ(180deg);
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.replica-feedback__tab > div {
+  font-size: 12px; /* the 15px above only sets the padding box; the label itself is 12px */
+  line-height: normal;
+}
+.replica-feedback.is-ring {
+  outline: auto 1px -webkit-focus-ring-color;
+}
+.replica-feedback.is-open {
+  right: calc(min(100vw, 400px) - 1px);
+}
+.replica-feedback-panel {
+  position: fixed;
+  top: 15%;
+  left: 100%;
+  width: 100vw;
+  max-width: 400px;
+  height: 70%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: rgb(237, 237, 237);
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(166, 166, 166);
+  border-right: 0;
+  border-radius: 2px 0 0 2px;
+  z-index: 1401;
+  visibility: hidden;
+  transition: left 0.5s, visibility 0s 0.5s;
+}
+.replica-feedback-panel.is-open {
+  left: calc(100% - min(100vw, 400px));
+  visibility: visible;
+  transition: left 0.5s, visibility 0s;
+}
+.replica-feedback-panel__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+  z-index: 1;
+}
+.replica-feedback-panel__close-bg {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  background: #fff;
+  opacity: 0.5;
+}
+.replica-feedback-panel__close button {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #000;
+  cursor: pointer;
+}
+.replica-feedback-panel__close svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+}
+.replica-feedback-panel:focus {
+  outline: 0;
+}
+/* The frame's "could not load" state. The icon sits left of and above centre (measured on live).
+   Hovering the frame lightens it and reveals the blocked message, as the browser does. */
+.replica-feedback-panel__body {
+  position: relative;
+  height: 100%;
+  background: rgb(221, 221, 221);
+}
+.replica-feedback-panel__body:hover {
+  background: rgb(238, 238, 238);
+}
+.replica-feedback-panel__body svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(calc(-50% - 18.25px), calc(-50% - 11.5px));
+}
+.replica-feedback-panel__blocked {
+  display: none;
+  position: absolute;
+  top: calc(50% + 26.25px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0 4px;
+  text-align: center;
+  font: 14.67px/17.5px system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: rgb(143, 143, 143);
+}
+.replica-feedback-panel__body:hover .replica-feedback-panel__blocked {
+  display: block;
+}
+.replica-feedback-panel__frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.replica-feedback-shadowbox {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  opacity: 0.5;
+  z-index: 1400;
+}
+/* Phones and tablets only. Qualtrics picks this by device (user agent), not by window width:
+   a narrow desktop window still gets the side panel. `replica-mobile-device` is set by chrome.js. */
+.replica-mobile-device .replica-feedback__tab {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.replica-mobile-device .replica-feedback.is-open {
+  right: -1px;
+}
+.replica-mobile-device .replica-feedback-panel {
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-width: none;
+  height: 80%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  transition: top 0.5s, visibility 0s 0.5s;
+}
+.replica-mobile-device .replica-feedback-panel.is-open {
+  top: 20%;
+  left: 0;
+  transition: top 0.5s, visibility 0s;
+}
+.replica-mobile-device .replica-feedback-panel__close {
+  position: static;
+  padding-right: 10px;
+}
+.replica-mobile-device .replica-feedback-panel__close-bg {
+  display: none;
+}
+.replica-mobile-device .replica-feedback-panel__close button {
+  color: #fff;
+}
+.replica-mobile-device .replica-feedback-panel__body,
+.replica-mobile-device .replica-feedback-panel__frame {
+  height: calc(100% - 27px);
+}
+
+/* Shown only if /data cannot be loaded (e.g. opened from file://) */
+.replica-error {
+  position: fixed;
+  top: 76px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 70;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #cc1000;
+  color: #fff;
+  font: 700 14px/18px Lato, sans-serif;
+}
+
+/* ---------------------------------------------------------------------------------------------
+ * Page and loading animations (read from the live site and its screen recording, 31 Oct 2026)
+ * ------------------------------------------------------------------------------------------- */
+
+/* Every page: the content between the header and the footer fades in and slides up 20px over 0.5s
+   (the live site wraps the page in a motion div: opacity 0 -> 1, y 20 -> 0, ease-out). */
+@keyframes replica-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+main.page-main {
+  animation: replica-page-in 0.5s cubic-bezier(0, 0, 0.58, 1) backwards;
+}
+
+/* Booking steps: the content waits (hidden) for the loading overlay, then fades in as the overlay
+   lifts. loading.js adds .replica-ready; if scripts fail, the content still appears after 6.5s. */
+@keyframes replica-reveal {
+  to {
+    opacity: 1;
+  }
+}
+body:is([data-page='trip-details'], [data-page='luggage'], [data-page='personal-details'], [data-page='review'])
+  main.page-main:not(.replica-ready) {
+  opacity: 0;
+  animation: replica-reveal 0s 6.5s forwards;
+}
+
+/* Loading overlay on the booking steps: the page blurs and three purple dots bounce in turn.
+   Dot motion = the live Lottie file: 20 units up and back over 24 frames, 5 frames apart,
+   in a 65-frame loop at 60fps (1083ms). */
+.replica-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.replica-loading__dot {
+  fill: #7a35b0;
+  animation: replica-dot-bounce 1083.33ms cubic-bezier(0.6, 0, 0.4, 1) infinite;
+}
+@keyframes replica-dot-bounce {
+  0% {
+    transform: translateY(0);
+  }
+  18.4615% {
+    transform: translateY(-20px);
+  }
+  36.9231%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main.page-main {
+    animation: none;
+  }
+  .replica-loading__dot {
+    animation: none;
+  }
+}
+
+
+/* =============================================================================================
+ * A2. Text colours and images
+ * ============================================================================================= */
+/* Text colours. On the live site these are inline style="color: ...; background: transparent" on every <p>/<div>.
+   One class per colour instead. Unlayered (like the site's own cag-* rules) so they beat the base layer; the
+   scripts still set el.style.color for error / disabled states, and an inline style always wins over these. */
+.ink-white  { color: #ffffff; background: transparent; }
+.ink-black  { color: #121212; background: transparent; }
+.ink-grey   { color: #454545; background: transparent; }
+.ink-muted  { color: #999999; background: transparent; }
+.ink-light  { color: #ababab; background: transparent; }
+.ink-purple { color: rgb(122, 53, 176); background: transparent; }
+
+/* next/image adds style="color: transparent" to every <img> so the alt text never shows while the image loads. */
+.next-img { color: transparent; }
+
+
+/* =============================================================================================
+ * A3. Shared markup slots. include.js swaps each <div data-include="..."> for /components/<name>.html
+ *     before the page scripts run. The header slot keeps the header's height so nothing jumps.
+ * ============================================================================================= */
+[data-include='header'] {
+  display: block;
+  height: 64px;
+  background-color: #222222;
+}
+@media (min-width: 48rem) {
+  [data-include='header'] {
+    height: 68px;
+  }
+}
+
+
+/* =============================================================================================
+ * A4. Typography. One class per text style; the names follow the Figma text styles
+ *     (type-body-l-bold = "Body L / Bold"). Same rules as the live site's cag-typography + cag-<size> + cag-<weight>.
+ * ============================================================================================= */
+.site-font {
+  font-family: Inter, Inter Fallback;
+  font-style: normal;
+}
+
+/* Body L / Black */
+.type-body-l-black {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 900;
+}
+
+/* Body L / Bold */
+.type-body-l-bold {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+/* Body L / Italic */
+.type-body-l-italic {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-style: italic;
+}
+
+/* Body L / Regular */
+.type-body-l-regular {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Body S / Black */
+.type-body-s-black {
+  font-size: 14px;
+  line-height: 18px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-weight: 900;
+}
+
+/* Body S / Bold */
+.type-body-s-bold {
+  font-size: 14px;
+  line-height: 18px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-weight: 700;
+}
+
+/* Body S / Regular */
+.type-body-s-regular {
+  font-size: 14px;
+  line-height: 18px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Small / Bold */
+.type-small-bold {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+}
+
+/* Small / Regular */
+.type-small-regular {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* XSmall / Bold */
+.type-xsmall-bold {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 700;
+}
+
+/* H3 / Bold */
+.type-h3-bold {
+  font-size: 32px;
+  line-height: 40px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-weight: 700;
+}
+
+/* H5 / Black */
+.type-h5-black {
+  font-size: 24px;
+  line-height: 32px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-weight: 900;
+}
+
+/* H6 / Black */
+.type-h6-black {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 900;
+}
+
+/* H6 / Bold */
+.type-h6-bold {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+/* Sub-heading / Black */
+.type-sub-heading-black {
+  font-size: 18px;
+  line-height: 22px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-weight: 900;
+}
+
+
+/* =============================================================================================
+ * A5. MUI text fields: the input inside is 36px tall, 44px from 1024px for the tall variant
+ *     (the live site's field-input / field-input--tall).
+ * ============================================================================================= */
+.text-field input {
+  height: 36px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+@media (min-width: 1024px) {
+  .text-field.text-field--tall input {
+    height: 44px !important;
+  }
+}
+
+
+@layer components {
+
+  /* ===========================================================================================
+   * B1. Layout: Stacks (column), rows, page shell and content wrappers
+   * =========================================================================================== */
+  /* used on: every page */
+  .stack-16 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* used on: every page */
+  .row-8-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* used on: every page */
+  .row-between {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /, /booking-review/, /booking-details/ */
+  .stack-4 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* used on: /booking-contact/, /, /manage-booking-pin/, /booking-details/ */
+  .row-4-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* used on: /booking-contact/, /, /manage-booking-pin/, /booking-review/, /booking-details/ */
+  .row-between-full {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* used on: /, /booking-details/ */
+  .stack-6 {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/ */
+  .row-10-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* used on: every page */
+  .stack-32 {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* used on: every page */
+  .stack-24 {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* used on: every page */
+  .page-shell {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  /* used on: every page */
+  .row-16 {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  /* used on: every page */
+  .row-24 {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  /* used on: every page */
+  .row-24-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /, /booking-review/ */
+  .stack-8 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/, /booking-details/ */
+  .stack-8-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/ */
+  .row-8 {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  /* used on: /booking-review/, /booking-details/ */
+  .page-content {
+    margin-inline: auto;
+    display: flex;
+    max-width: 1280px;
+    flex-direction: column;
+    gap: 24px;
+    background-color: #fcfcfc;
+    padding-inline: 16px;
+    padding-block: 24px;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/ */
+  .step-main {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width:64rem) {
+    .step-main {
+      width: 843px;
+    }
+  }
+
+  /* used on: / */
+  .stack-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+
+  /* used on: every page */
+  .page-main {
+    flex: 1;
+  }
+
+  /* ===========================================================================================
+   * B2. Header: Site header: logo, nav, Book Now (markup: components/header.html)
+   * =========================================================================================== */
+  /* used on: every page */
+  .site-header {
+    z-index: 50;
+    width: 100%;
+    background-color: #222;
+  }
+
+  /* used on: every page */
+  .header-book-now {
+    display: flex;
+    height: 36px;
+    width: 150px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 60px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #efebe7;
+    background-color: #efebe7;
+  }
+
+  /* used on: every page */
+  .header-inner {
+    margin-inline: auto;
+    display: flex;
+    max-width: 1280px;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 20px;
+    padding-block: 16px;
+  }
+
+  /* used on: every page */
+  .header-nav {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+  @media (min-width:48rem) {
+    .header-nav {
+      display: flex;
+    }
+  }
+
+
+
+  /* used on: every page (components/header.html) */
+  .header-group {
+    display: flex;
+    align-items: center;
+  }
+
+  /* used on: every page (components/header.html) */
+  .header-logo {
+    height: 32px;
+    width: auto;
+  }
+
+  /* ===========================================================================================
+   * B3. Footer: Compact (phone/tablet) and desktop footer (markup: components/footer.html)
+   * =========================================================================================== */
+  /* used on: every page */
+  .footer-link {
+    cursor: pointer;
+    font-size: 14px;
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
+    color: #ababab;
+  }
+
+  /* used on: every page */
+  .footer-legal-link {
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--color-white);
+  }
+
+  /* used on: every page */
+  .footer-column {
+    display: flex;
+    width: 193px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* used on: every page */
+  .footer-heading {
+    font-size: 14px;
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-white);
+  }
+
+  /* used on: every page */
+  .footer-store-badge {
+    height: 40px;
+    width: 117.55px;
+    cursor: pointer;
+  }
+  @media (min-width:48rem) {
+    .footer-store-badge {
+      height: 32.5px;
+      width: 95px;
+    }
+  }
+
+  /* used on: every page */
+  .footer-signup-btn {
+    height: 45px;
+    width: 112px;
+    cursor: pointer;
+    border-radius: 30px;
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+    border-color: var(--color-white);
+  }
+
+  /* used on: every page */
+  .footer-logo {
+    height: 36px;
+    width: auto;
+    cursor: pointer;
+  }
+
+  /* used on: every page */
+  .footer-content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 40px;
+  }
+  @media (min-width:48rem) {
+    .footer-content {
+      gap: 24px;
+    }
+  }
+
+  /* used on: every page */
+  .footer-social {
+    display: flex;
+    width: 100%;
+    max-width: 189px;
+    flex-direction: column;
+    gap: 16px;
+  }
+  @media (min-width:48rem) {
+    .footer-social {
+      max-width: 100%;
+    }
+  }
+
+  /* used on: every page */
+  .footer-apps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  @media (min-width:48rem) {
+    .footer-apps {
+      gap: 10px;
+    }
+  }
+
+  /* used on: every page */
+  .footer-social-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* used on: every page */
+  .footer-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  @media (min-width:48rem) {
+    .footer-badges {
+      gap: 5px;
+    }
+  }
+
+  /* used on: every page */
+  .footer-inner {
+    margin-inline: auto;
+    width: 100%;
+    padding: 24px;
+  }
+  @media (min-width:64rem) {
+    .footer-inner {
+      max-width: 1280px;
+      padding: 0;
+    }
+  }
+
+  /* used on: every page */
+  .footer-legal-bar {
+    width: 100%;
+    background-color: #121212;
+    padding-inline: 20px;
+  }
+
+  /* used on: every page */
+  .footer-compact {
+    display: block;
+    background-color: #222;
+    color: var(--color-white);
+  }
+  @media (min-width:64rem) {
+    .footer-compact {
+      display: none;
+    }
+  }
+
+  /* used on: every page */
+  .footer-main-bar {
+    width: 100%;
+    background-color: #222;
+    padding-inline: 20px;
+  }
+
+  /* used on: every page */
+  .footer-compact-sites {
+    margin-top: 24px;
+    background-color: var(--color-black);
+    padding-inline: 24px;
+    padding-block: 24px;
+  }
+
+  /* used on: every page */
+  .footer-sites-toggle {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+    border-color: #ababab;
+    padding-block: 16px;
+  }
+
+  /* used on: every page */
+  .footer-compact-inner {
+    margin-inline: auto;
+    display: flex;
+    width: 100%;
+    max-width: 1280px;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* used on: every page */
+  .footer-legal-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+  }
+
+  /* used on: every page */
+  .footer-legal-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 48px;
+  }
+
+  /* used on: every page */
+  .footer-legal-inner {
+    margin-inline: auto;
+    display: flex;
+    height: 83px;
+    max-width: 1280px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 24px;
+  }
+
+  /* used on: every page */
+  .footer-main-inner {
+    margin-inline: auto;
+    display: flex;
+    max-width: 1280px;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+  @media (min-width:80rem) {
+    .footer-main-inner {
+      flex-wrap: nowrap;
+    }
+  }
+
+  /* used on: every page */
+  .footer-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  @media (min-width:80rem) {
+    .footer-columns {
+      flex-wrap: nowrap;
+    }
+  }
+
+  /* used on: every page */
+  .footer-desktop {
+    display: none;
+    flex-direction: column;
+  }
+  @media (min-width:64rem) {
+    .footer-desktop {
+      display: block;
+    }
+  }
+
+
+
+  /* used on: every page (components/footer.html) */
+  .footer-text {
+    text-align: left;
+  }
+
+  /* used on: every page (components/footer.html) */
+  .footer-compact-logo {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  /* used on: every page (components/footer.html) */
+  .footer-sites {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* used on: every page (components/footer.html) */
+  .footer-sites-current {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* used on: every page (components/footer.html) */
+  .footer-sites-arrow {
+    transition-property: transform,translate,scale,rotate;
+    transition-timing-function: var(--tw-ease,var(--default-transition-timing-function));
+    --tw-duration: .3s;
+    transition-duration: .3s;
+  }
+
+  /* used on: every page (components/footer.html) */
+  .footer-legal-row {
+    display: flex;
+    gap: 16px;
+  }
+
+  /* ===========================================================================================
+   * B4. Buttons and links: Pill buttons, accent links, the floating 中文 button
+   * =========================================================================================== */
+  /* used on: /booking-baggage/, /booking-contact/, /, /manage-booking-pin/, /booking-review/, /booking-details/ */
+  .btn-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 60px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    transition-property: color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,--tw-gradient-from,--tw-gradient-via,--tw-gradient-to;
+    transition-timing-function: var(--tw-ease,var(--default-transition-timing-function));
+    --tw-duration: .2s;
+    transition-duration: .2s;
+  }
+
+  /* used on: every page */
+  .language-fab {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 50;
+    display: flex;
+    height: 56px;
+    width: 56px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: var(--color-black);
+    font-family: var(--font-sans);
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color,#0000001a), 0 4px 6px -4px var(--tw-shadow-color,#0000001a);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    transition-property: color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,--tw-gradient-from,--tw-gradient-via,--tw-gradient-to;
+    transition-timing-function: var(--tw-ease,var(--default-transition-timing-function));
+    --tw-duration: .2s;
+    transition-duration: .2s;
+  }
+  @media (hover:hover) {
+    .language-fab:hover {
+      background-color: var(--color-gray-800);
+    }
+  }
+
+  /* used on: /booking-review/, /booking-details/ */
+  .link-accent {
+    cursor: pointer;
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    color: #7a35b0;
+  }
+
+
+
+  /* used on: /, /booking-baggage/, /booking-contact/, /booking-details/, /booking-review/, /manage-booking-pin/ */
+  .btn-pill--disabled {
+    cursor: not-allowed;
+    border-color: #ccc;
+    background-color: #e5e5e5;
+  }
+
+  /* used on: / */
+  .btn-pill--dark {
+    cursor: pointer;
+    border-color: var(--color-black);
+    background-color: var(--color-black);
+  }
+
+  /* ===========================================================================================
+   * B5. Form fields: Selects, date input, icons inside fields, field wrappers
+   * =========================================================================================== */
+  /* used on: /booking-contact/, /, /manage-booking-pin/, /booking-details/ */
+  .field-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* used on: /, /booking-details/ */
+  .field-icon-right {
+    pointer-events: none;
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding-right: 12px;
+  }
+
+  /* used on: /, /booking-details/ */
+  .field-select {
+    height: 36px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #ccc;
+    background-color: var(--color-white);
+    padding-right: 40px;
+    padding-left: 12px;
+  }
+  .field-select:focus {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+    border-color: #7a35b0;
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color,currentcolor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    --tw-ring-color: #ece0f5;
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+
+  /* used on: /, /booking-details/ */
+  .field-icon-left {
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+  }
+
+  /* used on: /, /booking-details/ */
+  .field-date {
+    height: 36px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #ccc;
+    background-color: var(--color-white);
+    padding-left: 40px;
+  }
+  .field-date:focus {
+    border-color: #7a35b0;
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color,currentcolor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    --tw-ring-color: #ece0f5;
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+
+  /* used on: /, /booking-details/ */
+  .field-wrap {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* used on: / */
+  .field-select-disabled {
+    height: 36px;
+    width: 100%;
+    cursor: not-allowed;
+    border-radius: 8px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #e5e5e5;
+    background-color: #f7f7f7;
+    padding-right: 40px;
+    padding-left: 12px;
+  }
+  .field-select-disabled:focus {
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+
+
+
+  /* used on: /, /booking-details/ */
+  .field-control {
+    position: relative;
+    width: 100%;
+  }
+
+  /* used on: /booking-contact/, /booking-details/ */
+  .field-column {
+    flex: 1;
+  }
+
+  /* ===========================================================================================
+   * B6. Step progress: Title + "Step n / 4" bar on the booking steps
+   * =========================================================================================== */
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/, /booking-details/ */
+  .progress-fill {
+    height: 100%;
+    border-radius: 9999px;
+    background-color: #454545;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/, /booking-details/ */
+  .progress-track {
+    height: 8px;
+    width: 63px;
+    overflow: hidden;
+    border-radius: 9999px;
+    background-color: #e5e5e5;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/, /booking-details/ */
+  .progress-count {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/, /booking-details/ */
+  .progress-label {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/, /booking-details/ */
+  .progress-header {
+    display: flex;
+    width: 100%;
+    max-width: 843px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+
+  /* ===========================================================================================
+   * B7. Booking Summary: Collapsible summary card on Steps 2 and 3
+   * =========================================================================================== */
+  /* used on: /booking-baggage/, /booking-contact/ */
+  .booking-summary-card {
+    display: flex;
+    min-height: 52px;
+    width: 100%;
+    flex-direction: column;
+    border-radius: 12px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #e5e5e5;
+    background-color: var(--color-white);
+    padding: 16px;
+  }
+  @media (min-width:48rem) {
+    .booking-summary-card {
+      padding: 24px;
+    }
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/ */
+  .booking-summary-header {
+    display: flex;
+    cursor: pointer;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/ */
+  .booking-summary-body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 24px;
+  }
+
+  /* used on: /booking-contact/, /booking-review/ */
+  .booking-summary-line {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/ */
+  .booking-summary-aside {
+    width: 100%;
+  }
+  @media (min-width:64rem) {
+    .booking-summary-aside {
+      margin-top: 52px;
+      width: 405px;
+    }
+  }
+
+
+  /* ===========================================================================================
+   * B8. Banner: Hero banner on FAQs and Manage Booking
+   * =========================================================================================== */
+  /* used on: /faq/, /manage-booking-pin/ */
+  .banner-copy {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding-inline: 16px;
+    text-align: center;
+    color: var(--color-white);
+  }
+
+  /* used on: /faq/, /manage-booking-pin/ */
+  .banner {
+    position: relative;
+    height: 148px;
+    width: 100%;
+    background-color: #fcfcfc;
+  }
+  @media (min-width:48rem) {
+    .banner {
+      height: 240px;
+    }
+  }
+
+
+  /* ===========================================================================================
+   * B9. FAQ accordion: Question rows on the landing page and FAQs
+   * =========================================================================================== */
+  /* used on: /faq/, / */
+  .faq-item {
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+    border-color: #e8e8e8;
+  }
+
+  /* used on: /faq/, / */
+  .faq-item-header {
+    display: flex;
+    height: 72px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+
+  /* used on: /, /faq/ */
+  .faq-arrow {
+    cursor: pointer;
+    --tw-duration: .3s;
+    transition-duration: .3s;
+  }
+
+
+  /* ===========================================================================================
+   * B10. Helpers: responsive show/hide, clickable, centred text, cover images, dividers
+   *      show-from-md = hidden below 768px; hide-from-md = hidden from 768px; sm = 640px, lg = 1024px
+   * =========================================================================================== */
+
+  /* used on: every page (components/footer.html, components/header.html) */
+  .show-from-md {
+    display: none;
+  }
+  @media (min-width:48rem) {
+    .show-from-md {
+      display: block;
+    }
+  }
+
+  /* used on: /, /faq/, /manage-booking-pin/ */
+  .cover-image {
+    object-fit: cover;
+  }
+
+  /* used on: every page (components/footer.html, components/header.html) */
+  .clickable {
+    cursor: pointer;
+  }
+
+  /* used on: every page (components/header.html) */
+  .show-below-md {
+    display: block;
+  }
+  @media (min-width:48rem) {
+    .show-below-md {
+      display: none;
+    }
+  }
+
+  /* used on: /, /faq/ */
+  .centered-text {
+    text-align: center;
+  }
+
+  /* used on: / */
+  .show-below-lg {
+    display: block;
+  }
+  @media (min-width:64rem) {
+    .show-below-lg {
+      display: none;
+    }
+  }
+
+  /* used on: / */
+  .show-from-lg {
+    display: none;
+  }
+  @media (min-width:64rem) {
+    .show-from-lg {
+      display: block;
+    }
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/ */
+
+  @media (min-width:48rem) {
+    .hide-from-md {
+      display: none;
+    }
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/ */
+  .section-divider {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+    border-color: #e8e8e8;
+  }
+
+  /* used on: every page (components/footer.html) */
+  .show-below-sm {
+    display: block;
+  }
+  @media (min-width:40rem) {
+    .show-below-sm {
+      display: none;
+    }
+  }
+
+  /* Set by the scripts on an arrow while its panel is open (FAQ rows, footer sites, notes, country list). */
+  .is-flipped {
+    rotate: 180deg;
+  }
+
+}

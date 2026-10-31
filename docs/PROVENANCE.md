@@ -6,12 +6,12 @@ Where every part of this repo came from.
 
 | File in zip | Became |
 |---|---|
-| `Landing Page/Off Airport Check-In.html` | `views/pages/landing/index.html` |
-| `Booking-Review-Details-Changed/Off Airport Booking-Details-Changed.html` | `views/pages/booking-details/index.html` |
-| `Booking Baggage/Off Airport booking baggage.html` | `views/pages/booking-baggage/index.html`, plus the shared header/footer shell |
-| `Booking Review/Off Airport booking-review.html` | `views/pages/booking-review/index.html` |
-| `*_files/0ndgyzgu-3f19.css`, `3vw576cu90qfb.css` | `public/_next/static/chunks/` (byte-identical) |
-| `*_files/*.svg, *.png` | `public/icons/`, `public/images/`, `public/follow-us/` (served at their original URL paths) |
+| `Landing Page/Off Airport Check-In.html` | `index.html` |
+| `Booking-Review-Details-Changed/Off Airport Booking-Details-Changed.html` | `booking-details/index.html` |
+| `Booking Baggage/Off Airport booking baggage.html` | `booking-baggage/index.html`, plus the shared header/footer shell |
+| `Booking Review/Off Airport booking-review.html` | `booking-review/index.html` |
+| `*_files/0ndgyzgu-3f19.css`, `3vw576cu90qfb.css` | `_next/static/chunks/` (byte-identical) |
+| `*_files/*.svg, *.png` | `icons/`, `images/`, `follow-us/` (original URL paths restored) |
 | `*/Off Airport *.png` screenshots | Visual references for QA only (not in repo) |
 
 Removed from every saved page: all `<script>` tags and Next.js/Turbopack chunks, Adobe Launch,
@@ -24,19 +24,19 @@ live DOM with the browser's developer tools, going no further than Step 3 (no bo
 
 | Capture | Used in |
 |---|---|
-| Step 3 main content (`/booking-contact`) | `views/pages/booking-contact/index.html` |
-| Hotel dropdown, flight dropdown, react-calendar, country list, tooltips | `views/scripts/templates.js` |
+| Step 3 main content (`/booking-contact`) | `booking-contact/index.html` |
+| Hotel dropdown, flight dropdown, react-calendar, country list, tooltips | `replica/js/views/templates.js` |
 | "Leave this page?" and "Odd-sized items" dialogs | `templates.js` |
-| MUI / emotion runtime CSS | `public/vendor/mui-runtime.css` |
-| Manage Booking main, FAQ main + all 26 Q&As | `views/pages/manage-booking-pin/`, `views/pages/faq/`, `models/data/faq.json` |
-| Hotel list, flight list, tooltip copy, country names | `models/data/*.json` |
-| Icons not in the zip (calendar arrows, dialog icons, collapsed arrow) | `public/icons/` |
-| Skyline banner, FAQ drop-off illustration | `public/images/*.webp` (re-encoded) |
-| Page fade-in (0.5s, up 20px) and the loading dots overlay (blur 10px, purple dots) | read from the live page script and its `/animations/loading.json` Lottie file, rebuilt as CSS + SVG in `views/components/shared.css` and `views/scripts/loading.js` (no animation library, no copied bundle code) |
+| MUI / emotion runtime CSS | `replica/css/mui-runtime.css` |
+| Manage Booking main, FAQ main + all 26 Q&As | `manage-booking-pin/`, `faq/`, `data/faq.json` |
+| Hotel list, flight list, tooltip copy, country names | `data/*.json` |
+| Icons not in the zip (calendar arrows, dialog icons, collapsed arrow) | `icons/` |
+| Skyline banner, FAQ drop-off illustration | `images/*.webp` (re-encoded) |
+| Page fade-in (0.5s, up 20px) and the loading dots overlay (blur 10px, purple dots) | read from the live page script and its `/animations/loading.json` Lottie file, rebuilt as CSS + SVG in `components/shared.css` and `views/loading.js` (no animation library, no copied bundle code) |
 
 ## Replica code
 
-`models/`, `views/scripts/`, `controllers/`, `views/components/` (shared markup, `shared.css`, `include.js`), every page's `style.css`, `models/data/config.json` structure and `docs/`
+`replica/js/models`, `replica/js/views`, `replica/js/controllers`, `components/` (shared markup, `shared.css`, `include.js`), every page's `style.css`, `data/config.json` structure and `docs/`
 are new code written for this case study.
 
 ## After extraction
@@ -47,7 +47,7 @@ expected from here on.
 
 ## Terms and Conditions PDF
 
-`public/files/OACI-TCs_v13Apr26.pdf`: The Terms and Conditions PDF the live Step 4 link opens (`/files/OACI-T&Cs_v13Apr26.pdf` there). Supplied by the project owner, 31 Oct 2026, and served unchanged. The Privacy Policy link goes to Changi's own page. Both URLs are in `models/data/config.json` under `reviewLinks`
+`files/OACI-TCs_v13Apr26.pdf`: The Terms and Conditions PDF the live Step 4 link opens (`/files/OACI-T&Cs_v13Apr26.pdf` there). Supplied by the project owner, 31 Oct 2026, and served unchanged. The Privacy Policy link goes to Changi's own page. Both URLs are in `data/config.json` under `reviewLinks`
 
 ## How It Works columns (31 Oct 2026)
 The five columns are sized by their text, exactly like the live page (189 / 281 / 215 / 184 / 251 px, 32px gaps).

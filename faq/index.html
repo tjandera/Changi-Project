@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Off Airport Check-In · Replica</title>
+    <meta
+      name="description"
+      content="Case-study replica of the Changi Off-Airport Check-In booking flow. Not affiliated with Changi Airport Group. No data is sent anywhere."
+    />
+    <link rel="icon" href="/images/cag-logo.svg" />
+    <link
+      rel="preload"
+      href="/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2"
+      as="font"
+      crossorigin=""
+      type="font/woff2"
+    />
+    <!-- The live site's compiled CSS (Tailwind + globals) and MUI runtime styles: captured, not edited -->
+    <link rel="stylesheet" href="/_next/static/chunks/0ndgyzgu-3f19.css" data-precedence="next" />
+    <link rel="stylesheet" href="/_next/static/chunks/3vw576cu90qfb.css" data-precedence="next" />
+    <link rel="stylesheet" href="/replica/css/mui-runtime.css" />
+    <!-- Shared by every page: header, footer, buttons, form fields, layout -->
+    <link rel="stylesheet" href="/components/shared.css" />
+    <!-- This page only -->
+    <link rel="stylesheet" href="/faq/style.css" />
+    <!-- Fills the data-include slots below with the shared header, footer and 中文 button -->
+    <script type="module" src="/components/include.js"></script>
+  </head>
+  <body class="site-font" data-page="faq">
+    <!--
+      PAGE        FAQs
+      CONTROLLER  /replica/js/controllers/faq.js  (behaviour)
+      DATA        faq.json
+      NEXT        -
+      HOOKS       data-bind, data-field, data-action, data-nav, data-list, data-component, data-hook (see docs/INTEGRATION.md)
+    -->
+    <div hidden=""></div>
+    <div class="page-shell">
+      <!-- SITE HEADER · components/header.html (logo, nav, Book Now) -->
+      <div data-include="header"></div>
+      <!-- PAGE CONTENT -->
+      <main class="page-main">
+        <!-- 中文 / EN BUTTON · components/language-button.html -->
+        <div data-include="language-button"></div>
+        <div style="opacity: 1; transform: none">
+          <div class="faq-illustration-band">
+            <div class="banner">
+              <div class="show-from-md">
+                <img
+                  alt="Illustration"
+                  decoding="async"
+                  data-nimg="fill"
+                  class="cover-image"
+                  style=" position: absolute; height: 100%; width: 100%; left: 0; top: 0; right: 0; bottom: 0; color: transparent; "
+                  src="/images/skyline-illustration-desktop.webp"
+                />
+              </div>
+              <div class="show-below-sm">
+                <img
+                  alt="Illustration"
+                  decoding="async"
+                  data-nimg="fill"
+                  class="cover-image"
+                  style=" position: absolute; height: 100%; width: 100%; left: 0; top: 0; right: 0; bottom: 0; color: transparent; "
+                  src="/images/skyline-illustration-desktop.webp"
+                />
+              </div>
+              <div class="banner-copy">
+                <h6 class="type-h6-black ink-black">
+                  Frequently Asked Questions (FAQs)
+                </h6>
+              </div>
+            </div>
+            <div data-component="faq-tabs" class="faq-tabs" role="tablist" aria-orientation="horizontal">
+              <div data-template="faq-tab">
+                <div class="faq-tab" role="tab" aria-selected="true" tabindex="0">
+                  <div class="faq-tab-label">
+                    <p class="faq-tab-text type-body-s-bold ink-black" data-bind="tab.label">
+                      Overview
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="faq-tabs-rail"></div>
+              <div data-component="faq-underline" class="faq-tabs-indicator" style="left: 0px; width: 0px"></div>
+            </div>
+            <div data-list="faq-items" class="faq-list">
+              <div data-template="faq-item" class="faq-item">
+                <div class="faq-item-header">
+                  <p class="type-body-l-black ink-black" data-bind="item.question"></p>
+                  <img
+                    alt="Arrow Down"
+                    loading="lazy"
+                    width="24"
+                    height="24"
+                    decoding="async"
+                    data-nimg="1"
+                    class="faq-arrow next-img"
+                    src="/icons/arrow-down.svg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="faq-contact">
+              <h6 class="centered-text type-h6-black ink-black">
+                Have More Questions?
+              </h6>
+              <p class="centered-text type-body-s-regular ink-black">
+                Please reach out to us at<!-- -->
+                <a href="tel:+6567011185" class="link-accent">+65 6701 1185</a>
+                <!-- -->or via email at<!-- -->
+                <a href="mailto:bagassist@changirecommends.com.sg" class="link-accent"
+                  >bagassist@changirecommends.com.sg</a
+                >
+              </p>
+            </div>
+          </div>
+          <!--$--><!--/$-->
+        </div>
+      </main>
+      <!-- SITE FOOTER · components/footer.html (compact + desktop: app links, follow us, legal) -->
+      <div data-include="footer"></div>
+    </div>
+    <!-- CONTROLLER ENTRY POINT -->
+    <script type="module" src="/replica/js/controllers/faq.js"></script>
+  </body>
+</html>
