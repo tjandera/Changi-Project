@@ -1,15 +1,12 @@
 # Changi Off-Airport Check-In · Case-study replica
 
-Front-end replica of the Changi Off-Airport Check-In booking flow, built for the
-**EUXUI CAG Intern Challenge 1**. Not affiliated with Changi Airport Group.
-**No data leaves the page**: there are no network calls to any backend, and no tracking.
+Front-end replica of the Changi Off-Airport Check-In booking flow, contained Within is just the skeleton and backend for the front-end elements only. Built for developers to integrate their own backend. 
 
 | | |
 |---|---|
-| Source of truth | `Changi Case-Study.zip` (saved pages + screenshots) and the live site, captured 30 Oct 2026 |
 | Live demo (Vercel) | https://changiproject.vercel.app/ |
 | Figma prototype | https://www.figma.com/proto/6KAACC2C1GxOySmUomqv7V/Untitled?page-id=16%3A40&node-id=19-1582&starting-point-node-id=19%3A1582&scaling=scale-down-width |
-| Stack | Node server (`scripts/dev-server.js`, no dependencies) + static HTML + the site's own compiled Tailwind CSS + ES modules. No build step. |
+| Stack | Node server (`scripts/dev-server.js`, no dependencies) + static HTML + the site's own compiled Tailwind CSS + ES modules. |
 
 ## Run it
 
@@ -107,24 +104,6 @@ Read **[docs/INTEGRATION.md](docs/INTEGRATION.md)**. In short:
 1. Replace the bodies of the functions in `replica/js/models/api.js` with calls to your endpoints. Keep the return shapes.
 2. Everything a page shows is bound through `data-bind`, `data-field`, `data-action` and `data-list` attributes.
    No page code needs to change when data comes from an API.
-
-## Requirement gaps
-
-Things the capture could not supply, and the default used here: **[docs/GAPS.md](docs/GAPS.md)**.
-
-## Fidelity checks (1512 × 982, Chromium)
-
-| Page | Page height vs reference | Notes |
-|---|---|---|
-| Landing | 2565 / 2565 | How It Works pinned to the screenshot's equal columns (see GAPS #1) |
-| Step 2 | 1127 / 1127 | |
-| Step 3 | 1079 / 1079 | Reference shows filled fields; layout identical |
-| Step 4 | 1575 / 1575 | |
-
-Responsive checks (1512/1024/768/390) and the full gap list are in [docs/GAPS.md](docs/GAPS.md) (#18, #19, #20, #26 to #28).
-
-Full click-through (landing → Step 4 → dialogs, FAQ, Manage Booking) passes with zero console
-errors and zero requests outside the local server.
 
 ## Licences
 
