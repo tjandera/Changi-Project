@@ -45,4 +45,21 @@
       justify-content: center;
     }
   }
+
+
+  @media (min-width:48rem) {
+    .manage-field-col {
+      max-width: 335px;
+      min-width: 335px;
+    }
+  }
+
+  .manage-code-field {
+    background-color: var(--color-white);
+    text-transform: uppercase;
+  }
+
+  .manage-pin-box {
+    width: 39px;
+  }
 }

@@ -1,12 +1,12 @@
 /**
- * The site's pill buttons (Next, Book Now, Make Payment, Retrieve Booking) are <div>s
- * whose look is driven by three Tailwind classes plus the label colour.
- * Class sets below are the exact ones the live site toggles.
+ * The site's pill buttons (Next, Book Now, Make Payment, Retrieve Booking) are <div class="btn-pill">s.
+ * Enabled = btn-pill--dark, disabled = btn-pill--disabled (components/shared.css), plus the label colour.
+ * Each modifier holds the exact three rules the live site toggles (bg, border colour, cursor).
  */
 import { pressable } from './dom.js';
 
-const ENABLED = ['bg-black', 'border-black', 'cursor-pointer'];
-const DISABLED = ['bg-[#E5E5E5]', 'border-[#CCCCCC]', 'cursor-not-allowed'];
+const ENABLED = ['btn-pill--dark'];
+const DISABLED = ['btn-pill--disabled'];
 const TEXT_ON = 'rgb(255, 255, 255)';
 const TEXT_OFF = 'rgb(153, 153, 153)';
 

@@ -15,7 +15,7 @@ export function wireAccordion(row, item) {
     if (open) open.remove();
     else row.appendChild(html(faqAnswer(item)));
     head.setAttribute('aria-expanded', String(!open));
-    if (arrow) arrow.classList.toggle('rotate-180', !open);
+    if (arrow) arrow.classList.toggle('is-flipped', !open);
   };
   head.addEventListener('click', toggle);
   head.addEventListener('keydown', (e) => e.key === 'Enter' && toggle());

@@ -19,7 +19,7 @@ const FADE_LEAD_MS = 250;
 let overlay = null;
 let shownAt = 0;
 
-const main = () => document.querySelector('main.flex-1');
+const main = () => document.querySelector('main.page-main');
 
 /** The content is hidden by CSS until now; adding the class starts its fade-in. */
 function releaseContent() {

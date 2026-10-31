@@ -90,4 +90,12 @@
     justify-content: center;
     overflow-x: auto;
   }
+
+  .faq-illustration-band {
+    background-color: #fcfcfc;
+  }
+
+  .faq-tab-text {
+    white-space: nowrap;
+  }
 }

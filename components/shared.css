@@ -7,7 +7,7 @@
  * Under it sit the live site's own compiled CSS (/_next/static/chunks/*.css, Tailwind + globals) and the MUI
  * runtime styles (/replica/css/mui-runtime.css). Those are captured from the live site and not edited.
  *
- * Part A (unlayered): replica features, text colours, and the slots include.js fills.
+ * Part A (unlayered): replica features, text colours, header slot, typography (type-*), MUI text fields.
  * Part B (@layer components): the shared components, in this order:
  *    1. Layout
  *    2. Header
@@ -18,6 +18,7 @@
  *    7. Booking Summary
  *    8. Banner
  *    9. FAQ accordion
+ *   10. Helpers (show/hide by screen size, clickable, centred text ...)
  *
  * Each class in part B is the exact set of rules the live site compiled for that element (see docs/CSS.md).
  * @layer components sits below Tailwind's utilities, so classes the scripts toggle at runtime
@@ -270,7 +271,7 @@
     transform: none;
   }
 }
-main.flex-1 {
+main.page-main {
   animation: replica-page-in 0.5s cubic-bezier(0, 0, 0.58, 1) backwards;
 }
 
@@ -282,7 +283,7 @@ main.flex-1 {
   }
 }
 body:is([data-page='trip-details'], [data-page='luggage'], [data-page='personal-details'], [data-page='review'])
-  main.flex-1:not(.replica-ready) {
+  main.page-main:not(.replica-ready) {
   opacity: 0;
   animation: replica-reveal 0s 6.5s forwards;
 }
@@ -318,7 +319,7 @@ body:is([data-page='trip-details'], [data-page='luggage'], [data-page='personal-
 }
 
 @media (prefers-reduced-motion: reduce) {
-  main.flex-1 {
+  main.page-main {
     animation: none;
   }
   .replica-loading__dot {
@@ -356,6 +357,215 @@ body:is([data-page='trip-details'], [data-page='luggage'], [data-page='personal-
 @media (min-width: 48rem) {
   [data-include='header'] {
     height: 68px;
+  }
+}
+
+
+/* =============================================================================================
+ * A4. Typography. One class per text style; the names follow the Figma text styles
+ *     (type-body-l-bold = "Body L / Bold"). Same rules as the live site's cag-typography + cag-<size> + cag-<weight>.
+ * ============================================================================================= */
+.site-font {
+  font-family: Inter, Inter Fallback;
+  font-style: normal;
+}
+
+/* Body L / Black */
+.type-body-l-black {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 900;
+}
+
+/* Body L / Bold */
+.type-body-l-bold {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+/* Body L / Italic */
+.type-body-l-italic {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-style: italic;
+}
+
+/* Body L / Regular */
+.type-body-l-regular {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Body S / Black */
+.type-body-s-black {
+  font-size: 14px;
+  line-height: 18px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-weight: 900;
+}
+
+/* Body S / Bold */
+.type-body-s-bold {
+  font-size: 14px;
+  line-height: 18px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-weight: 700;
+}
+
+/* Body S / Regular */
+.type-body-s-regular {
+  font-size: 14px;
+  line-height: 18px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Small / Bold */
+.type-small-bold {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+}
+
+/* Small / Regular */
+.type-small-regular {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* XSmall / Bold */
+.type-xsmall-bold {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 700;
+}
+
+/* H3 / Bold */
+.type-h3-bold {
+  font-size: 32px;
+  line-height: 40px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-weight: 700;
+}
+
+/* H5 / Black */
+.type-h5-black {
+  font-size: 24px;
+  line-height: 32px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-weight: 900;
+}
+
+/* H6 / Black */
+.type-h6-black {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 900;
+}
+
+/* H6 / Bold */
+.type-h6-bold {
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+/* Sub-heading / Black */
+.type-sub-heading-black {
+  font-size: 18px;
+  line-height: 22px;
+  vertical-align: baseline;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: Lato,sans-serif;
+  font-weight: 900;
+}
+
+
+/* =============================================================================================
+ * A5. MUI text fields: the input inside is 36px tall, 44px from 1024px for the tall variant
+ *     (the live site's field-input / field-input--tall).
+ * ============================================================================================= */
+.text-field input {
+  height: 36px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+@media (min-width: 1024px) {
+  .text-field.text-field--tall input {
+    height: 44px !important;
   }
 }
 
@@ -525,6 +735,12 @@ body:is([data-page='trip-details'], [data-page='luggage'], [data-page='personal-
   }
 
 
+
+  /* used on: every page */
+  .page-main {
+    flex: 1;
+  }
+
   /* ===========================================================================================
    * B2. Header: Site header: logo, nav, Book Now (markup: components/header.html)
    * =========================================================================================== */
@@ -574,6 +790,19 @@ body:is([data-page='trip-details'], [data-page='luggage'], [data-page='personal-
     }
   }
 
+
+
+  /* used on: every page (components/header.html) */
+  .header-group {
+    display: flex;
+    align-items: center;
+  }
+
+  /* used on: every page (components/header.html) */
+  .header-logo {
+    height: 32px;
+    width: auto;
+  }
 
   /* ===========================================================================================
    * B3. Footer: Compact (phone/tablet) and desktop footer (markup: components/footer.html)
@@ -834,6 +1063,44 @@ body:is([data-page='trip-details'], [data-page='luggage'], [data-page='personal-
   }
 
 
+
+  /* used on: every page (components/footer.html) */
+  .footer-text {
+    text-align: left;
+  }
+
+  /* used on: every page (components/footer.html) */
+  .footer-compact-logo {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  /* used on: every page (components/footer.html) */
+  .footer-sites {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* used on: every page (components/footer.html) */
+  .footer-sites-current {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* used on: every page (components/footer.html) */
+  .footer-sites-arrow {
+    transition-property: transform,translate,scale,rotate;
+    transition-timing-function: var(--tw-ease,var(--default-transition-timing-function));
+    --tw-duration: .3s;
+    transition-duration: .3s;
+  }
+
+  /* used on: every page (components/footer.html) */
+  .footer-legal-row {
+    display: flex;
+    gap: 16px;
+  }
+
   /* ===========================================================================================
    * B4. Buttons and links: Pill buttons, accent links, the floating 中文 button
    * =========================================================================================== */
@@ -890,6 +1157,21 @@ body:is([data-page='trip-details'], [data-page='luggage'], [data-page='personal-
     color: #7a35b0;
   }
 
+
+
+  /* used on: /, /booking-baggage/, /booking-contact/, /booking-details/, /booking-review/, /manage-booking-pin/ */
+  .btn-pill--disabled {
+    cursor: not-allowed;
+    border-color: #ccc;
+    background-color: #e5e5e5;
+  }
+
+  /* used on: / */
+  .btn-pill--dark {
+    cursor: pointer;
+    border-color: var(--color-black);
+    background-color: var(--color-black);
+  }
 
   /* ===========================================================================================
    * B5. Form fields: Selects, date input, icons inside fields, field wrappers
@@ -994,6 +1276,18 @@ body:is([data-page='trip-details'], [data-page='luggage'], [data-page='personal-
     outline-style: none;
   }
 
+
+
+  /* used on: /, /booking-details/ */
+  .field-control {
+    position: relative;
+    width: 100%;
+  }
+
+  /* used on: /booking-contact/, /booking-details/ */
+  .field-column {
+    flex: 1;
+  }
 
   /* ===========================================================================================
    * B6. Step progress: Title + "Step n / 4" bar on the booking steps
@@ -1151,6 +1445,105 @@ body:is([data-page='trip-details'], [data-page='luggage'], [data-page='personal-
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+
+
+  /* used on: /, /faq/ */
+  .faq-arrow {
+    cursor: pointer;
+    --tw-duration: .3s;
+    transition-duration: .3s;
+  }
+
+
+  /* ===========================================================================================
+   * B10. Helpers: responsive show/hide, clickable, centred text, cover images, dividers
+   *      show-from-md = hidden below 768px; hide-from-md = hidden from 768px; sm = 640px, lg = 1024px
+   * =========================================================================================== */
+
+  /* used on: every page (components/footer.html, components/header.html) */
+  .show-from-md {
+    display: none;
+  }
+  @media (min-width:48rem) {
+    .show-from-md {
+      display: block;
+    }
+  }
+
+  /* used on: /, /faq/, /manage-booking-pin/ */
+  .cover-image {
+    object-fit: cover;
+  }
+
+  /* used on: every page (components/footer.html, components/header.html) */
+  .clickable {
+    cursor: pointer;
+  }
+
+  /* used on: every page (components/header.html) */
+  .show-below-md {
+    display: block;
+  }
+  @media (min-width:48rem) {
+    .show-below-md {
+      display: none;
+    }
+  }
+
+  /* used on: /, /faq/ */
+  .centered-text {
+    text-align: center;
+  }
+
+  /* used on: / */
+  .show-below-lg {
+    display: block;
+  }
+  @media (min-width:64rem) {
+    .show-below-lg {
+      display: none;
+    }
+  }
+
+  /* used on: / */
+  .show-from-lg {
+    display: none;
+  }
+  @media (min-width:64rem) {
+    .show-from-lg {
+      display: block;
+    }
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/ */
+
+  @media (min-width:48rem) {
+    .hide-from-md {
+      display: none;
+    }
+  }
+
+  /* used on: /booking-baggage/, /booking-contact/, /booking-review/ */
+  .section-divider {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+    border-color: #e8e8e8;
+  }
+
+  /* used on: every page (components/footer.html) */
+  .show-below-sm {
+    display: block;
+  }
+  @media (min-width:40rem) {
+    .show-below-sm {
+      display: none;
+    }
+  }
+
+  /* Set by the scripts on an arrow while its panel is open (FAQ rows, footer sites, notes, country list). */
+  .is-flipped {
+    rotate: 180deg;
   }
 
 }

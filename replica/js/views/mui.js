@@ -189,7 +189,7 @@ export function phoneField(input, { countries, countryIso, onChange }) {
     if (stopDismiss) stopDismiss();
     if (popup) popup.remove();
     popup = null;
-    arrow.classList.remove('rotate-180');
+    arrow.classList.remove('is-flipped');
   }
 
   trigger.addEventListener('click', () => {
@@ -197,7 +197,7 @@ export function phoneField(input, { countries, countryIso, onChange }) {
     const named = countries.map((c, i) => ({ ...c, i })).filter((c) => c.name); // live list shows 2 unnamed rows; kept in data, skipped here
     popup = html(countryList(named, iso));
     host.appendChild(popup);
-    arrow.classList.add('rotate-180');
+    arrow.classList.add('is-flipped');
     const list = popup.firstElementChild;
     list.querySelectorAll('[data-index]').forEach((row) => {
       row.addEventListener('click', () => {

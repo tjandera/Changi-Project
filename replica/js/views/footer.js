@@ -17,8 +17,8 @@ function link(el, url) {
   pressable(el, () => open(url));
 }
 
-/** Everything in the footer that is clickable on the live site (it carries Tailwind's cursor-pointer there). */
-const CLICKABLE = '.cursor-pointer, .footer-link, .footer-legal-link, .footer-store-badge, .footer-logo, .footer-signup-btn';
+/** Everything in the footer that is clickable on the live site (it has cursor: pointer there). */
+const CLICKABLE = '.clickable, .footer-link, .footer-legal-link, .footer-store-badge, .footer-logo, .footer-signup-btn';
 
 const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
 
@@ -44,7 +44,7 @@ export function initFooter(footer = {}) {
   // Each wrapper holds two <img> (phone size and desktop size), so collect the wrappers once.
   (footer.social || []).forEach((s) => {
     const wrappers = new Set(
-      within(`img[src="/follow-us/${s.icon}.svg"]`).map((img) => img.closest('.cursor-pointer')),
+      within(`img[src="/follow-us/${s.icon}.svg"]`).map((img) => img.closest('.clickable')),
     );
     wrappers.forEach((el) => link(el, s.url));
   });
@@ -75,7 +75,7 @@ function initSitesDropdown(sites) {
   pressable(head, () => {
     const isOpen = head.getAttribute('aria-expanded') !== 'true';
     head.setAttribute('aria-expanded', String(isOpen));
-    arrow.classList.toggle('rotate-180', isOpen);
+    arrow.classList.toggle('is-flipped', isOpen);
     if (isOpen) {
       rows = sites.map(({ site, url }) => {
         const row = list.appendChild(html(footerSite(site)));

@@ -98,4 +98,19 @@
     display: inline-block;
     width: 100%;
   }
+
+  .contact-field {
+    background-color: var(--color-white);
+  }
+
+  .contact-dial-adornment {
+    padding-right: 8px;
+  }
+
+  .contact-dial-arrow {
+    margin-right: 12px;
+    transition-property: transform,translate,scale,rotate;
+    transition-timing-function: var(--tw-ease,var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration,var(--default-transition-duration));
+  }
 }

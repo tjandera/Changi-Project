@@ -276,6 +276,43 @@
     width: 100%;
     max-width: 944px;
   }
+
+  .landing-card-gutter {
+    padding-inline: 16px;
+  }
+  @media (min-width:48rem) {
+    .landing-card-gutter {
+      padding: 0;
+    }
+  }
+
+  .landing-step-icon {
+    height: 80px;
+    width: 80px;
+  }
+
+  .landing-partners-band {
+    background-color: #efebe7;
+  }
+
+  .landing-partner-logo-box-sm {
+    height: 64px;
+    width: 64px;
+  }
+
+  .landing-partner-logo-box-lg {
+    height: 100px;
+    width: 100px;
+  }
+
+  .landing-partner-caption {
+    width: 80px;
+  }
+
+  .landing-partner-name {
+    text-align: center;
+    overflow-wrap: break-word;
+  }
 }
 
 /*
@@ -287,3 +324,40 @@
  * side-by-side check against the live page at 1903px).
  */
 
+
+/* Airline and hotel logos (the live site's partner-item, marquee and marquee-content).
+   Phones and tablets: the row scrolls sideways forever; from 1024px it wraps and stays still. */
+.landing-marquee {
+  width: 100%;
+  overflow: hidden;
+}
+.landing-marquee-track {
+  gap: 16px;
+  animation: 20s linear infinite landing-marquee-scroll;
+  display: flex;
+}
+.landing-partner {
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+}
+@media (min-width: 1024px) {
+  .landing-marquee-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    animation: none;
+  }
+  .landing-partner {
+    gap: 16px;
+  }
+}
+@keyframes landing-marquee-scroll {
+  0% {
+    transform: translate(0);
+  }
+  to {
+    transform: translate(-50%);
+  }
+}

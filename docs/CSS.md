@@ -4,7 +4,7 @@
 
 ```
 booking-baggage/
-  index.html        this page's markup only (about 340 lines)
+  index.html        this page's markup only (about 330 lines)
   style.css         styles only this page uses
 components/
   header.html       site header, written once
@@ -36,9 +36,14 @@ Each page `<head>` links exactly this:
 | one page only | that folder's `style.css`, class prefixed with the page (`baggage-stepper`, `landing-hero`) |
 | two or more pages | `components/shared.css`, in the matching section |
 
-`shared.css` has a table of contents at the top. Part A is unlayered (replica features such as the feedback tab and
-loading dots, the text colours `ink-*`, the header slot). Part B holds the shared components: layout, header, footer,
-buttons, form fields, step progress, booking summary, banner, FAQ accordion.
+`shared.css` has a table of contents at the top. Part A is unlayered: replica features (feedback tab, loading dots),
+text colours `ink-*`, the header slot, typography `type-*`, MUI text-field sizing. Part B holds the shared components:
+layout, header, footer, buttons, form fields, step progress, booking summary, banner, FAQ accordion, and helpers
+(`show-from-md`, `clickable`, `centered-text` ...).
+
+**Every class in a page's HTML is defined in that folder's `style.css` or in `components/shared.css`.** Search either
+file for the class name. The only exceptions are MUI's own runtime classes (`MuiInputBase-root`, `css-1x5jdmq` ...,
+defined in `replica/css/mui-runtime.css`) and `notranslate`, which only tells Google Translate to skip a node.
 
 Not duplicated on purpose: the footer is styled once in `shared.css`, not copied into seven `style.css` files, so a
 footer change is one edit.
@@ -62,6 +67,12 @@ While it loads, the header slot keeps the header's height (64px, 68px from 768px
 - Layout: `stack-<gap>` (column) and `row-<gap>[-center]` (row), e.g. `stack-16`, `row-8-center`, `row-between`.
 - Page only: `<page>-<part>`, e.g. `landing-hero`, `trip-card`, `contact-form-card`.
 - Text colour: `ink-black`, `ink-white`, `ink-grey`, `ink-muted`, `ink-light`, `ink-purple`.
+- Text style: `type-<size>-<weight>`, matching the Figma text styles: `type-body-l-bold` = "Body L / Bold",
+  `type-h6-black` = "H6 / Black". Sizes `h3 h5 h6 body-l body-s small xsmall`; weights `black bold regular italic`.
+- Screen size: `show-from-md` (hidden below 768px), `hide-from-md`, `show-below-md`, `show-below-sm` (640px),
+  `show-below-lg` / `show-from-lg` (1024px).
+- State, set by the scripts: `btn-pill--dark` / `btn-pill--disabled` (Next, Book Now, Make Payment, Retrieve),
+  `field-select` / `field-select-disabled` (flight number), `is-flipped` (an arrow while its panel is open).
 
 ## How each class is defined
 
@@ -69,15 +80,23 @@ Every class is the exact set of Tailwind rules the live site compiled for that e
 same media queries, `:hover` and `:focus` variants. Nothing was re-measured, so the pages look the same pixel for pixel.
 The rules sit in `@layer components`, below Tailwind's `utilities` layer, so:
 
-- the utility classes the scripts add and remove at runtime (`bg-black`, `border-black`, `cursor-not-allowed`,
-  `rotate-180`, `bg-gray-100` ...) still win: the Next button is `btn-pill` plus whichever state is active;
-- the site's own `cag-*` and MUI rules still win where they did before.
+- the site's unlayered rules and the MUI runtime styles still win where they did before;
+- state classes (`btn-pill--dark`, `btn-pill--disabled`) come after their base class, so they win over it.
+
+The typography classes copy the live site's `cag-typography` + `cag-<size>` + `cag-<weight>` rules, which were
+unlayered, so they stay unlayered.
 
 ## Where Tailwind utilities remain
 
-Pairs that already read clearly stay as utilities: `hidden md:block`, `flex items-center`, `block sm:hidden`,
-`w-full relative`. A name for `display: flex` would not help anyone. Inline `style` stays only for per-element sizes
-(`width: 240px; height: 44px`, progress-bar widths) and values the scripts change.
+None in the pages or `components/*.html`. They remain only in the snippets the scripts build at runtime
+(`replica/js/views/templates.js`: dropdown lists, calendar, dialogs, mobile menu), which use the live site's markup as
+is. Inline `style` stays only for per-element sizes (`width: 240px; height: 44px`, progress-bar widths) and values the
+scripts change.
+
+Removed because no CSS uses them: `transition-transfrom` (a typo on the live site), `scrollbar-hide`,
+`cag-form-field-wrapper`, `cag-input-field`, `cag-text-field`, `cag-checkbox`. Renamed site classes:
+`partner-item` → `landing-partner`, `marquee` → `landing-marquee`, `field-input` → `text-field`, the next/font body
+class → `site-font`.
 
 ## Scripts never select by class
 

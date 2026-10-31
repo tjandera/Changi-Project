@@ -28,7 +28,7 @@
     <!-- Fills the data-include slots below with the shared header, footer and 中文 button -->
     <script type="module" src="/components/include.js"></script>
   </head>
-  <body class="inter_5972bc34-module__OU16Qa__className" data-page="review">
+  <body class="site-font" data-page="review">
     <!--
       PAGE        Step 4 · Review Booking
       CONTROLLER  /replica/js/controllers/review.js  (behaviour)
@@ -41,28 +41,28 @@
       <!-- SITE HEADER · components/header.html (logo, nav, Book Now) -->
       <div data-include="header"></div>
       <!-- PAGE CONTENT -->
-      <main class="flex-1">
+      <main class="page-main">
         <!-- 中文 / EN BUTTON · components/language-button.html -->
         <div data-include="language-button"></div>
         <div style="opacity: 1; transform: none">
           <div class="page-content">
             <div class="progress-header">
-              <h6 class="cag-typography cag-h6 cag-black ink-black">
+              <h6 class="type-h6-black ink-black">
                 Review Booking
               </h6>
               <div class="stack-8-center">
                 <div class="progress-label">
-                  <p class="cag-typography cag-s-body cag-bold ink-muted">
+                  <p class="type-body-s-bold ink-muted">
                     Step
                   </p>
                   <div class="progress-count">
-                    <p class="cag-typography cag-s-body cag-bold ink-muted">
+                    <p class="type-body-s-bold ink-muted">
                       4
                     </p>
-                    <p class="cag-typography cag-s-body cag-bold ink-muted">
+                    <p class="type-body-s-bold ink-muted">
                       /
                     </p>
-                    <p class="cag-typography cag-s-body cag-bold ink-muted">
+                    <p class="type-body-s-bold ink-muted">
                       4
                     </p>
                   </div>
@@ -86,7 +86,7 @@
                       src="/icons/booking-summary-trip.svg"
                       class="next-img"
                     />
-                    <p class="cag-typography cag-l-body cag-black ink-black">
+                    <p class="type-body-l-black ink-black">
                       Trip Details
                     </p>
                   </div>
@@ -98,29 +98,26 @@
                     height="24"
                     decoding="async"
                     data-nimg="1"
-                    class="cursor-pointer next-img"
+                    class="clickable next-img"
                     src="/icons/edit-summary.svg"
                   />
                 </div>
                 <div class="stack-4">
-                  <p class="cag-typography cag-small-text cag-regular ink-grey">
+                  <p class="type-small-regular ink-grey">
                     Hotel
                   </p>
-                  <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="trip.hotel"></p>
-                  <p class="cag-typography cag-l-body cag-bold hidden md:block ink-black" data-bind="trip.hotel"></p>
+                  <p class="hide-from-md type-body-s-bold ink-black" data-bind="trip.hotel"></p>
+                  <p class="show-from-md type-body-l-bold ink-black" data-bind="trip.hotel"></p>
                 </div>
                 <div class="stack-4">
-                  <p class="cag-typography cag-small-text cag-regular ink-grey">
+                  <p class="type-small-regular ink-grey">
                     Departure Flight
                   </p>
-                  <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="trip.flightSummary"></p>
-                  <p
-                    class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
-                    data-bind="trip.flightSummary"
-                  ></p>
+                  <p class="hide-from-md type-body-s-bold ink-black" data-bind="trip.flightSummary"></p>
+                  <p class="show-from-md type-body-l-bold ink-black" data-bind="trip.flightSummary"></p>
                 </div>
               </div>
-              <div class="border-t border-[#E8E8E8]"></div>
+              <div class="section-divider"></div>
               <div class="stack-16">
                 <div class="row-between">
                   <div class="row-10-center">
@@ -134,7 +131,7 @@
                       src="/icons/baggage-summary.svg"
                       class="next-img"
                     />
-                    <p class="cag-typography cag-l-body cag-black ink-black">
+                    <p class="type-body-l-black ink-black">
                       Luggage Details
                     </p>
                   </div>
@@ -146,7 +143,7 @@
                     height="24"
                     decoding="async"
                     data-nimg="1"
-                    class="cursor-pointer next-img"
+                    class="clickable next-img"
                     src="/icons/edit-summary.svg"
                   />
                 </div>
@@ -154,29 +151,26 @@
                   <div class="stack-16" data-list="luggage-lines">
                     <div data-template="luggage-line" class="booking-summary-line">
                       <div class="row-between-full">
-                        <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="line.label"></p>
-                        <p class="cag-typography cag-l-body cag-bold hidden md:block ink-black" data-bind="line.label"></p>
+                        <p class="hide-from-md type-body-s-bold ink-black" data-bind="line.label"></p>
+                        <p class="show-from-md type-body-l-bold ink-black" data-bind="line.label"></p>
                         <div class="row-8">
-                          <p class="cag-typography cag-s-body cag-bold md:hidden ink-black">
+                          <p class="hide-from-md type-body-s-bold ink-black">
                             S$
                           </p>
-                          <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="line.subtotal"></p>
-                          <p class="cag-typography cag-l-body cag-bold hidden md:block ink-black">
+                          <p class="hide-from-md type-body-s-bold ink-black" data-bind="line.subtotal"></p>
+                          <p class="show-from-md type-body-l-bold ink-black">
                             S$
                           </p>
-                          <p
-                            class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
-                            data-bind="line.subtotal"
-                          ></p>
+                          <p class="show-from-md type-body-l-bold ink-black" data-bind="line.subtotal"></p>
                         </div>
                       </div>
                       <p
-                        class="cag-typography cag-small-text cag-bold md:hidden ink-muted"
+                        class="hide-from-md type-small-bold ink-muted"
                         data-bind="line.itemsLabel"
                         data-i18n-ctx="luggage-line"
                       ></p>
                       <p
-                        class="cag-typography cag-small-text cag-bold hidden md:block ink-muted"
+                        class="show-from-md type-small-bold ink-muted"
                         data-bind="line.itemsLabel"
                         data-i18n-ctx="luggage-line"
                       ></p>
@@ -184,7 +178,7 @@
                   </div>
                 </div>
               </div>
-              <div class="border-t border-[#E8E8E8]"></div>
+              <div class="section-divider"></div>
               <div class="stack-24">
                 <div class="row-between">
                   <div class="row-10-center">
@@ -198,7 +192,7 @@
                       src="/icons/contact-summary.svg"
                       class="next-img"
                     />
-                    <p class="cag-typography cag-l-body cag-black ink-black">
+                    <p class="type-body-l-black ink-black">
                       Personal Details
                     </p>
                   </div>
@@ -210,95 +204,77 @@
                     height="24"
                     decoding="async"
                     data-nimg="1"
-                    class="cursor-pointer next-img"
+                    class="clickable next-img"
                     src="/icons/edit-summary.svg"
                   />
                 </div>
                 <div class="review-details">
                   <div class="stack-16">
                     <div class="stack-4">
-                      <p class="cag-typography cag-small-text cag-regular ink-grey">
+                      <p class="type-small-regular ink-grey">
                         First/Last Name (as per passport)
                       </p>
-                      <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="contact.fullName"></p>
-                      <p
-                        class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
-                        data-bind="contact.fullName"
-                      ></p>
+                      <p class="hide-from-md type-body-s-bold ink-black" data-bind="contact.fullName"></p>
+                      <p class="show-from-md type-body-l-bold ink-black" data-bind="contact.fullName"></p>
                     </div>
                     <div class="stack-4">
-                      <p class="cag-typography cag-small-text cag-regular ink-grey">
+                      <p class="type-small-regular ink-grey">
                         Contact Number
                       </p>
-                      <p
-                        class="cag-typography cag-s-body cag-bold md:hidden ink-black"
-                        data-bind="contact.phoneDisplay"
-                      ></p>
-                      <p
-                        class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
-                        data-bind="contact.phoneDisplay"
-                      ></p>
+                      <p class="hide-from-md type-body-s-bold ink-black" data-bind="contact.phoneDisplay"></p>
+                      <p class="show-from-md type-body-l-bold ink-black" data-bind="contact.phoneDisplay"></p>
                     </div>
                     <div class="stack-4">
-                      <p class="cag-typography cag-small-text cag-regular ink-grey">
+                      <p class="type-small-regular ink-grey">
                         Email Address
                       </p>
-                      <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="contact.email"></p>
-                      <p class="cag-typography cag-l-body cag-bold hidden md:block ink-black" data-bind="contact.email"></p>
+                      <p class="hide-from-md type-body-s-bold ink-black" data-bind="contact.email"></p>
+                      <p class="show-from-md type-body-l-bold ink-black" data-bind="contact.email"></p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="border-t border-[#E8E8E8]"></div>
+              <div class="section-divider"></div>
               <div class="stack-8">
                 <div class="row-between">
-                  <p class="cag-typography cag-s-body cag-bold md:hidden ink-black">
+                  <p class="hide-from-md type-body-s-bold ink-black">
                     Total Luggage
                   </p>
-                  <p class="cag-typography cag-l-body cag-bold hidden md:block ink-black">
+                  <p class="show-from-md type-body-l-bold ink-black">
                     Total Luggage
                   </p>
                   <div class="row-8-center">
-                    <p
-                      class="cag-typography cag-s-body cag-bold md:hidden ink-black"
-                      data-bind="luggage.totalItemsLabel"
-                    ></p>
-                    <p
-                      class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
-                      data-bind="luggage.totalItemsLabel"
-                    ></p>
+                    <p class="hide-from-md type-body-s-bold ink-black" data-bind="luggage.totalItemsLabel"></p>
+                    <p class="show-from-md type-body-l-bold ink-black" data-bind="luggage.totalItemsLabel"></p>
                   </div>
                 </div>
                 <div class="row-between">
-                  <p class="cag-typography cag-s-body cag-bold md:hidden ink-black">
+                  <p class="hide-from-md type-body-s-bold ink-black">
                     Total Cost
                   </p>
-                  <p class="cag-typography cag-l-body cag-bold hidden md:block ink-black">
+                  <p class="show-from-md type-body-l-bold ink-black">
                     Total Cost
                   </p>
                   <div class="row-8-center">
-                    <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="currency">
+                    <p class="hide-from-md type-body-s-bold ink-black" data-bind="currency">
                       S$
                     </p>
-                    <p class="cag-typography cag-l-body cag-bold hidden md:block ink-black" data-bind="currency">
+                    <p class="show-from-md type-body-l-bold ink-black" data-bind="currency">
                       S$
                     </p>
-                    <p class="cag-typography cag-s-body cag-bold md:hidden ink-black" data-bind="luggage.totalCost"></p>
-                    <p
-                      class="cag-typography cag-l-body cag-bold hidden md:block ink-black"
-                      data-bind="luggage.totalCost"
-                    ></p>
+                    <p class="hide-from-md type-body-s-bold ink-black" data-bind="luggage.totalCost"></p>
+                    <p class="show-from-md type-body-l-bold ink-black" data-bind="luggage.totalCost"></p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="review-terms-card">
-              <p class="cag-typography cag-l-body cag-black ink-black">
+              <p class="type-body-l-black ink-black">
                 Terms &amp; Conditions
               </p>
               <div class="row-10-center">
                 <span
-                  class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium cag-checkbox css-115tajq"
+                  class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-115tajq"
                   data-testid="CagCheckbox"
                   ><input
                     data-field="terms"
@@ -307,7 +283,7 @@
                     aria-label="Checkbox component"
                     type="checkbox" /><span class="cag-checkbox-icon" font-size="medium"></span
                 ></span>
-                <p data-i18n-ctx="terms-sentence" class="cag-typography cag-s-body cag-regular ink-black">
+                <p data-i18n-ctx="terms-sentence" class="type-body-s-regular ink-black">
                   I have read and I agree to the
                   <span data-action="open-terms" class="link-accent"
                     >Terms and Conditions</span
@@ -321,10 +297,10 @@
             </div>
             <div
               data-action="make-payment"
-              class="btn-pill bg-[#E5E5E5] border-[#CCCCCC] cursor-not-allowed"
+              class="btn-pill btn-pill--disabled"
               style=" width: 240px; height: 44px; box-shadow: rgba(18, 18, 18, 0.05) 0px 1px 2px 0px; margin-top: 12px; margin-bottom: 36px; "
             >
-              <p class="cag-typography cag-l-body cag-bold ink-muted">
+              <p class="type-body-l-bold ink-muted">
                 Make Payment
               </p>
             </div>

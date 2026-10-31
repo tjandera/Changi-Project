@@ -54,9 +54,9 @@ export function hotelField(input, { hotels, onSelect }) {
 }
 
 /** Flight Number dropdown. Disabled until a hotel and date are chosen (live behaviour). */
-const FLIGHT_ON =
-  'w-full h-[36px] rounded-[8px] border pl-3 pr-10  focus:border-[#7a35b0] focus:ring-4 focus:ring-[#ece0f5] focus:outline-none focus:border-2 bg-white border-[#CCCCCC] cursor-pointer';
-const FLIGHT_OFF = 'w-full h-[36px] rounded-[8px] border pl-3 pr-10  focus:outline-none bg-[#F7F7F7] border-[#E5E5E5] cursor-not-allowed';
+/** Same look as the live site's enabled / disabled field (components/shared.css). */
+const FLIGHT_ON = 'field-select';
+const FLIGHT_OFF = 'field-select-disabled';
 
 export function flightField(input, { loadFlights, onSelect }) {
   const icon = input.parentElement.querySelector('img');

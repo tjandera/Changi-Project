@@ -28,7 +28,7 @@
     <!-- Fills the data-include slots below with the shared header, footer and 中文 button -->
     <script type="module" src="/components/include.js"></script>
   </head>
-  <body class="inter_5972bc34-module__OU16Qa__className" data-page="faq">
+  <body class="site-font" data-page="faq">
     <!--
       PAGE        FAQs
       CONTROLLER  /replica/js/controllers/faq.js  (behaviour)
@@ -41,43 +41,43 @@
       <!-- SITE HEADER · components/header.html (logo, nav, Book Now) -->
       <div data-include="header"></div>
       <!-- PAGE CONTENT -->
-      <main class="flex-1">
+      <main class="page-main">
         <!-- 中文 / EN BUTTON · components/language-button.html -->
         <div data-include="language-button"></div>
         <div style="opacity: 1; transform: none">
-          <div class="bg-[#FCFCFC]">
+          <div class="faq-illustration-band">
             <div class="banner">
-              <div class="hidden md:block">
+              <div class="show-from-md">
                 <img
                   alt="Illustration"
                   decoding="async"
                   data-nimg="fill"
-                  class="object-cover"
+                  class="cover-image"
                   style=" position: absolute; height: 100%; width: 100%; left: 0; top: 0; right: 0; bottom: 0; color: transparent; "
                   src="/images/skyline-illustration-desktop.webp"
                 />
               </div>
-              <div class="block sm:hidden">
+              <div class="show-below-sm">
                 <img
                   alt="Illustration"
                   decoding="async"
                   data-nimg="fill"
-                  class="object-cover"
+                  class="cover-image"
                   style=" position: absolute; height: 100%; width: 100%; left: 0; top: 0; right: 0; bottom: 0; color: transparent; "
                   src="/images/skyline-illustration-desktop.webp"
                 />
               </div>
               <div class="banner-copy">
-                <h6 class="cag-typography cag-h6 cag-black ink-black">
+                <h6 class="type-h6-black ink-black">
                   Frequently Asked Questions (FAQs)
                 </h6>
               </div>
             </div>
-            <div data-component="faq-tabs" class="faq-tabs scrollbar-hide" role="tablist" aria-orientation="horizontal">
+            <div data-component="faq-tabs" class="faq-tabs" role="tablist" aria-orientation="horizontal">
               <div data-template="faq-tab">
                 <div class="faq-tab" role="tab" aria-selected="true" tabindex="0">
                   <div class="faq-tab-label">
-                    <p class="cag-typography cag-s-body cag-bold whitespace-nowrap ink-black" data-bind="tab.label">
+                    <p class="faq-tab-text type-body-s-bold ink-black" data-bind="tab.label">
                       Overview
                     </p>
                   </div>
@@ -89,7 +89,7 @@
             <div data-list="faq-items" class="faq-list">
               <div data-template="faq-item" class="faq-item">
                 <div class="faq-item-header">
-                  <p class="cag-typography cag-l-body cag-black ink-black" data-bind="item.question"></p>
+                  <p class="type-body-l-black ink-black" data-bind="item.question"></p>
                   <img
                     alt="Arrow Down"
                     loading="lazy"
@@ -97,21 +97,21 @@
                     height="24"
                     decoding="async"
                     data-nimg="1"
-                    class="cursor-pointer transition-transfrom duration-300 next-img"
+                    class="faq-arrow next-img"
                     src="/icons/arrow-down.svg"
                   />
                 </div>
               </div>
             </div>
             <div class="faq-contact">
-              <h6 class="cag-typography cag-h6 cag-black text-center ink-black">
+              <h6 class="centered-text type-h6-black ink-black">
                 Have More Questions?
               </h6>
-              <p class="cag-typography cag-s-body cag-regular text-center ink-black">
+              <p class="centered-text type-body-s-regular ink-black">
                 Please reach out to us at<!-- -->
-                <a href="tel:+6567011185" class="text-[#7A35B0] font-bold">+65 6701 1185</a>
+                <a href="tel:+6567011185" class="link-accent">+65 6701 1185</a>
                 <!-- -->or via email at<!-- -->
-                <a href="mailto:bagassist@changirecommends.com.sg" class="text-[#7A35B0] font-bold"
+                <a href="mailto:bagassist@changirecommends.com.sg" class="link-accent"
                   >bagassist@changirecommends.com.sg</a
                 >
               </p>

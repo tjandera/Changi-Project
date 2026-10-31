@@ -61,7 +61,7 @@ try {
   const notes = $('[data-component="notes"]');
   const arrow = $('[data-action="toggle-notes"]');
   arrow.addEventListener('click', () => {
-    const collapsed = arrow.classList.toggle('rotate-180');
+    const collapsed = arrow.classList.toggle('is-flipped');
     $$(':scope > :not(:first-child)', notes).forEach((row) => (row.hidden = collapsed));
   });
 

@@ -78,4 +78,22 @@
       gap: 16px;
     }
   }
+
+  .trip-hotel-col {
+    width: 100%;
+  }
+  @media (min-width:48rem) {
+    .trip-hotel-col {
+      width: 50%;
+    }
+  }
+
+  .trip-notes-strong {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .trip-learn-more {
+    text-align: right;
+  }
 }
