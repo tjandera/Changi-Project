@@ -9,7 +9,6 @@
  *   flight:     { flightNumber, airline, route, departureTime } | null
  *   luggage:    { standard: number, oddSized: number }
  *   contact:    { firstName, lastName, countryIso, phone, email }
- *   termsAccepted: boolean
  * }
  */
 import { api } from './api.js';
@@ -24,7 +23,6 @@ export const emptyBooking = () => ({
   flight: null,
   luggage: { standard: 0, oddSized: 0 },
   contact: { firstName: '', lastName: '', countryIso: 'SG', phone: '', email: '' },
-  termsAccepted: false,
 });
 
 export function load() {

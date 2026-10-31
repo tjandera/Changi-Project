@@ -1,5 +1,30 @@
 {
   "version": 2,
-  "builds": [{ "src": "**", "use": "@vercel/static" }],
-  "trailingSlash": true
+  "builds": [
+    {
+      "src": "**",
+      "use": "@vercel/static"
+    }
+  ],
+  "trailingSlash": true,
+  "headers": [
+    {
+      "source": "/booking-review/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/booking-review",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ]
 }

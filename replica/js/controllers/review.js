@@ -6,7 +6,7 @@ import { ask } from '../views/dialog.js';
 import { checkbox } from '../views/mui.js';
 import { fillSummary, wireSummary } from '../views/summary.js';
 import { viewModel } from '../models/format.js';
-import { clear, guard, save } from '../models/store.js';
+import { clear, guard } from '../models/store.js';
 import { navigate } from '../models/leave.js';
 import { endLoading } from '../views/loading.js';
 import { boot, fail } from './boot.js';
@@ -23,20 +23,19 @@ try {
     fillSummary(document, viewModel(booking, config, { phoneDisplay: `${country ? country.dialCode : ''} ${national}`.trim() }));
     wireSummary(config);
 
-    // Live: the box is always empty when the page loads, so the guest agrees again after every reload.
-    booking.termsAccepted = false;
-    save(booking);
+    // The Terms tick is never stored (not in sessionStorage, not in the booking): it lives here, in
+    // memory, and starts empty every time the page is shown, so the guest agrees again each visit.
+    let accepted = false;
 
     const pay = $('[data-action="make-payment"]');
     const terms = checkbox($('[data-field="terms"]'), {
-      checked: booking.termsAccepted,
+      checked: accepted,
       onChange: (on) => {
-        booking.termsAccepted = on;
-        save(booking);
+        accepted = on;
         setEnabled(pay, on);
       },
     });
-    setEnabled(pay, booking.termsAccepted);
+    setEnabled(pay, accepted);
 
     onPress(pay, async () => {
       await api.submitBooking(booking); // mocked: see api.js

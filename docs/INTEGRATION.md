@@ -23,10 +23,11 @@ To put real data behind them you change **one file**: `replica/js/models/api.js`
   "flightDate": "2026-10-31",
   "flight": { "flightNumber": "SQ836", "airline": "SQ", "route": "Singapore to China (PVG)", "departureTime": "17:00" },
   "luggage": { "standard": 1, "oddSized": 0 },
-  "contact": { "firstName": "Alex", "lastName": "Tan", "countryIso": "SG", "phone": "91234567", "email": "alex.tan@example.com" },
-  "termsAccepted": true
+  "contact": { "firstName": "Alex", "lastName": "Tan", "countryIso": "SG", "phone": "91234567", "email": "alex.tan@example.com" }
 }
 ```
+
+The Terms tick is never stored: it lives in memory on the review page and starts empty every time the page is shown.
 
 Where to hook the real redirect: `replica/js/controllers/review.js`, the `onPress(pay, …)` handler. Today it shows
 an "End of replica flow" dialog after `submitBooking`.
