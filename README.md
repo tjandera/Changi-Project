@@ -1,5 +1,10 @@
 # Changi Off-Airport Check-In · Case-study replica
 
+![Walkthrough of the replica: landing booking card, Step 2 Luggage, Step 3 Personal Details, Step 4 Review, FAQs, Manage Booking and the 中文 switch](docs/demo.gif)
+
+*Desktop walkthrough at 1280px: choose a hotel, date and flight → add luggage → enter personal details → review and
+pay → FAQs → Manage Booking → 中文 and back. Recorded from this repo with `tools/record-demo.js`.*
+
 Front-end replica of the Changi Off-Airport Check-In booking flow, contained Within is just the skeleton and backend for the front-end elements only. Built for developers to integrate their own backend. 
 
 | | |
@@ -98,6 +103,7 @@ replica/js/controllers/       C · one script per page, loaded by that page's <s
 scripts/dev-server.js, package.json       Node server (npm start), no dependencies
 data/*.json                   all content: hotels, flights, prices, FAQ, countries, copy, flow
 data/i18n/*.json              Chinese text for the 中文 button (zh.json, faq.zh.json)
+tools/record-demo.js          records docs/demo.gif (needs Playwright + ffmpeg; see the comment at the top)
 tools/archive/build_pages.py  one-off script that produced the first version of the pages (history only)
 ```
 
