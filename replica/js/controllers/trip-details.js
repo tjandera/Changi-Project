@@ -13,6 +13,10 @@ try {
   const config = await boot();
   const booking = await guard(null, config);
   const hotels = await api.getHotels();
+  // Live behaviour (31 Oct 2026): Step 1 is reached through Edit, and it opens with the hotel and date
+  // kept but the flight number and flight time empty ("-"), so a flight must be picked again.
+  // Only this screen is cleared; the saved booking is untouched until Next is pressed.
+  booking.flight = null;
   const next = $('[data-action="next"]');
 
   const refresh = () => {

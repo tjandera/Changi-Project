@@ -10,11 +10,11 @@ export function fromISODate(iso) {
   return new Date(y, m - 1, d);
 }
 
-/** "2026-10-31" -> "31 Oct 2026" */
+/** "2026-11-01" -> "01 Nov 2026" (the live site pads the day) */
 export function displayDate(iso) {
   if (!iso) return '';
   const d = fromISODate(iso);
-  return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  return `${pad(d.getDate())} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
 }
 
 /** 29 -> "29.00" */
