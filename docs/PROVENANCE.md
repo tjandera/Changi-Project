@@ -48,3 +48,8 @@ expected from here on.
 ## Terms and Conditions PDF
 
 `files/OACI-TCs_v13Apr26.pdf`: The Terms and Conditions PDF the live Step 4 link opens (`/files/OACI-T&Cs_v13Apr26.pdf` there). Supplied by the project owner, 31 Oct 2026, and served unchanged. The Privacy Policy link goes to Changi's own page. Both URLs are in `data/config.json` under `reviewLinks`
+
+## How It Works columns (31 Oct 2026)
+The five columns are sized by their text, exactly like the live page (189 / 281 / 215 / 184 / 251 px, 32px gaps).
+An earlier version forced five equal 224px columns; that was removed after a side-by-side check against the live page at 1903px.
+Landing page offsets at 1512px (title tops): How It Works 732, Partners 1137, FAQ 1553; page height 2547px.
