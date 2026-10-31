@@ -28,7 +28,7 @@ try {
     save(booking);
 
     const pay = $('[data-action="make-payment"]');
-    checkbox($('[data-field="terms"]'), {
+    const terms = checkbox($('[data-field="terms"]'), {
       checked: booking.termsAccepted,
       onChange: (on) => {
         booking.termsAccepted = on;
@@ -47,14 +47,28 @@ try {
       }
     });
 
-    // Both open in a new tab, as on the live site.
+    // Both open in a new tab, as on the live site. Coming back from either (or from any other
+    // page, via Back) clears the tick, so the guest agrees again.
+    let readingTerms = false;
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && readingTerms) {
+        readingTerms = false;
+        terms.set(false);
+      }
+    });
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) terms.set(false);
+    });
     [
       ['open-terms', config.reviewLinks.terms],
       ['open-privacy', config.reviewLinks.privacy],
     ].forEach(([action, url]) => {
       const el = $(`[data-action="${action}"]`);
       el.setAttribute('role', 'link');
-      el.addEventListener('click', () => window.open(url, '_blank', 'noopener,noreferrer'));
+      el.addEventListener('click', () => {
+        readingTerms = true;
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
     });
   }
   endLoading();

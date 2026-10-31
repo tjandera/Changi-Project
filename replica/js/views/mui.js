@@ -249,4 +249,11 @@ export function checkbox(input, { checked = false, onChange }) {
     onChange(input.checked);
   });
   render(checked);
+  return {
+    /** Set the tick from code (reports the change like a click does). */
+    set(on) {
+      render(on);
+      onChange(on);
+    },
+  };
 }
