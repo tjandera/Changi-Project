@@ -79,7 +79,7 @@ replica/js/models/            M · data and state
     format.js                   display strings ("31 Oct 2026", "1 item(s)", "29.00") and the view model
 replica/js/views/             V · everything that touches the DOM
     dom.js, templates.js        helpers and the HTML snippets (dropdowns, calendar, dialogs)
-    button.js, dialog.js, accordion.js, chrome.js, footer.js (footer links), summary.js, language.js (中文 / EN switch)
+    button.js, dialog.js, accordion.js, chrome.js, footer.js (footer links), loading.js (dots overlay), summary.js, language.js (中文 / EN switch)
     fields.js, mui.js           hotel/date/flight pickers, MUI-style text, phone and checkbox fields
 replica/js/controllers/       C · one script per page, loaded by that page's <script type="module">
     boot.js                     shared start-up (config, header, tooltips)

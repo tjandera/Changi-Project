@@ -4,11 +4,15 @@
  */
 import { $, $$, html, pressable } from './dom.js';
 import { clear } from '../models/store.js';
-import { isLeaveCheckSkipped, navigate } from '../models/leave.js';
+import { beforeNavigate, isLeaveCheckSkipped, navigate } from '../models/leave.js';
 import { ask } from './dialog.js';
 import { initLanguage } from './language.js';
 import { initFooter } from './footer.js';
+import { showLoading } from './loading.js';
 import { mobileMenu, tooltip } from './templates.js';
+
+// Pages that show the loading overlay while they load (all four booking steps).
+const LOADING_PAGES = new Set(['trip-details', 'luggage', 'personal-details', 'review']);
 
 // Steps 2-4. Step 1 (trip-details) never shows the "Leave this page?" checks.
 const LEAVE_CHECK_PAGES = new Set(['luggage', 'personal-details', 'review']);
@@ -22,6 +26,17 @@ export function initChrome(config) {
     'manage-booking': routes.manageBooking,
     'book-now': routes.tripDetails,
   };
+
+  // Loading overlay (live behaviour): shown while a booking step loads, and as soon as the app
+  // starts moving to one, so the old page blurs while the next one loads.
+  if (LOADING_PAGES.has(page)) showLoading();
+  const path = (url) => new URL(url, window.location.href).pathname.replace(/\/$/, '');
+  const stepPaths = new Set(
+    [routes.tripDetails, routes.luggage, routes.personalDetails, routes.review].filter(Boolean).map(path),
+  );
+  beforeNavigate((url) => {
+    if (stepPaths.has(path(url))) showLoading();
+  });
 
   // Header links (also used by the mobile menu). Live behaviour: they just navigate, with no
   // "Leave this page?" dialog, on every page including the booking steps.

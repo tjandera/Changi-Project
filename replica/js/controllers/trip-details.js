@@ -7,6 +7,7 @@ import { viewModel } from '../models/format.js';
 import { guard, update } from '../models/store.js';
 import { nextRoute } from '../models/flow.js';
 import { navigate } from '../models/leave.js';
+import { endLoading } from '../views/loading.js';
 import { boot, fail } from './boot.js';
 
 try {
@@ -72,6 +73,7 @@ try {
     });
     navigate(nextRoute(config, 'tripDetails'));
   });
+  endLoading();
 } catch (err) {
   fail(err);
 }

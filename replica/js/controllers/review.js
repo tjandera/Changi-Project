@@ -8,6 +8,7 @@ import { fillSummary, wireSummary } from '../views/summary.js';
 import { viewModel } from '../models/format.js';
 import { clear, guard, save } from '../models/store.js';
 import { navigate } from '../models/leave.js';
+import { endLoading } from '../views/loading.js';
 import { boot, fail } from './boot.js';
 
 try {
@@ -46,6 +47,7 @@ try {
       $(`[data-action="${a}"]`).addEventListener('click', () => ask(config.dialogs.notInReplica)),
     );
   }
+  endLoading();
 } catch (err) {
   fail(err);
 }

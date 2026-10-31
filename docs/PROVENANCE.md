@@ -32,6 +32,7 @@ live DOM with the browser's developer tools, going no further than Step 3 (no bo
 | Hotel list, flight list, tooltip copy, country names | `data/*.json` |
 | Icons not in the zip (calendar arrows, dialog icons, collapsed arrow) | `icons/` |
 | Skyline banner, FAQ drop-off illustration | `images/*.webp` (re-encoded) |
+| Page fade-in (0.5s, up 20px) and the loading dots overlay (blur 10px, purple dots) | read from the live page script and its `/animations/loading.json` Lottie file, rebuilt as CSS + SVG in `replica.css` and `views/loading.js` (no animation library, no copied bundle code) |
 
 ## Replica code
 

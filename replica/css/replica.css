@@ -292,3 +292,75 @@
 #our-services .lg\:flex.w-full.flex-row > .max-w-\[300px\] {
   flex: 1 1 0%;
 }
+
+/* ---------------------------------------------------------------------------------------------
+ * Page and loading animations (read from the live site and its screen recording, 31 Oct 2026)
+ * ------------------------------------------------------------------------------------------- */
+
+/* Every page: the content between the header and the footer fades in and slides up 20px over 0.5s
+   (the live site wraps the page in a motion div: opacity 0 -> 1, y 20 -> 0, ease-out). */
+@keyframes replica-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+main.flex-1 {
+  animation: replica-page-in 0.5s cubic-bezier(0, 0, 0.58, 1) backwards;
+}
+
+/* Booking steps: the content waits (hidden) for the loading overlay, then fades in as the overlay
+   lifts. loading.js adds .replica-ready; if scripts fail, the content still appears after 6.5s. */
+@keyframes replica-reveal {
+  to {
+    opacity: 1;
+  }
+}
+body:is([data-page='trip-details'], [data-page='luggage'], [data-page='personal-details'], [data-page='review'])
+  main.flex-1:not(.replica-ready) {
+  opacity: 0;
+  animation: replica-reveal 0s 6.5s forwards;
+}
+
+/* Loading overlay on the booking steps: the page blurs and three purple dots bounce in turn.
+   Dot motion = the live Lottie file: 20 units up and back over 24 frames, 5 frames apart,
+   in a 65-frame loop at 60fps (1083ms). */
+.replica-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.replica-loading__dot {
+  fill: #7a35b0;
+  animation: replica-dot-bounce 1083.33ms cubic-bezier(0.6, 0, 0.4, 1) infinite;
+}
+@keyframes replica-dot-bounce {
+  0% {
+    transform: translateY(0);
+  }
+  18.4615% {
+    transform: translateY(-20px);
+  }
+  36.9231%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main.flex-1 {
+    animation: none;
+  }
+  .replica-loading__dot {
+    animation: none;
+  }
+}

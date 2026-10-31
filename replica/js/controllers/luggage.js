@@ -7,6 +7,7 @@ import { money, viewModel } from '../models/format.js';
 import { guard, save, totalItems } from '../models/store.js';
 import { nextRoute } from '../models/flow.js';
 import { navigate } from '../models/leave.js';
+import { endLoading } from '../views/loading.js';
 import { boot, fail } from './boot.js';
 
 // Live colours: zero counts are grey, non-zero are black.
@@ -59,6 +60,7 @@ try {
       navigate(nextRoute(config, 'luggage'));
     });
   }
+  endLoading();
 } catch (err) {
   fail(err);
 }
