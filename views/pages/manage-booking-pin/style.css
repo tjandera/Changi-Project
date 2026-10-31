@@ -1,0 +1,65 @@
+/*
+ * Manage Booking (/manage-booking-pin/): styles only this page uses.
+ * Shared pieces (header, footer, buttons, fields, layout) are in /views/components/shared.css.
+ * Each class is the exact set of rules the live site compiled for that element (see docs/CSS.md).
+ */
+@layer components {
+  .manage-pin-digit {
+    height: 48px;
+    width: 100%;
+    border-radius: 8px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #ccc;
+    background-color: var(--color-white);
+    text-align: center;
+    font-size: 16px;
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
+    text-transform: uppercase;
+  }
+  .manage-pin-digit:focus {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+    border-color: #7a35b0;
+    --tw-ring-color: #ece0f5;
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+
+  .manage-content {
+    margin-inline: auto;
+    display: flex;
+    width: 100%;
+    max-width: 1280px;
+    flex-direction: column;
+    gap: 24px;
+    background-color: #fcfcfc;
+    padding-inline: 20px;
+    padding-block: 24px;
+  }
+  @media (min-width:48rem) {
+    .manage-content {
+      margin-top: 24px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+
+  @media (min-width:48rem) {
+    .manage-field-col {
+      max-width: 335px;
+      min-width: 335px;
+    }
+  }
+
+  .manage-code-field {
+    background-color: var(--color-white);
+    text-transform: uppercase;
+  }
+
+  .manage-pin-box {
+    width: 39px;
+  }
+}

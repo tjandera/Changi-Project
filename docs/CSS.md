@@ -3,30 +3,31 @@
 ## Where things are
 
 ```
-booking-baggage/
-  index.html        this page's markup only (about 330 lines)
-  style.css         styles only this page uses
-components/
-  header.html       site header, written once
-  footer.html       compact + desktop footer, written once
-  language-button.html
-  shared.css        styles every page uses
-  include.js        puts the three .html files into each page
+views/
+  pages/booking-baggage/
+    index.html        this page's markup only (about 330 lines)
+    style.css         styles only this page uses
+  components/
+    header.html       site header, written once
+    footer.html       compact + desktop footer, written once
+    language-button.html
+    shared.css        styles every page uses
+    include.js        puts the three .html files into each page
 ```
 
-Every page folder has the same pair. The landing page is the root `index.html` + `style.css`.
+Every folder in `views/pages/` has the same pair (`landing/` is the home page).
 
 Each page `<head>` links exactly this:
 
 ```html
-<!-- The live site's compiled CSS + MUI runtime styles: captured, not edited -->
+<!-- The live site's compiled CSS + MUI runtime styles: captured, not edited (public/, served at the site root) -->
 <link rel="stylesheet" href="/_next/static/chunks/0ndgyzgu-3f19.css" />
 <link rel="stylesheet" href="/_next/static/chunks/3vw576cu90qfb.css" />
-<link rel="stylesheet" href="/replica/css/mui-runtime.css" />
+<link rel="stylesheet" href="/vendor/mui-runtime.css" />
 <!-- Shared by every page -->
-<link rel="stylesheet" href="/components/shared.css" />
+<link rel="stylesheet" href="/views/components/shared.css" />
 <!-- This page only -->
-<link rel="stylesheet" href="/booking-baggage/style.css" />
+<link rel="stylesheet" href="/views/pages/booking-baggage/style.css" />
 ```
 
 ## What goes in which file
@@ -34,16 +35,16 @@ Each page `<head>` links exactly this:
 | Is it used by... | Put it in |
 |---|---|
 | one page only | that folder's `style.css`, class prefixed with the page (`baggage-stepper`, `landing-hero`) |
-| two or more pages | `components/shared.css`, in the matching section |
+| two or more pages | `views/components/shared.css`, in the matching section |
 
 `shared.css` has a table of contents at the top. Part A is unlayered: replica features (feedback tab, loading dots),
 text colours `ink-*`, the header slot, typography `type-*`, MUI text-field sizing. Part B holds the shared components:
 layout, header, footer, buttons, form fields, step progress, booking summary, banner, FAQ accordion, and helpers
 (`show-from-md`, `clickable`, `centered-text` ...).
 
-**Every class in a page's HTML is defined in that folder's `style.css` or in `components/shared.css`.** Search either
+**Every class in a page's HTML is defined in that folder's `style.css` or in `views/components/shared.css`.** Search either
 file for the class name. The only exceptions are MUI's own runtime classes (`MuiInputBase-root`, `css-1x5jdmq` ...,
-defined in `replica/css/mui-runtime.css`) and `notranslate`, which only tells Google Translate to skip a node.
+defined in `public/vendor/mui-runtime.css`) and `notranslate`, which only tells Google Translate to skip a node.
 
 Not duplicated on purpose: the footer is styled once in `shared.css`, not copied into seven `style.css` files, so a
 footer change is one edit.
@@ -53,11 +54,11 @@ footer change is one edit.
 A page marks the spot:
 
 ```html
-<!-- SITE HEADER · components/header.html (logo, nav, Book Now) -->
+<!-- SITE HEADER · views/components/header.html (logo, nav, Book Now) -->
 <div data-include="header"></div>
 ```
 
-`components/include.js` (loaded in each `<head>`) fetches `/components/header.html` and swaps the slot for it.
+`views/components/include.js` (loaded in each `<head>`) fetches `/views/components/header.html` and swaps the slot for it.
 `boot()` waits for that before any page script runs, so the scripts see the same page as if the markup were inline.
 While it loads, the header slot keeps the header's height (64px, 68px from 768px) and colour, so the page does not jump.
 
@@ -88,8 +89,8 @@ unlayered, so they stay unlayered.
 
 ## Where Tailwind utilities remain
 
-None in the pages or `components/*.html`. They remain only in the snippets the scripts build at runtime
-(`replica/js/views/templates.js`: dropdown lists, calendar, dialogs, mobile menu), which use the live site's markup as
+None in the pages or `views/components/*.html`. They remain only in the snippets the scripts build at runtime
+(`views/scripts/templates.js`: dropdown lists, calendar, dialogs, mobile menu), which use the live site's markup as
 is. Inline `style` stays only for per-element sizes (`width: 240px; height: 44px`, progress-bar widths) and values the
 scripts change.
 
@@ -107,7 +108,7 @@ utility class freely.
 ## Adding a style
 
 1. Only this page: add it to the page folder's `style.css`, inside `@layer components { ... }`.
-2. Used on a second page: move it to `components/shared.css`, in its section.
+2. Used on a second page: move it to `views/components/shared.css`, in its section.
 3. A script needs the element: give it a `data-hook`, not a class selector.
 
 ## How this was checked

@@ -2,16 +2,17 @@
  * Node server for the Changi Off-Airport Check-In replica.
  *
  * Zero dependencies: only Node's built-in modules. It does three things:
- *   1. serves the site (HTML, CSS, JS, JSON, images, fonts) from this folder
- *   2. maps clean URLs to pages:  /faq  ->  faq/index.html
- *   3. refuses everything that is not part of the site (docs, tools, .git, this file)
+ *   1. serves views/, models/ and controllers/ at their own paths
+ *   2. applies the rewrites in vercel.json, as Vercel does:  /faq/  ->  views/pages/faq/index.html,
+ *      /icons/x.svg  ->  public/icons/x.svg  (public/ is served at the site root)
+ *   3. refuses everything else (docs, tools, scripts, .git)
  *
  * Run:  npm start            (http://localhost:3000)   [from the project folder]
  *       PORT=8080 npm start  (another port)
  *       HOST=0.0.0.0 npm start  (reachable from other devices on your network)
  *
  * Backend developers: add API routes in the `routes` table below, or replace this file with
- * the real stack. The pages only talk to the backend through replica/js/models/api.js.
+ * the real stack. The pages only talk to the backend through models/api.js.
  */
 const http = require('node:http');
 const fs = require('node:fs');
@@ -21,26 +22,24 @@ const ROOT = path.resolve(__dirname, '..'); // the site folder (one level up fro
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '127.0.0.1';
 
-// Only these top-level entries are public. Anything else (docs, tools, .git, server.js) gets a 404.
-const PUBLIC = new Set([
-  'index.html',
-  '_next',
-  'booking-baggage',
-  'booking-contact',
-  'booking-details',
-  'booking-review',
-  'components',
-  'data',
-  'faq',
-  'files',
-  'flags',
-  'follow-us',
-  'icons',
-  'images',
-  'manage-booking-pin',
-  'replica',
-  'style.css',
-]);
+// Folders served at their own path. Everything else reaches the browser only through a rewrite in vercel.json
+// (pages at their clean URLs, public/ at the site root), so docs, tools, scripts and .git get a 404.
+const SERVED = new Set(['views', 'models', 'controllers']);
+
+// The same rewrites Vercel uses, read from vercel.json so local and deployed URLs never drift apart.
+const REWRITES = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8')).rewrites.map(({ source, destination }) => {
+  const pattern = source.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\/:path\*$/, '(?:/(.*))?');
+  return { re: new RegExp(`^${pattern}$`), destination };
+});
+
+/** Applies the first matching rewrite, e.g. /faq/ -> /views/pages/faq/index.html, /icons/x.svg -> /public/icons/x.svg */
+function rewrite(urlPath) {
+  for (const { re, destination } of REWRITES) {
+    const m = urlPath.match(re);
+    if (m) return destination.replace(':path*', m[1] || '');
+  }
+  return null;
+}
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -62,7 +61,7 @@ const TYPES = {
 };
 
 /**
- * Optional API routes (none today; the replica mocks everything in replica/js/models/api.js).
+ * Optional API routes (none today; the replica mocks everything in models/api.js).
  * Example:  'POST /api/bookings': (req, res) => { ...; sendJson(res, 201, { ok: true }); }
  */
 const routes = {};
@@ -87,15 +86,18 @@ function resolveFile(urlPath) {
   }
   if (decoded.includes('\0')) return null;
 
-  const clean = path.posix.normalize(decoded).replace(/^\/+/, '');
-  const top = clean.split('/')[0];
-  if (clean && !PUBLIC.has(top)) return null;
+  let clean = path.posix.normalize(decoded);
+  if (!SERVED.has(clean.split('/')[1])) {
+    const target = rewrite(clean);
+    if (!target) return null;
+    clean = target;
+  }
+  clean = clean.replace(/^\/+/, '');
 
   let file = path.join(ROOT, clean);
-  if (file !== ROOT && !file.startsWith(ROOT + path.sep)) return null; // path traversal guard
+  if (!file.startsWith(ROOT + path.sep)) return null; // path traversal guard
 
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
-  else if (!path.extname(file) && fs.existsSync(file + '/index.html')) file = path.join(file, 'index.html'); // /faq
   return fs.existsSync(file) && fs.statSync(file).isFile() ? file : null;
 }
 
@@ -110,10 +112,9 @@ const server = http.createServer((req, res) => {
     return res.end();
   }
 
-  // Pages live in folders: send /faq to /faq/ so relative behaviour matches the static layout.
-  const folder = pathname.replace(/\/+$/, '');
-  if (!pathname.endsWith('/') && !path.extname(pathname) && PUBLIC.has(folder.split('/')[1] || '') && resolveFile(pathname)) {
-    res.writeHead(301, { Location: `${pathname}/` });
+  // Like Vercel's trailingSlash: true, send /faq to /faq/.
+  if (!pathname.endsWith('/') && !path.extname(pathname) && rewrite(`${pathname}/`)) {
+    res.writeHead(308, { Location: `${pathname}/` + new URL(req.url, 'http://x').search });
     return res.end();
   }
 

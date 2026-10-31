@@ -1,0 +1,363 @@
+/*
+ * Landing page (/): styles only this page uses.
+ * Shared pieces (header, footer, buttons, fields, layout) are in /views/components/shared.css.
+ * Each class is the exact set of rules the live site compiled for that element (see docs/CSS.md).
+ */
+@layer components {
+  .landing-step-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .landing-feature-copy {
+    display: flex;
+    max-width: 300px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .landing-step-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .landing-steps-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 24px;
+    padding-inline: 16px;
+  }
+
+  .landing-step-line {
+    margin-bottom: 4px;
+    height: 42px;
+    width: 4px;
+    border-radius: 9999px;
+    background-color: #d9d0c8;
+  }
+
+  .landing-partner-logo-sm {
+    height: 64px;
+    width: 64px;
+    border-radius: 9999px;
+  }
+
+  .landing-partner-logo-lg {
+    height: 100px;
+    width: 100px;
+    border-radius: 9999px;
+  }
+
+  .landing-booking-card {
+    width: 100%;
+    border-radius: 24px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #efebe7;
+    background-color: #f6f3f2;
+    padding: 24px;
+  }
+  @media (min-width:48rem) {
+    .landing-booking-card {
+      width: 343px;
+    }
+  }
+
+  .landing-beta-badge {
+    display: flex;
+    height: 18px;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #ababab;
+  }
+
+  .landing-how-it-works {
+    margin-inline: auto;
+    display: flex;
+    max-width: 1280px;
+    flex-direction: column;
+    gap: 36px;
+    padding-inline: 16px;
+    padding-block: 0;
+  }
+  @media (min-width:48rem) {
+    .landing-how-it-works {
+      padding-block: 24px;
+    }
+  }
+
+  .landing-steps-mobile {
+    display: flex;
+    flex-direction: column;
+  }
+  @media (min-width:64rem) {
+    .landing-steps-mobile {
+      display: none;
+    }
+  }
+
+  .landing-steps-desktop {
+    display: none;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  @media (min-width:64rem) {
+    .landing-steps-desktop {
+      display: flex;
+    }
+  }
+
+  .landing-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-inline: 24px;
+  }
+
+  .landing-hero-frame {
+    position: absolute;
+    inset: 0;
+    margin-inline: auto;
+    display: flex;
+    max-width: 1280px;
+  }
+
+  .landing-body {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    background-color: #fcfcfc;
+    padding-bottom: 48px;
+  }
+
+  .landing-partners-mobile {
+    display: block;
+    width: 100%;
+  }
+  @media (min-width:64rem) {
+    .landing-partners-mobile {
+      display: none;
+    }
+  }
+
+  .landing-how-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-bottom: 0;
+  }
+  @media (min-width:80rem) {
+    .landing-how-mobile {
+      display: none;
+    }
+  }
+
+  .landing-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .landing-hero-copy {
+    display: flex;
+    height: 496px;
+    width: 624px;
+    flex-direction: column;
+    gap: 24px;
+    padding-inline: 32px;
+    padding-top: 48px;
+  }
+
+  .landing-faq-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-inline: 20px;
+  }
+
+  .landing-partners {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding-block: 32px;
+  }
+  @media (min-width:64rem) {
+    .landing-partners {
+      gap: 44px;
+      padding-block: 40px;
+    }
+  }
+
+  .landing-hero-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 48px;
+  }
+
+  .landing-credit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .landing-faq-cta {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .landing-how-desktop {
+    margin-inline: auto;
+    display: none;
+    max-width: 1280px;
+    flex-direction: row;
+    gap: 32px;
+  }
+  @media (min-width:80rem) {
+    .landing-how-desktop {
+      display: flex;
+    }
+  }
+
+  .landing-partners-desktop {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 48px;
+  }
+  @media (min-width:64rem) {
+    .landing-partners-desktop {
+      display: flex;
+    }
+  }
+
+  .landing-hero-mobile {
+    position: relative;
+    height: 458px;
+    width: 100%;
+  }
+
+  .landing-hero {
+    position: relative;
+    height: 592px;
+    width: 100%;
+  }
+
+  .landing-hero-img {
+    height: 100%;
+    width: 100%;
+    max-width: 900px;
+    object-fit: cover;
+  }
+
+  .landing-faq-inner {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 944px;
+  }
+
+  .landing-card-gutter {
+    padding-inline: 16px;
+  }
+  @media (min-width:48rem) {
+    .landing-card-gutter {
+      padding: 0;
+    }
+  }
+
+  .landing-step-icon {
+    height: 80px;
+    width: 80px;
+  }
+
+  .landing-partners-band {
+    background-color: #efebe7;
+  }
+
+  .landing-partner-logo-box-sm {
+    height: 64px;
+    width: 64px;
+  }
+
+  .landing-partner-logo-box-lg {
+    height: 100px;
+    width: 100px;
+  }
+
+  .landing-partner-caption {
+    width: 80px;
+  }
+
+  .landing-partner-name {
+    text-align: center;
+    overflow-wrap: break-word;
+  }
+}
+
+/*
+ * "How It Works" columns.
+ * No override on purpose. The live markup gives each column `max-w-[300px]` with flex: 0 1 auto, so
+ * the five columns take their widths from their text (about 189 / 281 / 215 / 184 / 251 px, 32px gaps,
+ * 1248px row, centred). That is what the live site shows at every desktop width, so the replica now
+ * uses the same rule instead of forcing five equal 224px columns (changed 31 Oct 2026 after a
+ * side-by-side check against the live page at 1903px).
+ */
+
+
+/* Airline and hotel logos (the live site's partner-item, marquee and marquee-content).
+   Phones and tablets: the row scrolls sideways forever; from 1024px it wraps and stays still. */
+.landing-marquee {
+  width: 100%;
+  overflow: hidden;
+}
+.landing-marquee-track {
+  gap: 16px;
+  animation: 20s linear infinite landing-marquee-scroll;
+  display: flex;
+}
+.landing-partner {
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+}
+@media (min-width: 1024px) {
+  .landing-marquee-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    animation: none;
+  }
+  .landing-partner {
+    gap: 16px;
+  }
+}
+@keyframes landing-marquee-scroll {
+  0% {
+    transform: translate(0);
+  }
+  to {
+    transform: translate(-50%);
+  }
+}
