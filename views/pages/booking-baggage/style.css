@@ -1,0 +1,89 @@
+/*
+ * Step 2 · Luggage Details (/booking-baggage/): styles only this page uses.
+ * Shared pieces (header, footer, buttons, fields, layout) are in /views/components/shared.css.
+ * Each class is the exact set of rules the live site compiled for that element (see docs/CSS.md).
+ */
+@layer components {
+  .baggage-stepper {
+    display: flex;
+    height: 36px;
+    width: 124px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #ccc;
+    padding-inline: 12px;
+    padding-block: 8px;
+  }
+
+  .baggage-stepper-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  @media (min-width:48rem) {
+    .baggage-stepper-col {
+      width: 276px;
+    }
+  }
+
+  .baggage-label-row {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .baggage-luggage-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .baggage-content {
+    margin-inline: auto;
+    display: flex;
+    max-width: 1280px;
+    flex-direction: column;
+    gap: 24px;
+    background-color: #fcfcfc;
+    padding-inline: 16px;
+    padding-block: 24px;
+  }
+  @media (min-width:64rem) {
+    .baggage-content {
+      flex-direction: row-reverse;
+      gap: 32px;
+    }
+  }
+
+  .baggage-notice-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #e5e5e5;
+    background-color: var(--color-white);
+    padding-inline: 20px;
+    padding-block: 24px;
+  }
+
+  .baggage-steppers {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 32px;
+    padding-top: 16px;
+  }
+  @media (min-width:48rem) {
+    .baggage-steppers {
+      width: 388px;
+    }
+  }
+}

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Off Airport Check-In · Replica</title>
+    <meta
+      name="description"
+      content="Case-study replica of the Changi Off-Airport Check-In booking flow. Not affiliated with Changi Airport Group. No data is sent anywhere."
+    />
+    <link rel="icon" href="/images/cag-logo.svg" />
+    <link
+      rel="preload"
+      href="/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2"
+      as="font"
+      crossorigin=""
+      type="font/woff2"
+    />
+    <!-- The live site's compiled CSS (Tailwind + globals) and MUI runtime styles: captured, not edited -->
+    <link rel="stylesheet" href="/_next/static/chunks/0ndgyzgu-3f19.css" data-precedence="next" />
+    <link rel="stylesheet" href="/_next/static/chunks/3vw576cu90qfb.css" data-precedence="next" />
+    <link rel="stylesheet" href="/vendor/mui-runtime.css" />
+    <!-- Shared by every page: header, footer, buttons, form fields, layout -->
+    <link rel="stylesheet" href="/views/components/shared.css" />
+    <!-- This page only -->
+    <link rel="stylesheet" href="/views/pages/booking-details/style.css" />
+    <!-- Fills the data-include slots below with the shared header, footer and 中文 button -->
+    <script type="module" src="/views/components/include.js"></script>
+  </head>
+  <body class="site-font" data-page="trip-details">
+    <!--
+      PAGE        Step 1 · Trip Details
+      CONTROLLER  /controllers/trip-details.js  (behaviour)
+      DATA        hotels.json, flights.json
+      NEXT        flow.tripDetails -> Luggage (Step 2)
+      HOOKS       data-bind, data-field, data-action, data-nav, data-list, data-component, data-hook (see docs/INTEGRATION.md)
+    -->
+    <div hidden=""></div>
+    <div class="page-shell">
+      <!-- SITE HEADER · views/components/header.html (logo, nav, Book Now) -->
+      <div data-include="header"></div>
+      <!-- PAGE CONTENT -->
+      <main class="page-main">
+        <!-- 中文 / EN BUTTON · views/components/language-button.html -->
+        <div data-include="language-button"></div>
+        <div style="opacity: 1; transform: none">
+          <div class="page-content">
+            <div class="progress-header">
+              <h6 class="type-h6-black ink-black">
+                Trip Details
+              </h6>
+              <div class="stack-8-center">
+                <div class="progress-label">
+                  <p class="type-body-s-bold ink-muted">
+                    Step
+                  </p>
+                  <div class="progress-count">
+                    <p class="type-body-s-bold ink-muted">
+                      1
+                    </p>
+                    <p class="type-body-s-bold ink-muted">
+                      /
+                    </p>
+                    <p class="type-body-s-bold ink-muted">
+                      4
+                    </p>
+                  </div>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill" style="width: 25%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="trip-card">
+              <div class="stack-4">
+                <p class="type-body-l-black ink-black">
+                  Location
+                </p>
+                <p class="type-small-regular ink-grey">
+                  We currently only offer this service to selected partner hotels. You must be a
+                  hotel guest with a minimum one-night stay.
+                  <span data-nav="faq" class="link-accent"
+                    >Learn more</span
+                  >
+                </p>
+              </div>
+              <div class="trip-hotel-row">
+                <div class="trip-hotel-col">
+                  <div class="stack-6">
+                    <div class="row-4-center">
+                      <p class="type-body-s-bold ink-black">
+                        Hotel
+                      </p>
+                    </div>
+                    <div class="field-control" data-hook="popup-host">
+                      <div class="stack-6">
+                        <div class="field-control" data-hook="popup-host">
+                          <span
+                            class="field-icon-right"
+                            ><img
+                              alt="Dropdown"
+                              loading="lazy"
+                              width="20"
+                              height="20"
+                              decoding="async"
+                              data-nimg="1"
+                              src="/icons/arrow-dropdown.svg" class="next-img" /></span
+                          ><input
+                            class="field-select"
+                            type="text"
+                            value=""
+                            data-field="hotel"
+                            readonly=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="trip-card">
+              <p class="type-body-l-black ink-black">
+                Flight(s)
+              </p>
+              <div data-component="notes" class="trip-notes">
+                <div class="row-between">
+                  <p class="type-body-s-bold ink-black">
+                    Notes
+                  </p>
+                  <img
+                    data-action="toggle-notes"
+                    alt="arrow-up-black"
+                    loading="lazy"
+                    width="20"
+                    height="20"
+                    decoding="async"
+                    data-nimg="1"
+                    class="trip-notes-toggle next-img"
+                    src="/icons/arrow-up-black.svg"
+                  />
+                </div>
+                <div class="trip-info-row">
+                  <img
+                    alt="/icons/phone.svg"
+                    loading="lazy"
+                    width="20"
+                    height="20"
+                    decoding="async"
+                    data-nimg="1"
+                    src="/icons/phone.svg"
+                    class="next-img"
+                  />
+                  <p class="type-body-s-regular ink-black">
+                    <span
+                      >Passengers <span class="trip-notes-strong">must be able to check-in online</span> and
+                      generate your digital/mobile boarding pass to use this service.</span
+                    >
+                  </p>
+                </div>
+                <div class="trip-info-row">
+                  <img
+                    alt="/icons/flight-note-1.svg"
+                    loading="lazy"
+                    width="20"
+                    height="20"
+                    decoding="async"
+                    data-nimg="1"
+                    src="/icons/flight-note-1.svg"
+                    class="next-img"
+                  />
+                  <p class="type-body-s-regular ink-black">
+                    <span
+                      >For <span class="trip-notes-strong">5pm to 11:59pm flight departures,</span> please
+                      check in your luggage at the hotel from
+                      <span class="trip-notes-strong">7am - 11am.</span><br />
+                      For <span class="trip-notes-strong">12am - 7am departures,</span> please drop off your
+                      luggage <span class="trip-notes-strong">the day before.</span></span
+                    >
+                  </p>
+                </div>
+                <div class="trip-info-row">
+                  <img
+                    alt="/icons/flight-note-2.svg"
+                    loading="lazy"
+                    width="20"
+                    height="20"
+                    decoding="async"
+                    data-nimg="1"
+                    src="/icons/flight-note-2.svg"
+                    class="next-img"
+                  />
+                  <p class="type-body-s-regular ink-black">
+                    <span
+                      >Once collected by the hotel,
+                      <span class="trip-notes-strong">luggage is not retrievable</span> until at your
+                      arrival airport.</span
+                    >
+                  </p>
+                </div>
+                <div class="trip-info-row">
+                  <img
+                    alt="/icons/flight-note-3.svg"
+                    loading="lazy"
+                    width="20"
+                    height="20"
+                    decoding="async"
+                    data-nimg="1"
+                    src="/icons/flight-note-3.svg"
+                    class="next-img"
+                  />
+                  <p class="type-body-s-regular ink-black">
+                    <span
+                      ><span class="trip-notes-strong">Luggage must meet your airline's allowance;</span>
+                      excess luggage is not accepted.</span
+                    >
+                  </p>
+                </div>
+                <div class="clickable" data-nav="faq">
+                  <p class="trip-learn-more type-body-s-bold ink-purple">
+                    Learn More
+                  </p>
+                </div>
+              </div>
+              <div class="stack-4">
+                <p class="type-body-s-black ink-grey">
+                  Departure Flight
+                </p>
+                <p class="type-small-regular ink-grey">
+                  Currently, only Singapore Airlines flights departing from 5pm to 7am are eligible.
+                </p>
+              </div>
+              <div class="trip-stack">
+                <div class="trip-date-row">
+                  <div class="field-column">
+                    <div class="field-group" data-hook="field">
+                      <div class="row-between-full">
+                        <div class="row-4-center">
+                          <p class="type-body-s-bold ink-black">
+                            Flight Date
+                          </p>
+                        </div>
+                      </div>
+                      <div class="field-wrap" data-hook="popup-host">
+                        <div class="field-control" data-hook="popup-host">
+                          <span class="field-icon-left"
+                            ><img
+                              alt="Calendar"
+                              loading="lazy"
+                              width="20"
+                              height="20"
+                              decoding="async"
+                              data-nimg="1"
+                              src="/icons/calendar-input.svg" class="next-img" /></span
+                          ><input
+                            data-field="flightDate"
+                            data-testid="date-input"
+                            readonly=""
+                            class="field-date"
+                            type="text"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field-column">
+                    <div class="stack-6">
+                      <p class="type-body-s-bold ink-black">
+                        Flight Number
+                      </p>
+                      <div class="field-control" data-hook="popup-host">
+                        <div class="field-control" data-hook="popup-host">
+                          <span
+                            class="field-icon-right"
+                            ><img
+                              alt="Dropdown"
+                              loading="lazy"
+                              width="20"
+                              height="20"
+                              decoding="async"
+                              data-nimg="1"
+                              src="/icons/arrow-dropdown.svg" class="next-img" /></span
+                          ><input
+                            data-field="flight"
+                            readonly=""
+                            placeholder=""
+                            class="field-select"
+                            type="text"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="stack-6">
+                  <p class="type-body-s-bold ink-black">
+                    Flight Time
+                  </p>
+                  <p class="type-body-s-bold ink-black" data-bind="trip.flightTime">
+                    -
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              data-action="next"
+              class="btn-pill btn-pill--disabled"
+              style=" width: 240px; height: 44px; box-shadow: rgba(18, 18, 18, 0.05) 0px 1px 2px 0px; margin-top: 12px; margin-bottom: 36px; "
+            >
+              <p class="type-body-l-bold ink-muted">
+                Next
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- SITE FOOTER · views/components/footer.html (compact + desktop: app links, follow us, legal) -->
+      <div data-include="footer"></div>
+    </div>
+    <!-- CONTROLLER ENTRY POINT -->
+    <script type="module" src="/controllers/trip-details.js"></script>
+  </body>
+</html>
