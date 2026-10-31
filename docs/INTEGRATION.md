@@ -47,7 +47,7 @@ an "End of replica flow" dialog after `submitBooking`.
 | `data-bind-html="key"` | Inner HTML filled by a component | `data-bind-html="contact.flagSvg"` |
 | `data-field="name"` | Input owned by a component | `data-field="email"` |
 | `data-action="name"` | Clickable control | `data-action="next"`, `data-action="edit-trip"` |
-| `data-nav="name"` | Header link (asks "Leave this page?" during a booking) | `data-nav="faq"` |
+| `data-nav="name"` | Header link (navigates straight away, no "Leave this page?") | `data-nav="faq"` |
 | `data-list` + `data-template` | Repeated block; the template is cloned per item | luggage lines, FAQ items |
 | `data-stepper="key"` | Luggage counter row | `data-stepper="oddSized"` |
 | `data-tooltip="key"` | Info icon; text from `config.tooltips[key]` | `data-tooltip="contactNumber"` |
